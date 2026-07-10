@@ -5,10 +5,13 @@ export type CloudProgress = { owned?: boolean; mastered?: boolean; favorite?: bo
 export type CloudTracker = { id: string; owner_id: string; name: string; description: string; visibility: 'private' | 'shared'; role?: 'owner' | 'editor' | 'viewer' };
 export type LeaderboardRow = { rank: number; user_id: string; display_name: string; avatar_color: string; xp: number; level: number; owned_count: number; mastered_count: number; owned_percent: number; mastered_percent: number; indexed_count: number };
 
+function cleanDisplayName(value: string) { return value.replace(/[^a-zA-Z0-9 _.-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 24) || 'EMX Trainer'; }
+async function syncProfileDisplayName(userId: string, value: string) { if (!supabase) return; const { error } = await supabase.from('profiles').update({ display_name: cleanDisplayName(value) }).eq('id', userId); if (error) throw error; }
+
 export async function signInAnonymously() { if (!supabase) throw new Error('Supabase is not configured.'); return supabase.auth.signInAnonymously(); }
-export async function signInWithPassword(email: string, password: string) { if (!supabase) throw new Error('Supabase is not configured.'); return supabase.auth.signInWithPassword({ email, password }); }
-export async function signUpWithPassword(email: string, password: string, displayName: string) { if (!supabase) throw new Error('Supabase is not configured.'); return supabase.auth.signUp({ email, password, options: { data: { display_name: displayName } } }); }
-export async function claimAnonymousAccount(email: string, password: string, displayName: string) { if (!supabase) throw new Error('Supabase is not configured.'); return supabase.auth.updateUser({ email, password, data: { display_name: displayName } }); }
+export async function signInWithPassword(email: string, password: string) { if (!supabase) throw new Error('Supabase is not configured.'); const result = await supabase.auth.signInWithPassword({ email, password }); const displayName = result.data.user?.user_metadata?.display_name; if (result.data.user && displayName) await syncProfileDisplayName(result.data.user.id, displayName); return result; }
+export async function signUpWithPassword(email: string, password: string, displayName: string) { if (!supabase) throw new Error('Supabase is not configured.'); const result = await supabase.auth.signUp({ email, password, options: { data: { display_name: cleanDisplayName(displayName) } } }); if (result.data.user) await syncProfileDisplayName(result.data.user.id, displayName); return result; }
+export async function claimAnonymousAccount(email: string, password: string, displayName: string) { if (!supabase) throw new Error('Supabase is not configured.'); const result = await supabase.auth.updateUser({ email, password, data: { display_name: cleanDisplayName(displayName) } }); if (result.data.user) await syncProfileDisplayName(result.data.user.id, displayName); return result; }
 export async function signOut() { if (!supabase) return; return supabase.auth.signOut(); }
 export async function getSession(): Promise<{ session: Session | null; user: User | null }> { if (!supabase) return { session: null, user: null }; const result = await supabase.auth.getSession(); return { session: result.data.session, user: result.data.session?.user ?? null }; }
 
