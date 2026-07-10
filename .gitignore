@@ -6,6 +6,7 @@ node_modules/
 out/
 src-tauri/target/
 supabase/.temp/
-public/updates/
+public/updates/*
+!public/updates/latest.json
 outputs/
 work/

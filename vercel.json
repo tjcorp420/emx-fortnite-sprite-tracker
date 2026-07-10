@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/updates/EMX-Fortnite-Sprite-Tracker-Setup.exe",
+      "destination": "https://github.com/tjcorp420/emx-fortnite-sprite-tracker/releases/latest/download/EMX-Fortnite-Sprite-Tracker-Setup.exe"
+    }
+  ]
+}
