@@ -1,0 +1,1 @@
+-- Existing remote migration 007. Intentionally empty locally; already applied remotely.

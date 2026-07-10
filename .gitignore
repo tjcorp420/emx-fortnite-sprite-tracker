@@ -1,0 +1,11 @@
+.vercel
+.env*
+!.env.example
+node_modules/
+.next/
+out/
+src-tauri/target/
+supabase/.temp/
+public/updates/
+outputs/
+work/

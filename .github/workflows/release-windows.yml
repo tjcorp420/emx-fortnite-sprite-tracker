@@ -1,0 +1,50 @@
+name: Build and publish Windows release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the web bundle
+        run: npm run build
+
+      - name: Build the Windows app
+        run: npm run tauri:build
+
+      - name: Normalize release asset names
+        shell: pwsh
+        run: |
+          $setup = Get-ChildItem -LiteralPath 'src-tauri/target/release/bundle/nsis' -Filter '*-setup.exe' | Select-Object -First 1
+          $msi = Get-ChildItem -LiteralPath 'src-tauri/target/release/bundle/msi' -Filter '*.msi' | Select-Object -First 1
+          if (-not $setup -or -not $msi) { throw 'Tauri did not produce the expected Windows bundles.' }
+          Copy-Item -LiteralPath $setup.FullName -Destination 'EMX-Fortnite-Sprite-Tracker-Setup.exe' -Force
+          Copy-Item -LiteralPath $msi.FullName -Destination 'EMX-Fortnite-Sprite-Tracker.msi' -Force
+          Copy-Item -LiteralPath 'src-tauri/target/release/emx_fortnite_sprite_tracker.exe' -Destination 'EMX-Fortnite-Sprite-Tracker-Portable.exe' -Force
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            EMX-Fortnite-Sprite-Tracker-Setup.exe
+            EMX-Fortnite-Sprite-Tracker-Portable.exe
+            EMX-Fortnite-Sprite-Tracker.msi

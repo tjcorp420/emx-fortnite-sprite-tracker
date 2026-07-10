@@ -1,0 +1,1 @@
+-- Existing remote migration 002. Intentionally empty locally; already applied remotely.
