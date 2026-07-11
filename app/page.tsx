@@ -3,18 +3,46 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import appInfo from '../package.json';
 import sprites from '../data/sprites.json';
-import { claimAnonymousAccount, createInvite, createTracker, deleteAccount, deleteTracker, ensureDefaultTracker, getLeaderboard, getProfile, getSession, isSupabaseConfigured, listTrackers, loadProgress, redeemInvite, saveAchievements, saveProgress, setLeaderboardTracker, signInAnonymously, signInWithPassword, signOut, signUpWithPassword, supabase, updateLeaderboardOptIn, updateTracker, type CloudTracker, type LeaderboardRow } from '../lib/cloud';
+import { claimAnonymousAccount, createInvite, createTracker, deleteAccount, deleteTracker, ensureDefaultTracker, getLeaderboard, getProfile, getSession, isSupabaseConfigured, listTrackers, loadProgress, redeemInvite, saveAchievements, saveProgress, setLeaderboardTracker, signInAnonymously, signInWithPassword, signOut, signUpWithPassword, supabase, updateLeaderboardOptIn, updateProfileCosmetics, updateTracker, type CloudTracker, type LeaderboardRow } from '../lib/cloud';
 
 type Sprite = (typeof sprites)[number];
 type Progress = Record<string, { owned?: boolean; mastered?: boolean; favorite?: boolean; notes?: string }>;
 type AuthUser = { id: string; email?: string; is_anonymous?: boolean };
 type Achievement = { id: string; title: string; description: string; icon: string; reward: number };
+type SoundSettings = { effects: boolean; music: boolean };
+type ProfileCosmetics = { profile_badge: string; profile_title: string; avatar_frame: string };
+type CatalogAlert = { releases: string[]; verified: string[] };
+type CosmeticOption = { id: string; label: string; mark?: string; unlocked: (level: number, owned: number, mastered: number, achievements: Achievement[]) => boolean };
 
 const APP_VERSION = appInfo.version;
 
 const STORAGE = 'emx-sprite-progress-v1';
 const SEEN_ACHIEVEMENTS = 'emx-sprite-achievements-v1';
+const SOUND_SETTINGS = 'emx-sprite-sound-settings-v1';
+const PROFILE_COSMETICS = 'emx-sprite-profile-cosmetics-v1';
+const CATALOG_SNAPSHOT = 'emx-sprite-catalog-snapshot-v1';
 const rarityOrder: Record<string, number> = { mythic: 5, legendary: 4, epic: 3, rare: 2, special: 1 };
+const DEFAULT_COSMETICS: ProfileCosmetics = { profile_badge: 'spark', profile_title: 'Sprite Scout', avatar_frame: 'neon' };
+const PROFILE_OPTIONS: { badges: CosmeticOption[]; titles: CosmeticOption[]; frames: CosmeticOption[] } = {
+  badges: [
+    { id: 'spark', label: 'First Spark', mark: '*', unlocked: () => true },
+    { id: 'collector', label: 'Collection Star', mark: '+', unlocked: (_level: number, owned: number) => owned >= 10 },
+    { id: 'master', label: 'Spark Master', mark: 'M', unlocked: (_level: number, _owned: number, mastered: number) => mastered >= 10 },
+    { id: 'legend', label: 'Sprite Legend', mark: 'E', unlocked: (_level: number, _owned: number, _mastered: number, achievements: Achievement[]) => achievements.some((item) => item.id === 'all-mastered') },
+  ],
+  titles: [
+    { id: 'Sprite Scout', label: 'Sprite Scout', unlocked: () => true },
+    { id: 'Collection Commander', label: 'Collection Commander', unlocked: (_level: number, owned: number) => owned >= 10 },
+    { id: 'EMX Trainer', label: 'EMX Trainer', unlocked: (level: number) => level >= 5 },
+    { id: 'Sprite Legend', label: 'Sprite Legend', unlocked: (_level: number, _owned: number, _mastered: number, achievements: Achievement[]) => achievements.some((item) => item.id === 'all-mastered') },
+  ],
+  frames: [
+    { id: 'neon', label: 'Neon Core', unlocked: () => true },
+    { id: 'volt', label: 'Volt Ring', unlocked: (level: number) => level >= 3 },
+    { id: 'royal', label: 'Royal Charge', unlocked: (_level: number, _owned: number, mastered: number) => mastered >= 10 },
+    { id: 'legend', label: 'Legend Crown', unlocked: (_level: number, _owned: number, _mastered: number, achievements: Achievement[]) => achievements.some((item) => item.id === 'all-mastered') },
+  ],
+};
 const baseAchievements: Achievement[] = [
   { id: 'first-owned', title: 'First Find', description: 'Own your first Sprite.', icon: '*', reward: 50 },
   { id: 'first-mastered', title: 'Spark Master', description: 'Master your first Sprite.', icon: '+', reward: 100 },
@@ -64,24 +92,88 @@ export default function Home() {
   const [syncError, setSyncError] = useState('');
   const [pendingCloud, setPendingCloud] = useState<Progress | null>(null);
   const [cloudReady, setCloudReady] = useState(false);
-  const hydrated = useRef(false);
+  const [soundSettings, setSoundSettings] = useState<SoundSettings>({ effects: false, music: false });
+  const [profileCosmetics, setProfileCosmetics] = useState<ProfileCosmetics>(DEFAULT_COSMETICS);
+  const [catalogAlert, setCatalogAlert] = useState<CatalogAlert | null>(null);
+  const [localReady, setLocalReady] = useState(false);
   const seenRef = useRef<string[]>([]);
   const loadedTrackerRef = useRef<string | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const soundLoadedRef = useRef(false);
+
+  const playSound = (kind: 'collect' | 'master' | 'favorite' | 'interact' | 'achievement' | 'music') => {
+    if ((kind === 'music' && !soundSettings.music) || (kind !== 'music' && !soundSettings.effects)) return;
+    try {
+      const AudioCtor = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtor) return;
+      const context = audioContextRef.current || new AudioCtor();
+      audioContextRef.current = context;
+      void context.resume();
+      const notes: Record<typeof kind, [number, number, number]> = {
+        collect: [523.25, 0.12, 0.045], master: [783.99, 0.22, 0.06], favorite: [659.25, 0.1, 0.035],
+        interact: [440, 0.09, 0.028], achievement: [1046.5, 0.34, 0.08], music: [220, 1.8, 0.014],
+      };
+      const [frequency, duration, volume] = notes[kind];
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      oscillator.type = kind === 'music' ? 'sine' : 'triangle';
+      oscillator.frequency.setValueAtTime(frequency, context.currentTime);
+      if (kind === 'achievement') oscillator.frequency.exponentialRampToValueAtTime(1567.98, context.currentTime + duration);
+      gain.gain.setValueAtTime(0.0001, context.currentTime);
+      gain.gain.exponentialRampToValueAtTime(volume, context.currentTime + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + duration);
+      oscillator.connect(gain).connect(context.destination);
+      oscillator.start();
+      oscillator.stop(context.currentTime + duration + 0.03);
+    } catch { /* Audio is optional and should never interrupt tracking. */ }
+  };
 
   useEffect(() => {
     try {
       setProgress(JSON.parse(localStorage.getItem(STORAGE) || '{}'));
       const savedSeen = JSON.parse(localStorage.getItem(SEEN_ACHIEVEMENTS) || '[]');
       seenRef.current = Array.isArray(savedSeen) ? savedSeen : [];
+      const savedSound = JSON.parse(localStorage.getItem(SOUND_SETTINGS) || '{}');
+      if (typeof savedSound.effects === 'boolean' || typeof savedSound.music === 'boolean') setSoundSettings({ effects: Boolean(savedSound.effects), music: Boolean(savedSound.music) });
+      const savedCosmetics = JSON.parse(localStorage.getItem(PROFILE_COSMETICS) || '{}');
+      if (savedCosmetics.profile_badge && savedCosmetics.profile_title && savedCosmetics.avatar_frame) setProfileCosmetics(savedCosmetics);
     } catch { setProgress({}); }
-    hydrated.current = true;
+    soundLoadedRef.current = true;
+    setLocalReady(true);
   }, []);
-  useEffect(() => { localStorage.setItem(STORAGE, JSON.stringify(progress)); }, [progress]);
+  useEffect(() => { if (localReady) localStorage.setItem(STORAGE, JSON.stringify(progress)); }, [progress, localReady]);
+  useEffect(() => { if (soundLoadedRef.current) localStorage.setItem(SOUND_SETTINGS, JSON.stringify(soundSettings)); }, [soundSettings]);
   useEffect(() => {
-    if (!hydrated.current) return;
+    if (!soundSettings.music) return;
+    playSound('music');
+    const timer = window.setInterval(() => playSound('music'), 9000);
+    return () => window.clearInterval(timer);
+  }, [soundSettings.music]);
+  useEffect(() => {
+    if (!localReady) return;
     const fresh = getAchievements(progress).find((item) => !seenRef.current.includes(item.id));
-    if (fresh) { seenRef.current = [...seenRef.current, fresh.id]; localStorage.setItem(SEEN_ACHIEVEMENTS, JSON.stringify(seenRef.current)); setCelebration(fresh); }
-  }, [progress]);
+    if (fresh) { seenRef.current = [...seenRef.current, fresh.id]; localStorage.setItem(SEEN_ACHIEVEMENTS, JSON.stringify(seenRef.current)); playSound('achievement'); setCelebration(fresh); }
+  }, [progress, localReady]);
+  useEffect(() => {
+    if (!localReady) return;
+    const next = Object.fromEntries(sprites.map((sprite) => [sprite.id, {
+      released: sprite.released,
+      verified: sprite.dataStatus === 'verified' || sprite.imageStatus === 'verified',
+      details: `${sprite.description}|${sprite.stats.join('|')}|${sprite.abilities.join('|')}|${sprite.effects.join('|')}`,
+    }]));
+    try {
+      const previous = JSON.parse(localStorage.getItem(CATALOG_SNAPSHOT) || 'null');
+      if (previous && typeof previous === 'object') {
+        const releases = sprites.filter((sprite) => sprite.released && !previous[sprite.id]?.released).map((sprite) => sprite.name);
+        const verified = sprites.filter((sprite) => {
+          const nowVerified = sprite.dataStatus === 'verified' || sprite.imageStatus === 'verified';
+          return nowVerified && previous[sprite.id] && (!previous[sprite.id].verified || previous[sprite.id].details !== next[sprite.id].details);
+        }).map((sprite) => sprite.name);
+        if (releases.length || verified.length) setCatalogAlert({ releases, verified });
+      }
+      localStorage.setItem(CATALOG_SNAPSHOT, JSON.stringify(next));
+    } catch { localStorage.setItem(CATALOG_SNAPSHOT, JSON.stringify(next)); }
+  }, [localReady]);
   useEffect(() => {
     if (!isSupabaseConfigured || !supabase) return;
     let mounted = true;
@@ -109,7 +201,17 @@ export default function Home() {
     }).catch((error) => { if (!cancelled) { setSyncStatus('error'); setSyncError(error.message); } });
     return () => { cancelled = true; };
   }, [authUser?.id]);
-  useEffect(() => { if (!authUser || authUser.is_anonymous) { setLeaderboardOptIn(false); return; } getProfile(authUser.id).then((profile) => setLeaderboardOptIn(Boolean(profile?.leaderboard_opt_in))).catch(() => setLeaderboardOptIn(false)); }, [authUser?.id, authUser?.is_anonymous]);
+  useEffect(() => {
+    if (!authUser || authUser.is_anonymous) { setLeaderboardOptIn(false); return; }
+    getProfile(authUser.id).then((profile) => {
+      setLeaderboardOptIn(Boolean(profile?.leaderboard_opt_in));
+      if (profile) setProfileCosmetics({
+        profile_badge: profile.profile_badge || DEFAULT_COSMETICS.profile_badge,
+        profile_title: profile.profile_title || DEFAULT_COSMETICS.profile_title,
+        avatar_frame: profile.avatar_frame || DEFAULT_COSMETICS.avatar_frame,
+      });
+    }).catch(() => setLeaderboardOptIn(false));
+  }, [authUser?.id, authUser?.is_anonymous]);
   useEffect(() => {
     if (!authUser || !activeTracker || loadedTrackerRef.current === activeTracker.id) return;
     loadedTrackerRef.current = activeTracker.id;
@@ -139,7 +241,24 @@ export default function Home() {
   const xp = owned * 25 + mastered * 100 + unlockedAchievements.reduce((sum, item) => sum + item.reward, 0);
   const level = Math.floor(xp / 500) + 1;
   const levelProgress = (xp % 500) / 500;
-  const update = (id: string, patch: Progress[string]) => setProgress((current) => ({ ...current, [id]: { ...current[id], ...patch } }));
+  const profileUnlocks = {
+    badges: PROFILE_OPTIONS.badges.filter((option) => option.unlocked(level, owned, mastered, unlockedAchievements)).map((option) => option.id),
+    titles: PROFILE_OPTIONS.titles.filter((option) => option.unlocked(level, owned, mastered, unlockedAchievements)).map((option) => option.id),
+    frames: PROFILE_OPTIONS.frames.filter((option) => option.unlocked(level, owned, mastered, unlockedAchievements)).map((option) => option.id),
+  };
+  const update = (id: string, patch: Progress[string]) => {
+    const current = progress[id] || {};
+    if (patch.owned === true && !current.owned) playSound('collect');
+    if (patch.mastered === true && !current.mastered) playSound('master');
+    if (patch.favorite === true && !current.favorite) playSound('favorite');
+    setProgress((items) => ({ ...items, [id]: { ...items[id], ...patch } }));
+  };
+  const saveProfileCosmetics = async (patch: Partial<ProfileCosmetics>) => {
+    const next = { ...profileCosmetics, ...patch };
+    setProfileCosmetics(next);
+    localStorage.setItem(PROFILE_COSMETICS, JSON.stringify(next));
+    if (authUser && !authUser.is_anonymous) await updateProfileCosmetics(authUser.id, next);
+  };
   const exportProgress = () => { const blob = new Blob([JSON.stringify({ app: 'EMX Fortnite Sprite Tracker', version: 1, progress }, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'emx-sprite-progress.json'; a.click(); URL.revokeObjectURL(url); };
   const importProgress = (file?: File) => { if (!file) return; const reader = new FileReader(); reader.onload = () => { try { const parsed = JSON.parse(String(reader.result)); if (!parsed.progress || typeof parsed.progress !== 'object') throw new Error(); setProgress(parsed.progress); } catch { alert('That progress file is not valid.'); } }; reader.readAsText(file); };
   const mergeProgress = async (useLocal: boolean) => { if (!pendingCloud || !authUser || !activeTracker) return; const local = JSON.parse(localStorage.getItem(STORAGE) || '{}') as Progress; const next = useLocal ? { ...pendingCloud, ...local } : pendingCloud; setProgress(next); setPendingCloud(null); setCloudReady(true); localStorage.setItem(`emx-cloud-merged-${authUser.id}-${activeTracker.id}`, '1'); try { await saveProgress(activeTracker.id, authUser.id, next); setSyncStatus('synced'); } catch (error: any) { setSyncStatus('error'); setSyncError(error.message); } };
@@ -152,6 +271,7 @@ export default function Home() {
     <header className="topbar"><div className="brand"><img src="/branding/logo.png" alt="EMX Tweaks" /><div><span className="eyebrow">EMX TWEAKS</span><h1>FORTNITE SPRITES</h1></div></div><div className="header-actions"><span className="version-tag" title={`EMX build ${APP_VERSION}`}>v{APP_VERSION}</span><span className={`sync-pill ${syncStatus}`}><i />{syncStatus === 'synced' ? 'Cloud synced' : syncStatus === 'connecting' ? 'Connecting' : syncStatus === 'syncing' ? 'Syncing' : syncStatus === 'offline' ? 'Offline' : isSupabaseConfigured ? 'Cloud ready' : 'Local mode'}</span><UpdateButton />{isSupabaseConfigured && <button className="leaderboard-button" onClick={openLeaderboard}>Leaderboard</button>}{authUser && <button className="ghost" onClick={() => setTrackerOpen(true)}>My Trackers</button>}<button className="account-button" onClick={() => setAuthOpen(true)}>{authUser ? (authUser.is_anonymous ? 'Anonymous' : 'Account') : 'Sign in'}</button><button className="ghost" onClick={() => setSelected(null)}>About</button></div></header>
     {!isSupabaseConfigured && <div className="cloud-notice">Cloud sync is optional. Add Supabase URL and anon key to enable accounts and sharing; local tracking still works normally.</div>}
     {syncStatus === 'error' && syncError && <div className="cloud-notice error">Sync issue: {syncError}</div>}
+    {catalogAlert && <div className="catalog-alert"><div><strong>EMX Sprite Intel</strong><span>{catalogAlert.releases.length ? `${catalogAlert.releases.length} newly released` : ''}{catalogAlert.releases.length && catalogAlert.verified.length ? ' and ' : ''}{catalogAlert.verified.length ? `${catalogAlert.verified.length} verified or updated` : ''} Sprite {catalogAlert.releases.length + catalogAlert.verified.length === 1 ? 'entry' : 'entries'} added to your catalog.</span></div><button onClick={() => { setRelease('released'); setStatus('all'); document.querySelector('.toolbar')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>View intel</button><button className="dismiss-intel" aria-label="Dismiss Sprite Intel" onClick={() => setCatalogAlert(null)}>X</button></div>}
     <section className="hero"><div><p className="eyebrow accent">COLLECTION COMMAND CENTER</p><h2>Track every Sprite.<br /><span>Master the set.</span></h2><p className="muted">A personal, offline-first checklist for your Fortnite Sprite collection.</p></div><div className="stats"><Stat label="Owned" value={`${owned}/${sprites.length}`} percent={owned / sprites.length} /><Stat label="Mastered" value={`${mastered}/${sprites.length}`} percent={mastered / sprites.length} /></div></section>
     <section className="progress-hub"><div className="xp-card"><div className="xp-orb">{level}</div><div className="xp-copy"><span className="eyebrow accent">EMX TRAINER RANK</span><h3>Level {level} <span>•</span> {xp.toLocaleString()} XP</h3><div className="xp-bar"><i style={{ width: `${Math.round(levelProgress * 100)}%` }} /></div><small>{500 - (xp % 500)} XP to next level</small></div></div><div className="achievement-summary"><span className="eyebrow">ACHIEVEMENTS</span><strong>{unlockedAchievements.length}</strong><small>unlocked</small><button onClick={() => document.getElementById('achievements')?.scrollIntoView({ behavior: 'smooth' })}>View rewards</button></div></section>
     {activeTracker && <div className="active-tracker"><span>TRACKER</span><strong>{activeTracker.name}</strong><em>{activeTracker.role || 'owner'}</em></div>}
@@ -159,14 +279,14 @@ export default function Home() {
     <div className="quick-filters"><span>Quick view</span><button className={status === 'missing' ? 'active' : ''} onClick={() => setStatus(status === 'missing' ? 'all' : 'missing')}>Need to collect</button><button className={status === 'owned' ? 'active' : ''} onClick={() => setStatus(status === 'owned' ? 'all' : 'owned')}>Owned</button><button className={status === 'needs-mastering' ? 'active' : ''} onClick={() => setStatus(status === 'needs-mastering' ? 'all' : 'needs-mastering')}>Need to master</button><button className={status === 'mastered' ? 'active' : ''} onClick={() => setStatus(status === 'mastered' ? 'all' : 'mastered')}>Mastered</button><button className={status === 'favorites' ? 'active' : ''} onClick={() => setStatus(status === 'favorites' ? 'all' : 'favorites')}>Favorites</button><button onClick={() => { setStatus('all'); setRelease('released'); }}>Released only</button><button onClick={() => { setStatus('all'); setRelease('all'); setQuery(''); setType('all'); setVariant('all'); setRarity('all'); }}>Clear filters</button></div>
     <section className="actions"><span className="result-count">Showing <b>{filtered.length}</b> Sprites</span><div><button onClick={exportProgress}>Export</button><label className="button">Import<input type="file" accept="application/json" hidden onChange={(e) => importProgress(e.target.files?.[0])} /></label><button className="danger" onClick={() => confirm('Reset all EMX progress?') && setProgress({})}>Reset</button></div></section>
     <section className="achievements" id="achievements"><div className="section-heading"><div><p className="eyebrow accent">REWARD TRACK</p><h3>Achievements</h3></div><span>{unlockedAchievements.length} unlocked</span></div><div className="achievement-grid">{[...baseAchievements, ...Array.from(new Set(sprites.map((s) => s.type))).flatMap((item) => [{ id: `type-owned-${item}`, title: `${item} Collector`, description: `Own every ${item} Sprite.`, icon: '+', reward: 250 }, { id: `type-mastered-${item}`, title: `${item} Master`, description: `Master every ${item} Sprite.`, icon: 'X', reward: 500 }])].map((achievement) => <AchievementCard key={achievement.id} achievement={achievement} unlocked={unlockedAchievements.some((item) => item.id === achievement.id)} />)}</div></section>
-    <section className="grid">{filtered.map((sprite) => <SpriteCard key={sprite.id} sprite={sprite} progress={progress[sprite.id] || {}} update={update} onOpen={() => setSelected(sprite)} />)}</section>
+    <section className="grid">{filtered.map((sprite) => <SpriteCard key={sprite.id} sprite={sprite} progress={progress[sprite.id] || {}} update={update} onOpen={() => { playSound('interact'); setSelected(sprite); }} />)}</section>
     {!filtered.length && <div className="empty"><span>*</span><h3>No Sprites found</h3><p>Try changing your filters or search.</p></div>}
     <footer>EMX Fortnite Sprite Tracker <span>•</span> Independent fan-made project • Data stays on this device</footer>
     {pendingCloud && <MergeModal merge={() => mergeProgress(true)} useCloud={() => mergeProgress(false)} />}
-    {authOpen && <AuthModal user={authUser} leaderboardOptIn={leaderboardOptIn} setLeaderboardOptIn={async (enabled) => { if (authUser) { await updateLeaderboardOptIn(authUser.id, enabled); setLeaderboardOptIn(enabled); } }} close={() => setAuthOpen(false)} continueAnonymous={continueAnonymous} onSignedIn={(user) => { setAuthUser(user); setAuthOpen(false); localStorage.removeItem('emx-auth-signed-out'); }} onSignedOut={handleSignOut} />}
+    {authOpen && <AuthModal user={authUser} leaderboardOptIn={leaderboardOptIn} setLeaderboardOptIn={async (enabled) => { if (authUser) { await updateLeaderboardOptIn(authUser.id, enabled); setLeaderboardOptIn(enabled); } }} cosmetics={profileCosmetics} unlocks={profileUnlocks} saveCosmetics={saveProfileCosmetics} soundSettings={soundSettings} setSoundSettings={setSoundSettings} close={() => setAuthOpen(false)} continueAnonymous={continueAnonymous} onSignedIn={(user) => { setAuthUser(user); setAuthOpen(false); localStorage.removeItem('emx-auth-signed-out'); }} onSignedOut={handleSignOut} />}
     {trackerOpen && <TrackerModal trackers={trackers} active={activeTracker} user={authUser} close={() => setTrackerOpen(false)} select={(tracker) => { setActiveTracker(tracker); loadedTrackerRef.current = null; setTrackerOpen(false); }} create={async (name) => { if (!authUser) return; const tracker = await createTracker(authUser.id, name); setTrackers((items) => [...items, tracker]); setActiveTracker(tracker); loadedTrackerRef.current = null; }} share={async (role) => authUser && activeTracker ? createInvite(activeTracker.id, authUser.id, role) : ''} redeem={redeem} update={async (patch) => { if (!activeTracker) return; await updateTracker(activeTracker.id, patch); setActiveTracker({ ...activeTracker, ...patch }); setTrackers((items) => items.map((item) => item.id === activeTracker.id ? { ...item, ...patch } : item)); }} remove={async () => { if (!activeTracker) return; await deleteTracker(activeTracker.id); const next = trackers.filter((item) => item.id !== activeTracker.id); setTrackers(next); setActiveTracker(next[0] || null); loadedTrackerRef.current = null; }} />}
     {leaderboardOpen && <LeaderboardModal rows={leaderboard} loading={leaderboardLoading} optedIn={leaderboardOptIn} close={() => setLeaderboardOpen(false)} />}
-    {selected && <Preview sprite={selected} progress={progress[selected.id] || {}} update={update} close={() => setSelected(null)} />}
+    {selected && <Preview sprite={selected} progress={progress[selected.id] || {}} update={update} sound={playSound} close={() => setSelected(null)} />}
     {celebration && <Celebration achievement={celebration} close={() => setCelebration(null)} />}
   </main>;
 }
@@ -203,21 +323,28 @@ function Celebration({ achievement, close }: { achievement: Achievement; close: 
 
 function SpriteCard({ sprite, progress, update, onOpen }: { sprite: Sprite; progress: Progress[string]; update: (id: string, patch: Progress[string]) => void; onOpen: () => void }) { return <article className={`card ${progress.owned ? 'is-owned' : ''} ${!sprite.released ? 'is-unreleased' : ''}`} onClick={(event) => { if (!(event.target as HTMLElement).closest('input,button,textarea')) onOpen(); }} role="button" tabIndex={0} onKeyDown={(event) => event.key === 'Enter' && onOpen()}><div className="sprite-art"><img src={sprite.image} alt={sprite.name} /><span className={`rarity ${sprite.rarity}`}>{sprite.rarity}</span><button className={`favorite ${progress.favorite ? 'active' : ''}`} aria-label={`Favorite ${sprite.name}`} onClick={(event) => { event.stopPropagation(); update(sprite.id, { favorite: !progress.favorite }); }}>*</button></div><div className="card-body"><div className="card-title"><div><h3>{sprite.name}</h3><small>{sprite.id}</small></div><span className="type">{sprite.type}</span></div><div className="chips"><span>{sprite.variant}</span><span>{sprite.released ? 'Released' : 'Unreleased'}</span>{sprite.imageStatus !== 'verified' && <span className="verify">{sprite.released ? 'Verify image' : 'Outline'}</span>}{sprite.dataStatus === 'verified' && <span className="verified-data">Verified data</span>}</div><p className="card-description">{sprite.description || (sprite.released ? 'Information not documented.' : 'Official artwork is not available yet.')}</p><div className="checks"><label onClick={(event) => event.stopPropagation()}><input type="checkbox" checked={!!progress.owned} onChange={(event) => update(sprite.id, { owned: event.target.checked })} /> Owned</label><label onClick={(event) => event.stopPropagation()}><input type="checkbox" checked={!!progress.mastered} onChange={(event) => update(sprite.id, { mastered: event.target.checked })} /> Mastered</label></div><input className="notes" aria-label={`Notes for ${sprite.name}`} placeholder="Add a note..." value={progress.notes || ''} onClick={(event) => event.stopPropagation()} onChange={(event) => update(sprite.id, { notes: event.target.value })} /></div></article>; }
 
-function Preview({ sprite, progress, update, close }: { sprite: Sprite; progress: Progress[string]; update: (id: string, patch: Progress[string]) => void; close: () => void }) { const closeRef = useRef<HTMLButtonElement>(null); const [playing, setPlaying] = useState(false); const [reaction, setReaction] = useState(''); useEffect(() => { closeRef.current?.focus(); }, []); const interact = () => { setReaction(['Sparkly!', 'Cute!', 'Sprite activated!', 'EMX energy!'][Math.floor(Math.random() * 4)]); setPlaying(false); window.setTimeout(() => setPlaying(true), 20); window.setTimeout(() => setPlaying(false), 950); }; const list = (items: string[]) => items.length ? <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul> : <p className="unknown">Not documented.</p>; return <div className="modal-backdrop" onClick={close}><div className="preview-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}><button ref={closeRef} className="close-preview" onClick={close} aria-label="Exit preview">X</button><div className={'preview-art ' + (playing ? 'is-playing' : '')} role="button" tabIndex={0} aria-label={'Interact with ' + sprite.name} onClick={interact} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); interact(); } }}><span className="sprite-sparkles" aria-hidden="true">&#10022; &#10023; &#10022;</span><img src={sprite.image} alt={sprite.name} /><strong className={'sprite-reaction ' + (playing ? 'show' : '')}>{reaction}</strong><small className="sprite-hint">Click the Sprite to interact</small></div><div className="preview-info"><div className="preview-kicker">{sprite.type} <span>&bull;</span> {sprite.variant}</div><h2>{sprite.name}</h2><div className="preview-badges"><span className={'rarity ' + sprite.rarity}>{sprite.rarity}</span><span>{sprite.released ? 'Released' : 'Unreleased'}</span>{sprite.dataStatus === 'verified' && <span>Verified details</span>}</div><p className="preview-description">{sprite.description || (sprite.released ? 'Description not documented.' : 'This Sprite does not have official released artwork yet.')}</p><div className="detail-columns"><div><h4>Stats</h4>{list(sprite.stats)}</div><div><h4>Abilities and effects</h4>{list([...sprite.abilities, ...sprite.effects])}</div></div><p className="detail-line"><b>Acquisition:</b> {sprite.acquisition || 'Not documented.'}</p><p className="detail-line"><b>Location:</b> {sprite.spawnInfo || 'Not documented.'}</p><div className="preview-controls"><label><input type="checkbox" checked={!!progress.owned} onChange={(event) => update(sprite.id, { owned: event.target.checked })} /> Owned</label><label><input type="checkbox" checked={!!progress.mastered} onChange={(event) => update(sprite.id, { mastered: event.target.checked })} /> Mastered</label></div><input className="notes" aria-label={'Notes for ' + sprite.name} placeholder="Add a personal note..." value={progress.notes || ''} onChange={(event) => update(sprite.id, { notes: event.target.value })} /><button className="exit-button" onClick={close}>Exit Preview</button></div></div></div>; }
+function Preview({ sprite, progress, update, sound, close }: { sprite: Sprite; progress: Progress[string]; update: (id: string, patch: Progress[string]) => void; sound: (kind: 'interact') => void; close: () => void }) { const closeRef = useRef<HTMLButtonElement>(null); const [playing, setPlaying] = useState(false); const [reaction, setReaction] = useState(''); useEffect(() => { closeRef.current?.focus(); }, []); const interact = () => { sound('interact'); setReaction(['Sparkly!', 'Cute!', 'Sprite activated!', 'EMX energy!'][Math.floor(Math.random() * 4)]); setPlaying(false); window.setTimeout(() => setPlaying(true), 20); window.setTimeout(() => setPlaying(false), 950); }; const list = (items: string[]) => items.length ? <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul> : <p className="unknown">Not documented.</p>; return <div className="modal-backdrop" onClick={close}><div className="preview-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}><button ref={closeRef} className="close-preview" onClick={close} aria-label="Exit preview">X</button><div className={'preview-art ' + (playing ? 'is-playing' : '')} role="button" tabIndex={0} aria-label={'Interact with ' + sprite.name} onClick={interact} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); interact(); } }}><span className="sprite-sparkles" aria-hidden="true">&#10022; &#10023; &#10022;</span><img src={sprite.image} alt={sprite.name} /><strong className={'sprite-reaction ' + (playing ? 'show' : '')}>{reaction}</strong><small className="sprite-hint">Click the Sprite to interact</small></div><div className="preview-info"><div className="preview-kicker">{sprite.type} <span>&bull;</span> {sprite.variant}</div><h2>{sprite.name}</h2><div className="preview-badges"><span className={'rarity ' + sprite.rarity}>{sprite.rarity}</span><span>{sprite.released ? 'Released' : 'Unreleased'}</span>{sprite.dataStatus === 'verified' && <span>Verified details</span>}</div><p className="preview-description">{sprite.description || (sprite.released ? 'Description not documented.' : 'This Sprite does not have official released artwork yet.')}</p><div className="detail-columns"><div><h4>Stats</h4>{list(sprite.stats)}</div><div><h4>Abilities and effects</h4>{list([...sprite.abilities, ...sprite.effects])}</div></div><p className="detail-line"><b>Acquisition:</b> {sprite.acquisition || 'Not documented.'}</p><p className="detail-line"><b>Location:</b> {sprite.spawnInfo || 'Not documented.'}</p><div className="preview-controls"><label><input type="checkbox" checked={!!progress.owned} onChange={(event) => update(sprite.id, { owned: event.target.checked })} /> Owned</label><label><input type="checkbox" checked={!!progress.mastered} onChange={(event) => update(sprite.id, { mastered: event.target.checked })} /> Mastered</label></div><input className="notes" aria-label={'Notes for ' + sprite.name} placeholder="Add a personal note..." value={progress.notes || ''} onChange={(event) => update(sprite.id, { notes: event.target.value })} /><button className="exit-button" onClick={close}>Exit Preview</button></div></div></div>; }
 
-function LeaderboardModal({ rows, loading, optedIn, close }: { rows: LeaderboardRow[]; loading: boolean; optedIn: boolean; close: () => void }) { return <div className="modal-backdrop" onClick={close}><div className="leaderboard-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}><button className="close-preview" onClick={close} aria-label="Close leaderboard">X</button><div className="section-heading"><div><p className="eyebrow accent">EMX COMMUNITY</p><h2>Leaderboard</h2></div><span>{optedIn ? 'You are visible' : 'Hidden from rankings'}</span></div><p className="muted leaderboard-intro">Accounts are ranked from saved Owned, Mastered, and Achievement XP. Anonymous saves stay private. Use Account to hide or show your stats.</p>{loading ? <div className="leaderboard-empty">Loading rankings...</div> : rows.length ? <div className="leaderboard-list">{rows.map((row) => <div className={`leaderboard-row ${row.rank <= 3 ? 'top-rank' : ''}`} key={row.user_id}><strong className="rank">{row.rank}</strong><span className="avatar" style={{ background: row.avatar_color }}>{row.display_name.slice(0, 1).toUpperCase()}</span><div className="rank-name"><b>{row.display_name}</b><small>Level {row.level} &bull; {row.owned_count}/{row.indexed_count} owned · {row.mastered_count}/{row.indexed_count} mastered</small></div><div className="rank-score"><b>{row.xp.toLocaleString()} XP</b><small>{Number(row.mastered_percent).toFixed(1)}% mastered</small></div></div>)}</div> : <div className="leaderboard-empty"><strong>No public rankings yet.</strong><span>Create or claim an EMX account, then keep &quot;Show my stats on the public leaderboard&quot; enabled in Account.</span></div>}<div className="leaderboard-legend"><span><b>25 XP</b> owned</span><span><b>100 XP</b> mastered</span><span><b>achievement XP</b> included</span><span><b>146</b> indexed</span></div></div></div>; }
+function LeaderboardModal({ rows, loading, optedIn, close }: { rows: LeaderboardRow[]; loading: boolean; optedIn: boolean; close: () => void }) { return <div className="modal-backdrop" onClick={close}><div className="leaderboard-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}><button className="close-preview" onClick={close} aria-label="Close leaderboard">X</button><div className="section-heading"><div><p className="eyebrow accent">EMX COMMUNITY</p><h2>Leaderboard</h2></div><span>{optedIn ? 'You are visible' : 'Hidden from rankings'}</span></div><p className="muted leaderboard-intro">Accounts are ranked from saved Owned, Mastered, and Achievement XP. Anonymous saves stay private. Use Account to hide or show your stats.</p>{loading ? <div className="leaderboard-empty">Loading rankings...</div> : rows.length ? <div className="leaderboard-list">{rows.map((row) => <div className={`leaderboard-row ${row.rank <= 3 ? 'top-rank' : ''}`} key={row.user_id}><strong className="rank">{row.rank}</strong><span className={`avatar avatar-frame-${row.avatar_frame || 'neon'}`} style={{ background: row.avatar_color }} title={row.profile_badge || 'EMX Trainer'}>{row.profile_badge_mark || row.display_name.slice(0, 1).toUpperCase()}</span><div className="rank-name"><b>{row.display_name}</b><small className="profile-title">{row.profile_title || 'Sprite Scout'}</small><small>Level {row.level} &bull; {row.owned_count}/{row.indexed_count} owned &bull; {row.mastered_count}/{row.indexed_count} mastered</small></div><div className="rank-score"><b>{row.xp.toLocaleString()} XP</b><small>{Number(row.mastered_percent).toFixed(1)}% mastered</small></div></div>)}</div> : <div className="leaderboard-empty"><strong>No public rankings yet.</strong><span>Create or claim an EMX account, then keep &quot;Show my stats on the public leaderboard&quot; enabled in Account.</span></div>}<div className="leaderboard-legend"><span><b>25 XP</b> owned</span><span><b>100 XP</b> mastered</span><span><b>achievement XP</b> included</span><span><b>146</b> indexed</span></div></div></div>; }
 
-function AuthModal({ user, leaderboardOptIn, setLeaderboardOptIn, close, continueAnonymous, onSignedIn, onSignedOut }: { user: AuthUser | null; leaderboardOptIn: boolean; setLeaderboardOptIn: (enabled: boolean) => Promise<void>; close: () => void; continueAnonymous: () => Promise<void>; onSignedIn: (user: AuthUser) => void; onSignedOut: () => Promise<void> }) {
+function AuthModal({ user, leaderboardOptIn, setLeaderboardOptIn, cosmetics, unlocks, saveCosmetics, soundSettings, setSoundSettings, close, continueAnonymous, onSignedIn, onSignedOut }: { user: AuthUser | null; leaderboardOptIn: boolean; setLeaderboardOptIn: (enabled: boolean) => Promise<void>; cosmetics: ProfileCosmetics; unlocks: { badges: string[]; titles: string[]; frames: string[] }; saveCosmetics: (patch: Partial<ProfileCosmetics>) => Promise<void>; soundSettings: SoundSettings; setSoundSettings: (settings: SoundSettings) => void; close: () => void; continueAnonymous: () => Promise<void>; onSignedIn: (user: AuthUser) => void; onSignedOut: () => Promise<void> }) {
   const [mode, setMode] = useState<'sign-in' | 'create' | 'claim'>(user?.is_anonymous ? 'claim' : 'sign-in'); const [email, setEmail] = useState(''); const [password, setPassword] = useState(''); const [displayName, setDisplayName] = useState(''); const [busy, setBusy] = useState(false); const [error, setError] = useState(''); const [message, setMessage] = useState('');
   const submit = async (event: React.FormEvent) => { event.preventDefault(); setBusy(true); setError(''); try { const result = mode === 'claim' ? await claimAnonymousAccount(email, password, sanitizeDisplayName(displayName)) : mode === 'create' ? await signUpWithPassword(email, password, sanitizeDisplayName(displayName)) : await signInWithPassword(email, password); if (result.error) throw result.error; if (result.data.user) onSignedIn({ id: result.data.user.id, email: result.data.user.email, is_anonymous: result.data.user.is_anonymous }); else setMessage('Check your email to finish creating the account.'); } catch (err: any) { setError(err.message || 'Authentication failed.'); } finally { setBusy(false); } };
   const removeAccount = async () => { if (!confirm('Delete your EMX account and cloud progress permanently?')) return; setBusy(true); try { await deleteAccount(); await onSignedOut(); close(); } catch (err: any) { setError(err.message || 'Deploy the Supabase delete-account function before using this.'); } finally { setBusy(false); } };
   let body;
   if (!isSupabaseConfigured) body = <><h2>Cloud is not configured</h2><p className="muted">Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to enable accounts and sharing. Local tracking remains available.</p></>;
   else if (user?.is_anonymous) body = <><div className="auth-tabs"><button className={mode === 'claim' ? 'active' : ''} onClick={() => setMode('claim')}>Claim progress</button><button className={mode === 'sign-in' ? 'active' : ''} onClick={() => setMode('sign-in')}>Sign in</button><button className={mode === 'create' ? 'active' : ''} onClick={() => setMode('create')}>Create account</button></div>{mode === 'claim' ? <><h2>Claim your progress</h2><p className="muted">Your anonymous collection is safe on this device. Add an account to use it everywhere.</p><AuthForm mode="claim" email={email} password={password} displayName={displayName} setEmail={setEmail} setPassword={setPassword} setDisplayName={setDisplayName} submit={submit} busy={busy} /></> : <><h2>{mode === 'create' ? 'Create your save' : 'Welcome back'}</h2><p className="muted">No Epic login. Use your EMX email and password to access an existing account.</p><AuthForm mode={mode} email={email} password={password} displayName={displayName} setEmail={setEmail} setPassword={setPassword} setDisplayName={setDisplayName} submit={submit} busy={busy} /></>}</>;
-  else if (user) body = <><h2>Your EMX account</h2><p className="muted">Signed in securely. Your tracker can sync across phone, browser, and Windows.</p><label className="leaderboard-opt"><input type="checkbox" checked={leaderboardOptIn} onChange={(event) => setLeaderboardOptIn(event.target.checked)} /> Show my stats on the public leaderboard</label><p className="tiny-note">Enabled by default for account users. Only your display name, XP, level, and collection totals appear. Your email, notes, and Sprite details stay private.</p><button className="primary-action" onClick={onSignedOut}>Sign out</button><button className="danger account-delete" onClick={removeAccount} disabled={busy}>Delete account</button></>;
+  else if (user) body = <><h2>Your EMX account</h2><p className="muted">Signed in securely. Your tracker can sync across phone, browser, and Windows.</p><ProfileLoadout cosmetics={cosmetics} unlocks={unlocks} save={saveCosmetics} /><label className="leaderboard-opt"><input type="checkbox" checked={leaderboardOptIn} onChange={(event) => setLeaderboardOptIn(event.target.checked)} /> Show my stats on the public leaderboard</label><p className="tiny-note">Enabled by default for account users. Only your display name, XP, level, and collection totals appear. Your email, notes, and Sprite details stay private.</p><button className="primary-action" onClick={onSignedOut}>Sign out</button><button className="danger account-delete" onClick={removeAccount} disabled={busy}>Delete account</button></>;
   else body = <><div className="auth-tabs"><button className={mode === 'sign-in' ? 'active' : ''} onClick={() => setMode('sign-in')}>Sign in</button><button className={mode === 'create' ? 'active' : ''} onClick={() => setMode('create')}>Create account</button></div><h2>{mode === 'create' ? 'Create your save' : 'Welcome back'}</h2><p className="muted">No Epic login. Use an EMX account or continue anonymously.</p><AuthForm mode={mode} email={email} password={password} displayName={displayName} setEmail={setEmail} setPassword={setPassword} setDisplayName={setDisplayName} submit={submit} busy={busy} /><button className="anonymous-action" onClick={continueAnonymous}>Continue anonymously</button></>;
-  return <div className="modal-backdrop" onClick={close}><div className="account-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}><button className="close-preview" onClick={close} aria-label="Close account">X</button><img src="/branding/logo.png" alt="EMX" /><p className="eyebrow accent">EMX CLOUD SAVE</p>{body}{error && <p className="form-error">{error}</p>}{message && <p className="form-success">{message}</p>}</div></div>;
+  return <div className="modal-backdrop" onClick={close}><div className="account-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}><button className="close-preview" onClick={close} aria-label="Close account">X</button><img src="/branding/logo.png" alt="EMX" /><p className="eyebrow accent">EMX CLOUD SAVE</p>{body}<SoundPreferences settings={soundSettings} setSettings={setSoundSettings} />{error && <p className="form-error">{error}</p>}{message && <p className="form-success">{message}</p>}</div></div>;
 }
+function ProfileLoadout({ cosmetics, unlocks, save }: { cosmetics: ProfileCosmetics; unlocks: { badges: string[]; titles: string[]; frames: string[] }; save: (patch: Partial<ProfileCosmetics>) => Promise<void> }) {
+  const [saving, setSaving] = useState(false);
+  const choose = async (patch: Partial<ProfileCosmetics>) => { setSaving(true); try { await save(patch); } finally { setSaving(false); } };
+  return <section className="profile-loadout"><div><p className="eyebrow accent">EMX PROFILE LOADOUT</p><span>Choose your unlocked badge, title, and leaderboard frame.</span></div><CosmeticChoices label="Badge" value={cosmetics.profile_badge} options={PROFILE_OPTIONS.badges.map((item) => ({ id: item.id, label: `${item.mark} ${item.label}` }))} unlocked={unlocks.badges} onChoose={(profile_badge) => choose({ profile_badge })} disabled={saving} /><CosmeticChoices label="Title" value={cosmetics.profile_title} options={PROFILE_OPTIONS.titles.map((item) => ({ id: item.id, label: item.label }))} unlocked={unlocks.titles} onChoose={(profile_title) => choose({ profile_title })} disabled={saving} /><CosmeticChoices label="Frame" value={cosmetics.avatar_frame} options={PROFILE_OPTIONS.frames.map((item) => ({ id: item.id, label: item.label }))} unlocked={unlocks.frames} onChoose={(avatar_frame) => choose({ avatar_frame })} disabled={saving} /></section>;
+}
+function CosmeticChoices({ label, value, options, unlocked, onChoose, disabled }: { label: string; value: string; options: Array<{ id: string; label: string }>; unlocked: string[]; onChoose: (value: string) => void; disabled: boolean }) { return <label className="cosmetic-choice"><span>{label}</span><select value={value} disabled={disabled} onChange={(event) => onChoose(event.target.value)}>{options.filter((option) => unlocked.includes(option.id)).map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}</select></label>; }
+function SoundPreferences({ settings, setSettings }: { settings: SoundSettings; setSettings: (settings: SoundSettings) => void }) { return <section className="sound-preferences"><p className="eyebrow accent">EMX AUDIO</p><label><input type="checkbox" checked={settings.effects} onChange={(event) => setSettings({ ...settings, effects: event.target.checked })} /> Interaction sound effects</label><label><input type="checkbox" checked={settings.music} onChange={(event) => setSettings({ ...settings, music: event.target.checked })} /> Ambient EMX music</label><small>Generated in the app; no outside audio service or account data is used.</small></section>; }
 function AuthForm({ mode, email, password, displayName, setEmail, setPassword, setDisplayName, submit, busy }: { mode: 'sign-in' | 'create' | 'claim'; email: string; password: string; displayName: string; setEmail: (value: string) => void; setPassword: (value: string) => void; setDisplayName: (value: string) => void; submit: (event: React.FormEvent) => Promise<void>; busy: boolean }) { return <form onSubmit={submit}>{mode !== 'sign-in' && <input required minLength={3} maxLength={24} placeholder="Public display name" value={displayName} onChange={(event) => setDisplayName(event.target.value)} />}<input required type="email" placeholder="Email address" value={email} onChange={(event) => setEmail(event.target.value)} /><input required minLength={8} type="password" placeholder="Password (8+ characters)" value={password} onChange={(event) => setPassword(event.target.value)} /><button className="primary-action" disabled={busy}>{busy ? 'Working...' : mode === 'claim' ? 'Claim my progress' : mode === 'create' ? 'Create account' : 'Sign in'}</button></form>; }
 function MergeModal({ merge, useCloud }: { merge: () => Promise<void>; useCloud: () => Promise<void> }) { return <div className="modal-backdrop"><div className="account-modal merge-modal" role="dialog" aria-modal="true"><p className="eyebrow accent">CLOUD SAVE FOUND</p><h2>Merge your progress?</h2><p className="muted">This device has local progress and the cloud tracker has saved progress. Local progress will not be deleted automatically.</p><div className="merge-actions"><button onClick={useCloud}>Use cloud save</button><button className="primary-action" onClick={merge}>Merge local and cloud</button></div></div></div>; }
 
