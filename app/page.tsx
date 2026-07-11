@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import appInfo from '../package.json';
 import sprites from '../data/sprites.json';
 import { claimAnonymousAccount, createInvite, createTracker, deleteAccount, deleteTracker, ensureDefaultTracker, getLeaderboard, getProfile, getSession, isSupabaseConfigured, listTrackers, loadProgress, redeemInvite, saveAchievements, saveProgress, setLeaderboardTracker, signInAnonymously, signInWithPassword, signOut, signUpWithPassword, supabase, updateLeaderboardOptIn, updateTracker, type CloudTracker, type LeaderboardRow } from '../lib/cloud';
 
@@ -8,6 +9,8 @@ type Sprite = (typeof sprites)[number];
 type Progress = Record<string, { owned?: boolean; mastered?: boolean; favorite?: boolean; notes?: string }>;
 type AuthUser = { id: string; email?: string; is_anonymous?: boolean };
 type Achievement = { id: string; title: string; description: string; icon: string; reward: number };
+
+const APP_VERSION = appInfo.version;
 
 const STORAGE = 'emx-sprite-progress-v1';
 const SEEN_ACHIEVEMENTS = 'emx-sprite-achievements-v1';
@@ -146,7 +149,7 @@ export default function Home() {
   const openLeaderboard = async () => { setLeaderboardOpen(true); setLeaderboardLoading(true); try { setLeaderboard(await getLeaderboard(50)); } catch (error: any) { setSyncError(error.message); } finally { setLeaderboardLoading(false); } };
 
   return <main>
-    <header className="topbar"><div className="brand"><img src="/branding/logo.png" alt="EMX Tweaks" /><div><span className="eyebrow">EMX TWEAKS</span><h1>FORTNITE SPRITES</h1></div></div><div className="header-actions"><span className={`sync-pill ${syncStatus}`}><i />{syncStatus === 'synced' ? 'Cloud synced' : syncStatus === 'connecting' ? 'Connecting' : syncStatus === 'syncing' ? 'Syncing' : syncStatus === 'offline' ? 'Offline' : isSupabaseConfigured ? 'Cloud ready' : 'Local mode'}</span><UpdateButton />{isSupabaseConfigured && <button className="leaderboard-button" onClick={openLeaderboard}>Leaderboard</button>}{authUser && <button className="ghost" onClick={() => setTrackerOpen(true)}>My Trackers</button>}<button className="account-button" onClick={() => setAuthOpen(true)}>{authUser ? (authUser.is_anonymous ? 'Anonymous' : 'Account') : 'Sign in'}</button><button className="ghost" onClick={() => setSelected(null)}>About</button></div></header>
+    <header className="topbar"><div className="brand"><img src="/branding/logo.png" alt="EMX Tweaks" /><div><span className="eyebrow">EMX TWEAKS</span><h1>FORTNITE SPRITES</h1></div></div><div className="header-actions"><span className="version-tag" title={`EMX build ${APP_VERSION}`}>v{APP_VERSION}</span><span className={`sync-pill ${syncStatus}`}><i />{syncStatus === 'synced' ? 'Cloud synced' : syncStatus === 'connecting' ? 'Connecting' : syncStatus === 'syncing' ? 'Syncing' : syncStatus === 'offline' ? 'Offline' : isSupabaseConfigured ? 'Cloud ready' : 'Local mode'}</span><UpdateButton />{isSupabaseConfigured && <button className="leaderboard-button" onClick={openLeaderboard}>Leaderboard</button>}{authUser && <button className="ghost" onClick={() => setTrackerOpen(true)}>My Trackers</button>}<button className="account-button" onClick={() => setAuthOpen(true)}>{authUser ? (authUser.is_anonymous ? 'Anonymous' : 'Account') : 'Sign in'}</button><button className="ghost" onClick={() => setSelected(null)}>About</button></div></header>
     {!isSupabaseConfigured && <div className="cloud-notice">Cloud sync is optional. Add Supabase URL and anon key to enable accounts and sharing; local tracking still works normally.</div>}
     {syncStatus === 'error' && syncError && <div className="cloud-notice error">Sync issue: {syncError}</div>}
     <section className="hero"><div><p className="eyebrow accent">COLLECTION COMMAND CENTER</p><h2>Track every Sprite.<br /><span>Master the set.</span></h2><p className="muted">A personal, offline-first checklist for your Fortnite Sprite collection.</p></div><div className="stats"><Stat label="Owned" value={`${owned}/${sprites.length}`} percent={owned / sprites.length} /><Stat label="Mastered" value={`${mastered}/${sprites.length}`} percent={mastered / sprites.length} /></div></section>
