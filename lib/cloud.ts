@@ -13,7 +13,22 @@ export async function signInWithPassword(email: string, password: string) { if (
 export async function signUpWithPassword(email: string, password: string, displayName: string) { if (!supabase) throw new Error('Supabase is not configured.'); const result = await supabase.auth.signUp({ email, password, options: { data: { display_name: cleanDisplayName(displayName) } } }); if (result.data.user) await syncProfileDisplayName(result.data.user.id, displayName); return result; }
 export async function claimAnonymousAccount(email: string, password: string, displayName: string) { if (!supabase) throw new Error('Supabase is not configured.'); const result = await supabase.auth.updateUser({ email, password, data: { display_name: cleanDisplayName(displayName) } }); if (result.data.user) await syncProfileDisplayName(result.data.user.id, displayName); return result; }
 export async function signOut() { if (!supabase) return; return supabase.auth.signOut(); }
-export async function getSession(): Promise<{ session: Session | null; user: User | null }> { if (!supabase) return { session: null, user: null }; const result = await supabase.auth.getSession(); return { session: result.data.session, user: result.data.session?.user ?? null }; }
+export async function getSession(): Promise<{ session: Session | null; user: User | null }> {
+  if (!supabase) return { session: null, user: null };
+  const initial = await supabase.auth.getSession();
+  if (initial.error) throw initial.error;
+  if (!initial.data.session) return { session: null, user: null };
+  // A fresh access token on launch prevents a sleeping desktop app from using a stale session.
+  const refreshed = await supabase.auth.refreshSession();
+  if (refreshed.error || !refreshed.data.session) return { session: initial.data.session, user: initial.data.session.user };
+  return { session: refreshed.data.session, user: refreshed.data.session.user };
+}
+export async function refreshCloudSession(): Promise<{ session: Session | null; user: User | null }> {
+  if (!supabase) return { session: null, user: null };
+  const result = await supabase.auth.refreshSession();
+  if (result.error) throw result.error;
+  return { session: result.data.session, user: result.data.session?.user ?? null };
+}
 
 export async function listTrackers(userId: string): Promise<CloudTracker[]> {
   if (!supabase) return [];
