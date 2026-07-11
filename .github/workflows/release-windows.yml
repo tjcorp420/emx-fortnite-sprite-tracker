@@ -11,6 +11,9 @@ permissions:
 jobs:
   release:
     runs-on: windows-latest
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -23,6 +26,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Verify cloud build configuration
+        shell: pwsh
+        run: |
+          if (-not $env:NEXT_PUBLIC_SUPABASE_URL -or -not $env:NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+            throw 'Supabase release variables are not configured in GitHub Actions secrets.'
+          }
 
       - name: Build the web bundle
         run: npm run build
