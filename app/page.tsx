@@ -174,7 +174,6 @@ export default function Home() {
 function Stat({ label, value, percent }: { label: string; value: string; percent: number }) { return <div className="stat"><span>{label}</span><strong>{value}</strong><div className="bar"><i style={{ width: `${Math.round(percent * 100)}%` }} /></div><small>{Math.round(percent * 100)}% complete</small></div>; }
 function Select({ label, value, setValue, options }: { label: string; value: string; setValue: (value: string) => void; options: string[] }) { return <label className="select"><span>{label}</span><select aria-label={label} value={value} onChange={(event) => setValue(event.target.value)}><option value="all">All</option>{options.map((option) => <option key={option} value={option}>{option === 'needs-mastering' ? 'Need to master' : option[0].toUpperCase() + option.slice(1)}</option>)}</select></label>; }
 function sanitizeDisplayName(value: string) { return value.replace(/[^a-zA-Z0-9 _.-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 24) || 'EMX Trainer'; }
-function compareVersions(left: string, right: string) { const a = left.split('.').map(Number); const b = right.split('.').map(Number); for (let index = 0; index < Math.max(a.length, b.length); index += 1) { const difference = (a[index] || 0) - (b[index] || 0); if (difference) return difference; } return 0; }
 function UpdateButton() {
   const [isDesktop, setIsDesktop] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -185,18 +184,13 @@ function UpdateButton() {
     setBusy(true); setMessage('');
     try {
       const { invoke } = await import('@tauri-apps/api/core');
-      const releaseJson = await invoke<string>('check_for_update');
-      const release = JSON.parse(releaseJson) as { tag_name: string; body?: string; assets?: Array<{ name: string; browser_download_url: string }> };
-      const version = release.tag_name.replace(/^v/, '');
-      const asset = release.assets?.find((item) => item.name === 'EMX-Fortnite-Sprite-Tracker-Setup.exe');
-      if (!asset) throw new Error('The latest GitHub release does not include the EMX Windows installer.');
-      const { getVersion } = await import('@tauri-apps/api/app');
-      const current = await getVersion();
-      if (compareVersions(version, current) <= 0) { notify(`EMX is up to date (${current}).`); return; }
-      const notes = release.body?.replace(/[#*_`]/g, '').trim().slice(0, 600) || '';
-      const updatePrompt = `EMX update ${version} is ready. Install it now and restart the app?${notes ? `\n\nWhat's new:\n${notes}` : ''}`;
+      const update = await invoke<{ version: string; currentVersion: string; notes?: string } | null>('check_for_update');
+      if (!update) { notify('EMX is up to date.'); return; }
+      const notes = update.notes?.replace(/[#*_`]/g, '').trim().slice(0, 600) || '';
+      const updatePrompt = `EMX update ${update.version} is ready. Install it now and restart the app?${notes ? `\n\nWhat's new:\n${notes}` : ''}`;
       if (!window.confirm(updatePrompt)) return;
-      await invoke('install_update', { url: asset.browser_download_url });
+      setMessage(`Installing EMX ${update.version}...`);
+      await invoke('install_update');
     } catch (error: any) { notify(error.message || 'Could not check for updates.'); }
     finally { setBusy(false); }
   };

@@ -1,59 +1,88 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use std::process::Command;
-use tauri::AppHandle;
+use std::{sync::Mutex, time::Duration};
+
+use serde::Serialize;
+use tauri::{AppHandle, Manager, State};
+use tauri_plugin_updater::{Update, UpdaterExt};
 
 #[tauri::command]
-fn greet(name: &str) -> String { format!("Welcome to EMX, {name}!") }
+fn greet(name: &str) -> String {
+    format!("Welcome to EMX, {name}!")
+}
 
-fn powershell_quote(value: &str) -> String { format!("'{}'", value.replace('\'', "''")) }
+struct PendingUpdate(Mutex<Option<Update>>);
 
-#[tauri::command]
-fn check_for_update() -> Result<String, String> {
-    const RELEASE_API: &str = "https://api.github.com/repos/tjcorp420/emx-fortnite-sprite-tracker/releases/latest";
-    let script = format!(
-        "$ErrorActionPreference='Stop';$headers=@{{Accept='application/vnd.github+json';'User-Agent'='EMX-Fortnite-Sprite-Tracker'}};Invoke-RestMethod -UseBasicParsing -Uri {} -Headers $headers | ConvertTo-Json -Compress -Depth 10",
-        powershell_quote(RELEASE_API),
-    );
-    let output = Command::new("powershell.exe")
-        .args(["-NoLogo", "-NoProfile", "-NonInteractive", "-WindowStyle", "Hidden", "-Command", &script])
-        .output()
-        .map_err(|error| format!("Could not start the GitHub release check: {error}"))?;
-    if !output.status.success() {
-        let detail = String::from_utf8_lossy(&output.stderr).trim().to_string();
-        return Err(if detail.is_empty() { "GitHub release check failed.".to_string() } else { detail });
-    }
-    let body = String::from_utf8_lossy(&output.stdout).trim().to_string();
-    if body.is_empty() { Err("GitHub returned an empty release response.".to_string()) } else { Ok(body) }
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct UpdateMetadata {
+    version: String,
+    current_version: String,
+    notes: Option<String>,
 }
 
 #[tauri::command]
-fn install_update(app: AppHandle, url: String) -> Result<(), String> {
-    const UPDATE_PREFIX: &str = "https://github.com/tjcorp420/emx-fortnite-sprite-tracker/releases/download/";
-    if !url.starts_with(UPDATE_PREFIX) || !url.ends_with(".exe") {
-        return Err("The update URL is not an approved EMX update package.".to_string());
-    }
-    let process_id = std::process::id();
-    let output_path = std::env::temp_dir().join(format!("emx-sprite-tracker-update-{process_id}.exe"));
-    let app_path = std::env::current_exe().map_err(|error| format!("Could not locate the EMX app: {error}"))?;
-    let script = format!(
-        "$ErrorActionPreference='Stop';$processId={process_id};$url={};$output={};$appPath={};Wait-Process -Id $processId -ErrorAction SilentlyContinue;Invoke-WebRequest -UseBasicParsing -Uri $url -OutFile $output;$installer=Start-Process -FilePath $output -ArgumentList '/S' -Verb RunAs -Wait -PassThru;if($installer.ExitCode -ne 0){{throw \"EMX installer exited with code $($installer.ExitCode).\"}};Remove-Item -LiteralPath $output -Force -ErrorAction SilentlyContinue;Start-Process -FilePath $appPath;",
-        powershell_quote(&url),
-        powershell_quote(&output_path.to_string_lossy()),
-        powershell_quote(&app_path.to_string_lossy()),
-    );
-    Command::new("powershell.exe")
-        .args(["-NoLogo", "-NoProfile", "-NonInteractive", "-WindowStyle", "Hidden", "-Command", &script])
-        .spawn()
-        .map_err(|error| format!("Could not start the EMX updater: {error}"))?;
-    app.exit(0);
-    Ok(())
+async fn check_for_update(
+    app: AppHandle,
+    pending_update: State<'_, PendingUpdate>,
+) -> Result<Option<UpdateMetadata>, String> {
+    let update = app
+        .updater_builder()
+        .timeout(Duration::from_secs(30))
+        .build()
+        .map_err(|error| format!("Could not configure the EMX updater: {error}"))?
+        .check()
+        .await
+        .map_err(|error| format!("Could not reach the EMX update feed: {error}"))?;
+
+    let metadata = update.as_ref().map(|item| UpdateMetadata {
+        version: item.version.clone(),
+        current_version: item.current_version.clone(),
+        notes: item.body.clone(),
+    });
+
+    *pending_update
+        .0
+        .lock()
+        .map_err(|_| "Could not prepare the EMX updater state.".to_string())? = update;
+
+    Ok(metadata)
+}
+
+#[tauri::command]
+async fn install_update(
+    app: AppHandle,
+    pending_update: State<'_, PendingUpdate>,
+) -> Result<(), String> {
+    let update = pending_update
+        .0
+        .lock()
+        .map_err(|_| "Could not access the pending EMX update.".to_string())?
+        .take()
+        .ok_or_else(|| "No pending update. Check for updates first.".to_string())?;
+
+    update
+        .download_and_install(|_, _| {}, || {})
+        .await
+        .map_err(|error| format!("Could not install the EMX update: {error}"))?;
+
+    app.restart();
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet, check_for_update, install_update])
+        .setup(|app| {
+            app.handle()
+                .plugin(tauri_plugin_updater::Builder::new().build())?;
+            app.manage(PendingUpdate(Mutex::new(None)));
+            Ok(())
+        })
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            check_for_update,
+            install_update
+        ])
         .run(tauri::generate_context!())
         .expect("error while running EMX Fortnite Sprite Tracker");
 }

@@ -38,6 +38,9 @@ jobs:
         run: npm run build
 
       - name: Build the Windows app
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         run: npm run tauri:build
 
       - name: Normalize release asset names
@@ -45,10 +48,27 @@ jobs:
         run: |
           $setup = Get-ChildItem -LiteralPath 'src-tauri/target/release/bundle/nsis' -Filter '*-setup.exe' | Select-Object -First 1
           $msi = Get-ChildItem -LiteralPath 'src-tauri/target/release/bundle/msi' -Filter '*.msi' | Select-Object -First 1
-          if (-not $setup -or -not $msi) { throw 'Tauri did not produce the expected Windows bundles.' }
+          $signature = Get-Item -LiteralPath "$($setup.FullName).sig" -ErrorAction SilentlyContinue
+          if (-not $setup -or -not $signature -or -not $msi) { throw 'Tauri did not produce the expected signed Windows bundles.' }
           Copy-Item -LiteralPath $setup.FullName -Destination 'EMX-Fortnite-Sprite-Tracker-Setup.exe' -Force
+          Copy-Item -LiteralPath $signature.FullName -Destination 'EMX-Fortnite-Sprite-Tracker-Setup.exe.sig' -Force
           Copy-Item -LiteralPath $msi.FullName -Destination 'EMX-Fortnite-Sprite-Tracker.msi' -Force
           Copy-Item -LiteralPath 'src-tauri/target/release/emx_fortnite_sprite_tracker.exe' -Destination 'EMX-Fortnite-Sprite-Tracker-Portable.exe' -Force
+
+          $package = Get-Content -Raw 'src-tauri/tauri.conf.json' | ConvertFrom-Json
+          $tag = "v$($package.version)"
+          $manifest = [ordered]@{
+            version = $package.version
+            notes = "EMX Fortnite Sprite Tracker update $($package.version)."
+            pub_date = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+            platforms = [ordered]@{
+              'windows-x86_64' = [ordered]@{
+                signature = (Get-Content -Raw 'EMX-Fortnite-Sprite-Tracker-Setup.exe.sig').Trim()
+                url = "https://github.com/$env:GITHUB_REPOSITORY/releases/download/$tag/EMX-Fortnite-Sprite-Tracker-Setup.exe"
+              }
+            }
+          }
+          $manifest | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath 'latest.json' -Encoding utf8
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
@@ -56,5 +76,7 @@ jobs:
           generate_release_notes: true
           files: |
             EMX-Fortnite-Sprite-Tracker-Setup.exe
+            EMX-Fortnite-Sprite-Tracker-Setup.exe.sig
             EMX-Fortnite-Sprite-Tracker-Portable.exe
             EMX-Fortnite-Sprite-Tracker.msi
+            latest.json
