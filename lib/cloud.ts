@@ -3,7 +3,7 @@ import { isSupabaseConfigured, supabase } from './supabase';
 
 export type CloudProgress = { owned?: boolean; mastered?: boolean; favorite?: boolean; notes?: string };
 export type CloudTracker = { id: string; owner_id: string; name: string; description: string; visibility: 'private' | 'shared'; role?: 'owner' | 'editor' | 'viewer' };
-export type LeaderboardRow = { rank: number; user_id: string; display_name: string; avatar_color: string; xp: number; level: number; owned_count: number; mastered_count: number; owned_percent: number; mastered_percent: number; indexed_count: number };
+export type LeaderboardRow = { rank: number; user_id: string; display_name: string; avatar_color: string; profile_badge: string; profile_badge_mark: string; profile_title: string; avatar_frame: string; xp: number; level: number; owned_count: number; mastered_count: number; owned_percent: number; mastered_percent: number; indexed_count: number };
 
 function cleanDisplayName(value: string) { return value.replace(/[^a-zA-Z0-9 _.-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 24) || 'EMX Trainer'; }
 async function syncProfileDisplayName(userId: string, value: string) { if (!supabase) return; const { error } = await supabase.from('profiles').update({ display_name: cleanDisplayName(value) }).eq('id', userId); if (error) throw error; }
@@ -76,7 +76,8 @@ export async function createInvite(trackerId: string, userId: string, role: 'edi
 export async function redeemInvite(code: string) { if (!supabase) throw new Error('Supabase is not configured.'); const { data, error } = await supabase.rpc('redeem_tracker_invite', { invite_code: code }); if (error) throw error; return data as string; }
 export async function deleteAccount() { if (!supabase) throw new Error('Supabase is not configured.'); const { error } = await supabase.functions.invoke('delete-account', { body: {} }); if (error) throw error; await supabase.auth.signOut(); }
 export async function getLeaderboard(limit = 50): Promise<LeaderboardRow[]> { if (!supabase) return []; const { data, error } = await supabase.rpc('get_emx_leaderboard', { requested_limit: limit }); if (error) throw error; return (data || []) as LeaderboardRow[]; }
-export async function getProfile(userId: string) { if (!supabase) return null; const { data, error } = await supabase.from('profiles').select('username,display_name,avatar_color,leaderboard_opt_in').eq('id', userId).single(); if (error) throw error; return data; }
+export async function getProfile(userId: string) { if (!supabase) return null; const { data, error } = await supabase.from('profiles').select('username,display_name,avatar_color,leaderboard_opt_in,profile_badge,profile_title,avatar_frame').eq('id', userId).single(); if (error) throw error; return data; }
 export async function updateLeaderboardOptIn(userId: string, enabled: boolean) { if (!supabase) return; const { error } = await supabase.from('profiles').update({ leaderboard_opt_in: enabled }).eq('id', userId); if (error) throw error; }
+export async function updateProfileCosmetics(userId: string, cosmetics: { profile_badge: string; profile_title: string; avatar_frame: string }) { if (!supabase) return; const { error } = await supabase.from('profiles').update(cosmetics).eq('id', userId); if (error) throw error; }
 
 export { isSupabaseConfigured, supabase };
