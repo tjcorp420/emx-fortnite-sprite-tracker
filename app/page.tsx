@@ -183,14 +183,16 @@ function UpdateButton() {
     try {
       const { invoke } = await import('@tauri-apps/api/core');
       const releaseJson = await invoke<string>('check_for_update');
-      const release = JSON.parse(releaseJson) as { tag_name: string; assets?: Array<{ name: string; browser_download_url: string }> };
+      const release = JSON.parse(releaseJson) as { tag_name: string; body?: string; assets?: Array<{ name: string; browser_download_url: string }> };
       const version = release.tag_name.replace(/^v/, '');
       const asset = release.assets?.find((item) => item.name === 'EMX-Fortnite-Sprite-Tracker-Setup.exe');
       if (!asset) throw new Error('The latest GitHub release does not include the EMX Windows installer.');
       const { getVersion } = await import('@tauri-apps/api/app');
       const current = await getVersion();
       if (compareVersions(version, current) <= 0) { notify(`EMX is up to date (${current}).`); return; }
-      if (!window.confirm(`EMX update ${version} is ready. Install it now and restart the app?`)) return;
+      const notes = release.body?.replace(/[#*_`]/g, '').trim().slice(0, 600) || '';
+      const updatePrompt = `EMX update ${version} is ready. Install it now and restart the app?${notes ? `\n\nWhat's new:\n${notes}` : ''}`;
+      if (!window.confirm(updatePrompt)) return;
       await invoke('install_update', { url: asset.browser_download_url });
     } catch (error: any) { notify(error.message || 'Could not check for updates.'); }
     finally { setBusy(false); }
