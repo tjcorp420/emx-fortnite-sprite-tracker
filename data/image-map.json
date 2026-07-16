@@ -173,16 +173,22 @@
     "Base": "tmp_john_wick.webp"
   },
   "Batman": {
-    "Base": "tmp_batman.webp",
-    "Gold": "tmp_batman_gold.webp",
-    "Gummy": "tmp_batman_candy.webp",
-    "Galaxy": "tmp_batman_galaxy.webp",
+    "Base": "T_Icon_BR_FossilMeal_Default_L.webp",
+    "Gold": "T_Icon_BR_FossilMeal_Gold_L.webp",
+    "Gummy": "T_Icon_BR_FossilMeal_Candy_L.webp",
+    "Galaxy": "T_Icon_BR_FossilMeal_Galaxy_L.webp",
     "Gem": "tmp_batman_gem.webp",
-    "Holofoil": "tmp_batman_holofoil.webp",
+    "Holofoil": "T_Icon_BR_FossilMeal_Holofoil_L.webp",
     "Cube": "tmp_batman_cube.webp",
     "Quack": "tmp_batman_quack.webp"
   },
   "Peanut": {
     "Base": "T_Icon_BR_Creature_Sprite_BurntPeanut_ui_L.webp"
+  },
+  "Pollo": {
+    "Base": "T_Icon_BR_CompanyStargazer_Default_L.webp"
+  },
+  "Vini Jr.": {
+    "Base": "T_Icon_BR_CokeParmesan_Default_L.webp"
   }
 }

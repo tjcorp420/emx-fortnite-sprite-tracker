@@ -1,0 +1,3316 @@
+{
+  "schema": 1,
+  "updatedAt": "2026-07-16T16:45:00-04:00",
+  "patch": "v41.20",
+  "indexedCount": 148,
+  "releasedCount": 83,
+  "sprites": [
+    {
+      "id": "sprite-water-sprite",
+      "name": "Water Sprite",
+      "type": "Water",
+      "variant": "Base",
+      "rarity": "rare",
+      "released": true,
+      "image": "/sprites/sprite-water-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Replenish shields while standing in water!",
+      "stats": [
+        "Drop chance: Sprite Chest 12.83%",
+        "Summon cost: 100",
+        "Location: Spotted near rivers and beaches"
+      ],
+      "abilities": [
+        "Replenish shields while standing in water!"
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 2 Shield -> 3 Shield -> 4 Shield -> 5 Shield -> 6 Shield per tick"
+      ],
+      "acquisition": "Sprite Chest 12.83%",
+      "spawnInfo": "Spotted near rivers and beaches",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-water-sprite",
+      "name": "Gold Water Sprite",
+      "type": "Water",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-water-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.7%",
+        "Summon cost: 4,000",
+        "Location: Spotted near rivers and beaches"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Replenish shields while standing in water!"
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 2 Shield -> 3 Shield -> 4 Shield -> 5 Shield -> 6 Shield per tick"
+      ],
+      "acquisition": "Sprite Chest 0.7%",
+      "spawnInfo": "Spotted near rivers and beaches",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-water-sprite",
+      "name": "Gummy Water Sprite",
+      "type": "Water",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-water-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.28%",
+        "Summon cost: 4,000",
+        "Location: Spotted near rivers and beaches"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Replenish shields while standing in water!"
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 2 Shield -> 3 Shield -> 4 Shield -> 5 Shield -> 6 Shield per tick"
+      ],
+      "acquisition": "Sprite Chest 0.28%",
+      "spawnInfo": "Spotted near rivers and beaches",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-water-sprite",
+      "name": "Galaxy Water Sprite",
+      "type": "Water",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-water-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.28%",
+        "Summon cost: 4,000",
+        "Location: Spotted near rivers and beaches"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Replenish shields while standing in water!"
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 2 Shield -> 3 Shield -> 4 Shield -> 5 Shield -> 6 Shield per tick"
+      ],
+      "acquisition": "Sprite Chest 0.28%",
+      "spawnInfo": "Spotted near rivers and beaches",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-water-sprite",
+      "name": "Gem Water Sprite",
+      "type": "Water",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-water-sprite",
+      "name": "Holofoil Water Sprite",
+      "type": "Water",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-holofoil-water-sprite.webp",
+      "imageStatus": "verified",
+      "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 4,000",
+        "Location: Spotted near rivers and beaches"
+      ],
+      "abilities": [
+        "5% chance for your squad to find rare Sprite Variants from looting chests",
+        "Replenish shields while standing in water!"
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 2 Shield -> 3 Shield -> 4 Shield -> 5 Shield -> 6 Shield per tick"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near rivers and beaches",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-cube-water-sprite",
+      "name": "Cube Water Sprite",
+      "type": "Water",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-water-sprite",
+      "name": "Quack Water Sprite",
+      "type": "Water",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-earth-sprite",
+      "name": "Earth Sprite",
+      "type": "Earth",
+      "variant": "Base",
+      "rarity": "rare",
+      "released": true,
+      "image": "/sprites/sprite-earth-sprite.webp",
+      "imageStatus": "verified",
+      "description": "You have a chance to find additional rare items when opening chests.",
+      "stats": [
+        "Drop chance: Sprite Chest 12.83%",
+        "Summon cost: 100",
+        "Location: Found wandering around forests and wooded regions"
+      ],
+      "abilities": [
+        "You have a chance to find additional rare items when opening chests."
+      ],
+      "effects": [
+        "Chance increases at each Level Up: 10% -> 12.5% -> 15% -> 17.5% -> 20% chance to find additional rare loot"
+      ],
+      "acquisition": "Sprite Chest 12.83%",
+      "spawnInfo": "Found wandering around forests and wooded regions",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-earth-sprite",
+      "name": "Gold Earth Sprite",
+      "type": "Earth",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-earth-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.7%",
+        "Summon cost: 4,000",
+        "Location: Found wandering around forests and wooded regions"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "You have a chance to find additional rare items when opening chests."
+      ],
+      "effects": [
+        "Chance increases at each Level Up: 10% -> 12.5% -> 15% -> 17.5% -> 20% chance to find additional rare loot"
+      ],
+      "acquisition": "Sprite Chest 0.7%",
+      "spawnInfo": "Found wandering around forests and wooded regions",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-earth-sprite",
+      "name": "Gummy Earth Sprite",
+      "type": "Earth",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-earth-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.28%",
+        "Summon cost: 4,000",
+        "Location: Found wandering around forests and wooded regions"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "You have a chance to find additional rare items when opening chests."
+      ],
+      "effects": [
+        "Chance increases at each Level Up: 10% -> 12.5% -> 15% -> 17.5% -> 20% chance to find additional rare loot"
+      ],
+      "acquisition": "Sprite Chest 0.28%",
+      "spawnInfo": "Found wandering around forests and wooded regions",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-earth-sprite",
+      "name": "Galaxy Earth Sprite",
+      "type": "Earth",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-earth-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.28%",
+        "Summon cost: 4,000",
+        "Location: Found wandering around forests and wooded regions"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "You have a chance to find additional rare items when opening chests."
+      ],
+      "effects": [
+        "Chance increases at each Level Up: 10% -> 12.5% -> 15% -> 17.5% -> 20% chance to find additional rare loot"
+      ],
+      "acquisition": "Sprite Chest 0.28%",
+      "spawnInfo": "Found wandering around forests and wooded regions",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-earth-sprite",
+      "name": "Gem Earth Sprite",
+      "type": "Earth",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-earth-sprite",
+      "name": "Holofoil Earth Sprite",
+      "type": "Earth",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-cube-earth-sprite",
+      "name": "Cube Earth Sprite",
+      "type": "Earth",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-earth-sprite",
+      "name": "Quack Earth Sprite",
+      "type": "Earth",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-fire-sprite",
+      "name": "Fire Sprite",
+      "type": "Fire",
+      "variant": "Base",
+      "rarity": "rare",
+      "released": true,
+      "image": "/sprites/sprite-fire-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Creates a fiery burst when you deal enough damage to an enemy!",
+      "stats": [
+        "Drop chance: Sprite Chest 12.45%",
+        "Summon cost: 100",
+        "Location: Located near urban areas"
+      ],
+      "abilities": [
+        "Creates a fiery burst when you deal enough damage to an enemy!"
+      ],
+      "effects": [
+        "Required damage decreases at each Level Up: 150 Damage -> 125 Damage -> 100 Damage -> 75 Damage -> 50 Damage to trigger"
+      ],
+      "acquisition": "Sprite Chest 12.45%",
+      "spawnInfo": "Located near urban areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-fire-sprite",
+      "name": "Gold Fire Sprite",
+      "type": "Fire",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-fire-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.68%",
+        "Summon cost: 4,000",
+        "Location: Located near urban areas"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Creates a fiery burst when you deal enough damage to an enemy!"
+      ],
+      "effects": [
+        "Required damage decreases at each Level Up: 150 Damage -> 125 Damage -> 100 Damage -> 75 Damage -> 50 Damage to trigger"
+      ],
+      "acquisition": "Sprite Chest 0.68%",
+      "spawnInfo": "Located near urban areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-fire-sprite",
+      "name": "Gummy Fire Sprite",
+      "type": "Fire",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-fire-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.68%",
+        "Summon cost: 4,000",
+        "Location: Located near urban areas"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Creates a fiery burst when you deal enough damage to an enemy!"
+      ],
+      "effects": [
+        "Required damage decreases at each Level Up: 150 Damage -> 125 Damage -> 100 Damage -> 75 Damage -> 50 Damage to trigger"
+      ],
+      "acquisition": "Sprite Chest 0.68%",
+      "spawnInfo": "Located near urban areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-fire-sprite",
+      "name": "Galaxy Fire Sprite",
+      "type": "Fire",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-fire-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.27%",
+        "Summon cost: 4,000",
+        "Location: Located near urban areas"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Creates a fiery burst when you deal enough damage to an enemy!"
+      ],
+      "effects": [
+        "Required damage decreases at each Level Up: 150 Damage -> 125 Damage -> 100 Damage -> 75 Damage -> 50 Damage to trigger"
+      ],
+      "acquisition": "Sprite Chest 0.27%",
+      "spawnInfo": "Located near urban areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-fire-sprite",
+      "name": "Gem Fire Sprite",
+      "type": "Fire",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-fire-sprite",
+      "name": "Holofoil Fire Sprite",
+      "type": "Fire",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-holofoil-fire-sprite.webp",
+      "imageStatus": "verified",
+      "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 4,000",
+        "Location: Located near urban areas"
+      ],
+      "abilities": [
+        "5% chance for your squad to find rare Sprite Variants from looting chests",
+        "Creates a fiery burst when you deal enough damage to an enemy!"
+      ],
+      "effects": [
+        "Required damage decreases at each Level Up: 150 Damage -> 125 Damage -> 100 Damage -> 75 Damage -> 50 Damage to trigger"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Located near urban areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-cube-fire-sprite",
+      "name": "Cube Fire Sprite",
+      "type": "Fire",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-fire-sprite",
+      "name": "Quack Fire Sprite",
+      "type": "Fire",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-duck-sprite",
+      "name": "Duck Sprite",
+      "type": "Duck",
+      "variant": "Base",
+      "rarity": "epic",
+      "released": true,
+      "image": "/sprites/sprite-duck-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Emoting or Jamming replenishes shields.",
+      "stats": [
+        "Drop chance: Sprite Chest 5.74%",
+        "Summon cost: 3,000",
+        "Location: Found in the vault of a certain business mogul"
+      ],
+      "abilities": [
+        "Emoting or Jamming replenishes shields."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 2 Shield -> 3 Shield -> 4 Shield -> 6 Shield -> 8 Shield per tick"
+      ],
+      "acquisition": "Sprite Chest 5.74%",
+      "spawnInfo": "Found in the vault of a certain business mogul",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-duck-sprite",
+      "name": "Gold Duck Sprite",
+      "type": "Duck",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-duck-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.07%",
+        "Summon cost: 6,000",
+        "Location: Found in the vault of a certain business mogul"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Emoting or Jamming replenishes shields."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 2 Shield -> 3 Shield -> 4 Shield -> 6 Shield -> 8 Shield per tick"
+      ],
+      "acquisition": "Sprite Chest 0.07%",
+      "spawnInfo": "Found in the vault of a certain business mogul",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-duck-sprite",
+      "name": "Gummy Duck Sprite",
+      "type": "Duck",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-duck-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.04%",
+        "Summon cost: 6,000",
+        "Location: Found in the vault of a certain business mogul"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Emoting or Jamming replenishes shields."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 2 Shield -> 3 Shield -> 4 Shield -> 6 Shield -> 8 Shield per tick"
+      ],
+      "acquisition": "Sprite Chest 0.04%",
+      "spawnInfo": "Found in the vault of a certain business mogul",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-duck-sprite",
+      "name": "Galaxy Duck Sprite",
+      "type": "Duck",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-duck-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.02%",
+        "Summon cost: 6,000",
+        "Location: Found in the vault of a certain business mogul"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Emoting or Jamming replenishes shields."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 2 Shield -> 3 Shield -> 4 Shield -> 6 Shield -> 8 Shield per tick"
+      ],
+      "acquisition": "Sprite Chest 0.02%",
+      "spawnInfo": "Found in the vault of a certain business mogul",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-duck-sprite",
+      "name": "Gem Duck Sprite",
+      "type": "Duck",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-duck-sprite",
+      "name": "Holofoil Duck Sprite",
+      "type": "Duck",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-cube-duck-sprite",
+      "name": "Cube Duck Sprite",
+      "type": "Duck",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-duck-sprite",
+      "name": "Quack Duck Sprite",
+      "type": "Duck",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-ghost-sprite",
+      "name": "Ghost Sprite",
+      "type": "Ghost",
+      "variant": "Base",
+      "rarity": "epic",
+      "released": true,
+      "image": "/sprites/sprite-ghost-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Grants cloak for a duration upon reloading.",
+      "stats": [
+        "Drop chance: Sprite Chest 5.74%",
+        "Summon cost: 3,000",
+        "Location: Found in the world at nighttime"
+      ],
+      "abilities": [
+        "Grants cloak for a duration upon reloading."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 3 Seconds -> 3.5 Seconds -> 4 Seconds -> 4.5 Seconds -> 5 Seconds"
+      ],
+      "acquisition": "Sprite Chest 5.74%",
+      "spawnInfo": "Found in the world at nighttime",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-ghost-sprite",
+      "name": "Gold Ghost Sprite",
+      "type": "Ghost",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-ghost-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.07%",
+        "Summon cost: 6,000",
+        "Location: Found in the world at nighttime"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Grants cloak for a duration upon reloading."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 3 Seconds -> 3.5 Seconds -> 4 Seconds -> 4.5 Seconds -> 5 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.07%",
+      "spawnInfo": "Found in the world at nighttime",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-ghost-sprite",
+      "name": "Gummy Ghost Sprite",
+      "type": "Ghost",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-ghost-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.04%",
+        "Summon cost: 6,000",
+        "Location: Found in the world at nighttime"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Grants cloak for a duration upon reloading."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 3 Seconds -> 3.5 Seconds -> 4 Seconds -> 4.5 Seconds -> 5 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.04%",
+      "spawnInfo": "Found in the world at nighttime",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-ghost-sprite",
+      "name": "Galaxy Ghost Sprite",
+      "type": "Ghost",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-ghost-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.02%",
+        "Summon cost: 6,000",
+        "Location: Found in the world at nighttime"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Grants cloak for a duration upon reloading."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 3 Seconds -> 3.5 Seconds -> 4 Seconds -> 4.5 Seconds -> 5 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.02%",
+      "spawnInfo": "Found in the world at nighttime",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-ghost-sprite",
+      "name": "Gem Ghost Sprite",
+      "type": "Ghost",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-ghost-sprite",
+      "name": "Holofoil Ghost Sprite",
+      "type": "Ghost",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-holofoil-ghost-sprite.webp",
+      "imageStatus": "verified",
+      "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 6,000",
+        "Location: Found in the world at nighttime"
+      ],
+      "abilities": [
+        "5% chance for your squad to find rare Sprite Variants from looting chests",
+        "Grants cloak for a duration upon reloading."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 3 Seconds -> 3.5 Seconds -> 4 Seconds -> 4.5 Seconds -> 5 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Found in the world at nighttime",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-cube-ghost-sprite",
+      "name": "Cube Ghost Sprite",
+      "type": "Ghost",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-ghost-sprite",
+      "name": "Quack Ghost Sprite",
+      "type": "Ghost",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-dream-sprite",
+      "name": "Dream Sprite",
+      "type": "Dream",
+      "variant": "Base",
+      "rarity": "legendary",
+      "released": true,
+      "image": "/sprites/sprite-dream-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Grants a random item at each level, exploding with legendary loot at Max Level.",
+      "stats": [
+        "Drop chance: Sprite Chest 2.63%",
+        "Summon cost: 5,000",
+        "Location: Sometimes found sleeping in the storage crates"
+      ],
+      "abilities": [
+        "Grants a random item at each level, exploding with legendary loot at Max Level."
+      ],
+      "effects": [
+        "Loot value increases at each Level Up!"
+      ],
+      "acquisition": "Sprite Chest 2.63%",
+      "spawnInfo": "Sometimes found sleeping in the storage crates",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-dream-sprite",
+      "name": "Gold Dream Sprite",
+      "type": "Dream",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-dream-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.03%",
+        "Summon cost: 10,000",
+        "Location: Sometimes found sleeping in the storage crates"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Grants a random item at each level, exploding with legendary loot at Max Level."
+      ],
+      "effects": [
+        "Loot value increases at each Level Up!"
+      ],
+      "acquisition": "Sprite Chest 0.03%",
+      "spawnInfo": "Sometimes found sleeping in the storage crates",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-dream-sprite",
+      "name": "Gummy Dream Sprite",
+      "type": "Dream",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-dream-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.02%",
+        "Summon cost: 10,000",
+        "Location: Sometimes found sleeping in the storage crates"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Grants a random item at each level, exploding with legendary loot at Max Level."
+      ],
+      "effects": [
+        "Loot value increases at each Level Up!"
+      ],
+      "acquisition": "Sprite Chest 0.02%",
+      "spawnInfo": "Sometimes found sleeping in the storage crates",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-dream-sprite",
+      "name": "Galaxy Dream Sprite",
+      "type": "Dream",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-dream-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.01%",
+        "Summon cost: 10,000",
+        "Location: Sometimes found sleeping in the storage crates"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Grants a random item at each level, exploding with legendary loot at Max Level."
+      ],
+      "effects": [
+        "Loot value increases at each Level Up!"
+      ],
+      "acquisition": "Sprite Chest 0.01%",
+      "spawnInfo": "Sometimes found sleeping in the storage crates",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-dream-sprite",
+      "name": "Gem Dream Sprite",
+      "type": "Dream",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-dream-sprite",
+      "name": "Holofoil Dream Sprite",
+      "type": "Dream",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-cube-dream-sprite",
+      "name": "Cube Dream Sprite",
+      "type": "Dream",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-dream-sprite",
+      "name": "Quack Dream Sprite",
+      "type": "Dream",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-demon-sprite",
+      "name": "Demon Sprite",
+      "type": "Demon",
+      "variant": "Base",
+      "rarity": "epic",
+      "released": true,
+      "image": "/sprites/sprite-demon-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Siphon some health and shields when you eliminate an opponent.",
+      "stats": [
+        "Drop chance: Sprite Chest 5.76%",
+        "Summon cost: 3,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Siphon some health and shields when you eliminate an opponent."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 10 Healing -> 15 Healing -> 20 Healing -> 25 Healing -> 30 Healing per elimination"
+      ],
+      "acquisition": "Sprite Chest 5.76%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-demon-sprite",
+      "name": "Gold Demon Sprite",
+      "type": "Demon",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-demon-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.07%",
+        "Summon cost: 6,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Siphon some health and shields when you eliminate an opponent."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 10 Healing -> 15 Healing -> 20 Healing -> 25 Healing -> 30 Healing per elimination"
+      ],
+      "acquisition": "Sprite Chest 0.07%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-demon-sprite",
+      "name": "Gummy Demon Sprite",
+      "type": "Demon",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-demon-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.04%",
+        "Summon cost: 6,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Siphon some health and shields when you eliminate an opponent."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 10 Healing -> 15 Healing -> 20 Healing -> 25 Healing -> 30 Healing per elimination"
+      ],
+      "acquisition": "Sprite Chest 0.04%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-demon-sprite",
+      "name": "Galaxy Demon Sprite",
+      "type": "Demon",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-demon-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.02%",
+        "Summon cost: 6,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Siphon some health and shields when you eliminate an opponent."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 10 Healing -> 15 Healing -> 20 Healing -> 25 Healing -> 30 Healing per elimination"
+      ],
+      "acquisition": "Sprite Chest 0.02%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-demon-sprite",
+      "name": "Gem Demon Sprite",
+      "type": "Demon",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-demon-sprite",
+      "name": "Holofoil Demon Sprite",
+      "type": "Demon",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-cube-demon-sprite",
+      "name": "Cube Demon Sprite",
+      "type": "Demon",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-demon-sprite",
+      "name": "Quack Demon Sprite",
+      "type": "Demon",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-punk-sprite",
+      "name": "Punk Sprite",
+      "type": "Punk",
+      "variant": "Base",
+      "rarity": "legendary",
+      "released": true,
+      "image": "/sprites/sprite-punk-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Possibly nothing... or infinitely something",
+      "stats": [
+        "Drop chance: Sprite Chest 1.98%",
+        "Summon cost: 5,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Possibly nothing... or infinitely something"
+      ],
+      "effects": [],
+      "acquisition": "Sprite Chest 1.98%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-punk-sprite",
+      "name": "Gold Punk Sprite",
+      "type": "Punk",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-punk-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.02%",
+        "Summon cost: 10,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Possibly nothing... or infinitely something"
+      ],
+      "effects": [],
+      "acquisition": "Sprite Chest 0.02%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-punk-sprite",
+      "name": "Gummy Punk Sprite",
+      "type": "Punk",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-punk-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.01%",
+        "Summon cost: 10,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Possibly nothing... or infinitely something"
+      ],
+      "effects": [],
+      "acquisition": "Sprite Chest 0.01%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-punk-sprite",
+      "name": "Galaxy Punk Sprite",
+      "type": "Punk",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-punk-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.01%",
+        "Summon cost: 10,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Possibly nothing... or infinitely something"
+      ],
+      "effects": [],
+      "acquisition": "Sprite Chest 0.01%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-punk-sprite",
+      "name": "Gem Punk Sprite",
+      "type": "Punk",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-punk-sprite",
+      "name": "Holofoil Punk Sprite",
+      "type": "Punk",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-cube-punk-sprite",
+      "name": "Cube Punk Sprite",
+      "type": "Punk",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-punk-sprite",
+      "name": "Quack Punk Sprite",
+      "type": "Punk",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-king-sprite",
+      "name": "King Sprite",
+      "type": "King",
+      "variant": "Base",
+      "rarity": "epic",
+      "released": true,
+      "image": "/sprites/sprite-king-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Your Pickaxe deals more damage.",
+      "stats": [
+        "Drop chance: Sprite Chest 5.74%",
+        "Summon cost: 3,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Your Pickaxe deals more damage."
+      ],
+      "effects": [
+        "Increases in damage at each Level Up: 30 -> 40 -> 60 -> 80 -> 120 bonus damage"
+      ],
+      "acquisition": "Sprite Chest 5.74%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-king-sprite",
+      "name": "Gold King Sprite",
+      "type": "King",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-king-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.07%",
+        "Summon cost: 6,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Your Pickaxe deals more damage."
+      ],
+      "effects": [
+        "Increases in damage at each Level Up: 30 -> 40 -> 60 -> 80 -> 120 bonus damage"
+      ],
+      "acquisition": "Sprite Chest 0.07%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-king-sprite",
+      "name": "Gummy King Sprite",
+      "type": "King",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-king-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.04%",
+        "Summon cost: 6,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Your Pickaxe deals more damage."
+      ],
+      "effects": [
+        "Increases in damage at each Level Up: 30 -> 40 -> 60 -> 80 -> 120 bonus damage"
+      ],
+      "acquisition": "Sprite Chest 0.04%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-king-sprite",
+      "name": "Galaxy King Sprite",
+      "type": "King",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-king-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.02%",
+        "Summon cost: 6,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Your Pickaxe deals more damage."
+      ],
+      "effects": [
+        "Increases in damage at each Level Up: 30 -> 40 -> 60 -> 80 -> 120 bonus damage"
+      ],
+      "acquisition": "Sprite Chest 0.02%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-king-sprite",
+      "name": "Gem King Sprite",
+      "type": "King",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-king-sprite",
+      "name": "Holofoil King Sprite",
+      "type": "King",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-holofoil-king-sprite.webp",
+      "imageStatus": "verified",
+      "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 6,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "5% chance for your squad to find rare Sprite Variants from looting chests",
+        "Your Pickaxe deals more damage."
+      ],
+      "effects": [
+        "Increases in damage at each Level Up: 30 -> 40 -> 60 -> 80 -> 120 bonus damage"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-cube-king-sprite",
+      "name": "Cube King Sprite",
+      "type": "King",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-king-sprite",
+      "name": "Quack King Sprite",
+      "type": "King",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-burnt-peanut",
+      "name": "Burnt Peanut",
+      "type": "Peanut",
+      "variant": "Base",
+      "rarity": "mythic",
+      "released": true,
+      "image": "/sprites/sprite-burnt-peanut.webp",
+      "imageStatus": "verified",
+      "description": "Goop! When eliminating players, you may find more loot. Sometimes mythic!",
+      "stats": [
+        "Drop chance: Sprite Chest 1.01%",
+        "Summon cost: 7,500",
+        "Location: Found in Relic Chests"
+      ],
+      "abilities": [
+        "Goop! When eliminating players, you may find more loot. Sometimes mythic!"
+      ],
+      "effects": [
+        "Chance increases at each Level Up: 20% -> 30% -> 40% -> 50% -> 60% chance to find more loot. 10% chance to find Mythic at Max Level!"
+      ],
+      "acquisition": "Sprite Chest 1.01%",
+      "spawnInfo": "Found in Relic Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-zero-point-sprite",
+      "name": "Zero Point Sprite",
+      "type": "Zero Point",
+      "variant": "Base",
+      "rarity": "mythic",
+      "released": true,
+      "image": "/sprites/sprite-zero-point-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Spawn a Shield Bubble Jr. when you use a healing item on yourself (excluding splashes and grenades).",
+      "stats": [
+        "Drop chance: Sprite Chest 0.000098%",
+        "Summon cost: 7,500",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Spawn a Shield Bubble Jr. when you use a healing item on yourself (excluding splashes and grenades)."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.000098%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-zero-point-sprite",
+      "name": "Gold Zero Point Sprite",
+      "type": "Zero Point",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-zero-point-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.0000012%",
+        "Summon cost: 15,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Spawn a Shield Bubble Jr. when you use a healing item on yourself (excluding splashes and grenades)."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.0000012%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-zero-point-sprite",
+      "name": "Gummy Zero Point Sprite",
+      "type": "Zero Point",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-zero-point-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.0000006%",
+        "Summon cost: 15,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Spawn a Shield Bubble Jr. when you use a healing item on yourself (excluding splashes and grenades)."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.0000006%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-zero-point-sprite",
+      "name": "Galaxy Zero Point Sprite",
+      "type": "Zero Point",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-zero-point-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.0000004%",
+        "Summon cost: 15,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Spawn a Shield Bubble Jr. when you use a healing item on yourself (excluding splashes and grenades)."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.0000004%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-zero-point-sprite",
+      "name": "Gem Zero Point Sprite",
+      "type": "Zero Point",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-zero-point-sprite",
+      "name": "Holofoil Zero Point Sprite",
+      "type": "Zero Point",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-cube-zero-point-sprite",
+      "name": "Cube Zero Point Sprite",
+      "type": "Zero Point",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-zero-point-sprite",
+      "name": "Quack Zero Point Sprite",
+      "type": "Zero Point",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-fishy-sprite",
+      "name": "Fishy Sprite",
+      "type": "Fishy",
+      "variant": "Base",
+      "rarity": "rare",
+      "released": true,
+      "image": "/sprites/sprite-fishy-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Swim speed greatly increased. Taking damage also briefly increases movement speed.",
+      "stats": [
+        "Drop chance: Sprite Chest 13.79%",
+        "Summon cost: 2,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Swim speed greatly increased. Taking damage also briefly increases movement speed."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 25% Swim Speed / 10% Movement Speed -> 50% Swim Speed / 20% Movement Speed -> 100% Swim Speed / 30% Movement Speed -> 150% Swim Speed / 40% Movement Speed -> 200% Swim Speed / 50% Movement Speed Bonuses"
+      ],
+      "acquisition": "Sprite Chest 13.79%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-fishy-sprite",
+      "name": "Gold Fishy Sprite",
+      "type": "Fishy",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-fishy-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.17%",
+        "Summon cost: 4,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Swim speed greatly increased. Taking damage also briefly increases movement speed."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 25% Swim Speed / 10% Movement Speed -> 50% Swim Speed / 20% Movement Speed -> 100% Swim Speed / 30% Movement Speed -> 150% Swim Speed / 40% Movement Speed -> 200% Swim Speed / 50% Movement Speed Bonuses"
+      ],
+      "acquisition": "Sprite Chest 0.17%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-fishy-sprite",
+      "name": "Gummy Fishy Sprite",
+      "type": "Fishy",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-fishy-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.08%",
+        "Summon cost: 4,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Swim speed greatly increased. Taking damage also briefly increases movement speed."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 25% Swim Speed / 10% Movement Speed -> 50% Swim Speed / 20% Movement Speed -> 100% Swim Speed / 30% Movement Speed -> 150% Swim Speed / 40% Movement Speed -> 200% Swim Speed / 50% Movement Speed Bonuses"
+      ],
+      "acquisition": "Sprite Chest 0.08%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-fishy-sprite",
+      "name": "Galaxy Fishy Sprite",
+      "type": "Fishy",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-fishy-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.06%",
+        "Summon cost: 4,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Swim speed greatly increased. Taking damage also briefly increases movement speed."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 25% Swim Speed / 10% Movement Speed -> 50% Swim Speed / 20% Movement Speed -> 100% Swim Speed / 30% Movement Speed -> 150% Swim Speed / 40% Movement Speed -> 200% Swim Speed / 50% Movement Speed Bonuses"
+      ],
+      "acquisition": "Sprite Chest 0.06%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-fishy-sprite",
+      "name": "Gem Fishy Sprite",
+      "type": "Fishy",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-fishy-sprite",
+      "name": "Holofoil Fishy Sprite",
+      "type": "Fishy",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-cube-fishy-sprite",
+      "name": "Cube Fishy Sprite",
+      "type": "Fishy",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-fishy-sprite",
+      "name": "Quack Fishy Sprite",
+      "type": "Fishy",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-striker-sprite",
+      "name": "Striker Sprite",
+      "type": "Striker",
+      "variant": "Base",
+      "rarity": "epic",
+      "released": true,
+      "image": "/sprites/sprite-striker-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain the Overdrive effect when you Mantle, Hurdle, or Wall Scramble.",
+      "stats": [
+        "Drop chance: Sprite Chest 5.74%",
+        "Summon cost: 3,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain the Overdrive effect when you Mantle, Hurdle, or Wall Scramble."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds of Overdrive"
+      ],
+      "acquisition": "Sprite Chest 5.74%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-striker-sprite",
+      "name": "Gold Striker Sprite",
+      "type": "Striker",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-striker-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.07%",
+        "Summon cost: 6,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Gain the Overdrive effect when you Mantle, Hurdle, or Wall Scramble."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds of Overdrive"
+      ],
+      "acquisition": "Sprite Chest 0.07%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-striker-sprite",
+      "name": "Gummy Striker Sprite",
+      "type": "Striker",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-striker-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.04%",
+        "Summon cost: 6,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Gain the Overdrive effect when you Mantle, Hurdle, or Wall Scramble."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds of Overdrive"
+      ],
+      "acquisition": "Sprite Chest 0.04%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-striker-sprite",
+      "name": "Galaxy Striker Sprite",
+      "type": "Striker",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-striker-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.02%",
+        "Summon cost: 6,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Gain the Overdrive effect when you Mantle, Hurdle, or Wall Scramble."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds of Overdrive"
+      ],
+      "acquisition": "Sprite Chest 0.02%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-striker-sprite",
+      "name": "Gem Striker Sprite",
+      "type": "Striker",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-striker-sprite",
+      "name": "Holofoil Striker Sprite",
+      "type": "Striker",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-holofoil-striker-sprite.webp",
+      "imageStatus": "verified",
+      "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 6,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "5% chance for your squad to find rare Sprite Variants from looting chests",
+        "Gain the Overdrive effect when you Mantle, Hurdle, or Wall Scramble."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds of Overdrive"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-cube-striker-sprite",
+      "name": "Cube Striker Sprite",
+      "type": "Striker",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-striker-sprite",
+      "name": "Quack Striker Sprite",
+      "type": "Striker",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-aura-sprite",
+      "name": "Aura Sprite",
+      "type": "Aura",
+      "variant": "Base",
+      "rarity": "epic",
+      "released": true,
+      "image": "/sprites/sprite-aura-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain a Shock Rock charge when you deal enough damage to enemies!",
+      "stats": [
+        "Drop chance: Sprite Chest 5.74%",
+        "Summon cost: 3,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain a Shock Rock charge when you deal enough damage to enemies!"
+      ],
+      "effects": [
+        "Required damage decreases at each Level Up: 175 Damage -> 150 Damage -> 125 Damage -> 100 Damage -> 75 Damage to trigger"
+      ],
+      "acquisition": "Sprite Chest 5.74%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-aura-sprite",
+      "name": "Gold Aura Sprite",
+      "type": "Aura",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-aura-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.07%",
+        "Summon cost: 6,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Gain a Shock Rock charge when you deal enough damage to enemies!"
+      ],
+      "effects": [
+        "Required damage decreases at each Level Up: 175 Damage -> 150 Damage -> 125 Damage -> 100 Damage -> 75 Damage to trigger"
+      ],
+      "acquisition": "Sprite Chest 0.07%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-aura-sprite",
+      "name": "Gummy Aura Sprite",
+      "type": "Aura",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-aura-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.04%",
+        "Summon cost: 6,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Gain a Shock Rock charge when you deal enough damage to enemies!"
+      ],
+      "effects": [
+        "Required damage decreases at each Level Up: 175 Damage -> 150 Damage -> 125 Damage -> 100 Damage -> 75 Damage to trigger"
+      ],
+      "acquisition": "Sprite Chest 0.04%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-aura-sprite",
+      "name": "Galaxy Aura Sprite",
+      "type": "Aura",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-aura-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.02%",
+        "Summon cost: 6,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Gain a Shock Rock charge when you deal enough damage to enemies!"
+      ],
+      "effects": [
+        "Required damage decreases at each Level Up: 175 Damage -> 150 Damage -> 125 Damage -> 100 Damage -> 75 Damage to trigger"
+      ],
+      "acquisition": "Sprite Chest 0.02%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-aura-sprite",
+      "name": "Gem Aura Sprite",
+      "type": "Aura",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-aura-sprite",
+      "name": "Holofoil Aura Sprite",
+      "type": "Aura",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-cube-aura-sprite",
+      "name": "Cube Aura Sprite",
+      "type": "Aura",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-aura-sprite",
+      "name": "Quack Aura Sprite",
+      "type": "Aura",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-boss-sprite",
+      "name": "Boss Sprite",
+      "type": "Boss",
+      "variant": "Base",
+      "rarity": "legendary",
+      "released": true,
+      "image": "/sprites/sprite-boss-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Grants an increase to your max HP and Shield.",
+      "stats": [
+        "Drop chance: Sprite Chest 2.63%",
+        "Summon cost: 5,000",
+        "Location: Claimed from defeating a powerful adversary"
+      ],
+      "abilities": [
+        "Grants an increase to your max HP and Shield."
+      ],
+      "effects": [
+        "Increases at each Level Up: 5 HP/Shield -> 10 HP/Shield -> 15 HP/Shield -> 20 HP/Shield -> 25 HP/Shield"
+      ],
+      "acquisition": "Sprite Chest 2.63%",
+      "spawnInfo": "Claimed from defeating a powerful adversary",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-boss-sprite",
+      "name": "Gold Boss Sprite",
+      "type": "Boss",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-boss-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.03%",
+        "Summon cost: 10,000",
+        "Location: Claimed from defeating a powerful adversary"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Grants an increase to your max HP and Shield."
+      ],
+      "effects": [
+        "Increases at each Level Up: 5 HP/Shield -> 10 HP/Shield -> 15 HP/Shield -> 20 HP/Shield -> 25 HP/Shield"
+      ],
+      "acquisition": "Sprite Chest 0.03%",
+      "spawnInfo": "Claimed from defeating a powerful adversary",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-boss-sprite",
+      "name": "Gummy Boss Sprite",
+      "type": "Boss",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-boss-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.02%",
+        "Summon cost: 10,000",
+        "Location: Claimed from defeating a powerful adversary"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Grants an increase to your max HP and Shield."
+      ],
+      "effects": [
+        "Increases at each Level Up: 5 HP/Shield -> 10 HP/Shield -> 15 HP/Shield -> 20 HP/Shield -> 25 HP/Shield"
+      ],
+      "acquisition": "Sprite Chest 0.02%",
+      "spawnInfo": "Claimed from defeating a powerful adversary",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-boss-sprite",
+      "name": "Galaxy Boss Sprite",
+      "type": "Boss",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-boss-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.01%",
+        "Summon cost: 10,000",
+        "Location: Claimed from defeating a powerful adversary"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Grants an increase to your max HP and Shield."
+      ],
+      "effects": [
+        "Increases at each Level Up: 5 HP/Shield -> 10 HP/Shield -> 15 HP/Shield -> 20 HP/Shield -> 25 HP/Shield"
+      ],
+      "acquisition": "Sprite Chest 0.01%",
+      "spawnInfo": "Claimed from defeating a powerful adversary",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-boss-sprite",
+      "name": "Gem Boss Sprite",
+      "type": "Boss",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-boss-sprite",
+      "name": "Holofoil Boss Sprite",
+      "type": "Boss",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-cube-boss-sprite",
+      "name": "Cube Boss Sprite",
+      "type": "Boss",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-boss-sprite",
+      "name": "Quack Boss Sprite",
+      "type": "Boss",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-grim-sprite",
+      "name": "Grim Sprite",
+      "type": "Grim",
+      "variant": "Base",
+      "rarity": "mythic",
+      "released": true,
+      "image": "/sprites/sprite-grim-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Players who attack you are marked for a duration.",
+      "stats": [
+        "Drop chance: Sprite Chest 0.000098%",
+        "Summon cost: 7,500",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Players who attack you are marked for a duration."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 3 Seconds -> 3.5 Seconds -> 4 Seconds -> 4.5 Seconds -> 5 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.000098%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-grim-sprite",
+      "name": "Gold Grim Sprite",
+      "type": "Grim",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-grim-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0.0000012%",
+        "Summon cost: 15,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Players who attack you are marked for a duration."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 3 Seconds -> 3.5 Seconds -> 4 Seconds -> 4.5 Seconds -> 5 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.0000012%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-grim-sprite",
+      "name": "Gummy Grim Sprite",
+      "type": "Grim",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-grim-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0.0000006%",
+        "Summon cost: 15,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Players who attack you are marked for a duration."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 3 Seconds -> 3.5 Seconds -> 4 Seconds -> 4.5 Seconds -> 5 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.0000006%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-grim-sprite",
+      "name": "Galaxy Grim Sprite",
+      "type": "Grim",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-grim-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0.0000004%",
+        "Summon cost: 15,000",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Players who attack you are marked for a duration."
+      ],
+      "effects": [
+        "Increases in duration at each Level Up: 3 Seconds -> 3.5 Seconds -> 4 Seconds -> 4.5 Seconds -> 5 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0.0000004%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-grim-sprite",
+      "name": "Gem Grim Sprite",
+      "type": "Grim",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-grim-sprite",
+      "name": "Holofoil Grim Sprite",
+      "type": "Grim",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-cube-grim-sprite",
+      "name": "Cube Grim Sprite",
+      "type": "Grim",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-grim-sprite",
+      "name": "Quack Grim Sprite",
+      "type": "Grim",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-air-sprite",
+      "name": "Air Sprite",
+      "type": "Air",
+      "variant": "Base",
+      "rarity": "rare",
+      "released": true,
+      "image": "/sprites/sprite-air-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Increases sprinting speed and jump height. Also nullifies fall damage.",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 2,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Increases sprinting speed and jump height. Also nullifies fall damage."
+      ],
+      "effects": [
+        "Jump height increases with each Level Up!"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-air-sprite",
+      "name": "Gold Air Sprite",
+      "type": "Air",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-air-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 4,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Increases sprinting speed and jump height. Also nullifies fall damage."
+      ],
+      "effects": [
+        "Jump height increases with each Level Up!"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-air-sprite",
+      "name": "Gummy Air Sprite",
+      "type": "Air",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-air-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 4,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Increases sprinting speed and jump height. Also nullifies fall damage."
+      ],
+      "effects": [
+        "Jump height increases with each Level Up!"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-air-sprite",
+      "name": "Galaxy Air Sprite",
+      "type": "Air",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-air-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 4,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Increases sprinting speed and jump height. Also nullifies fall damage."
+      ],
+      "effects": [
+        "Jump height increases with each Level Up!"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-air-sprite",
+      "name": "Gem Air Sprite",
+      "type": "Air",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-air-sprite",
+      "name": "Holofoil Air Sprite",
+      "type": "Air",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-holofoil-air-sprite.webp",
+      "imageStatus": "verified",
+      "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 4,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "5% chance for your squad to find rare Sprite Variants from looting chests",
+        "Increases sprinting speed and jump height. Also nullifies fall damage."
+      ],
+      "effects": [
+        "Jump height increases with each Level Up!"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-cube-air-sprite",
+      "name": "Cube Air Sprite",
+      "type": "Air",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-air-sprite",
+      "name": "Quack Air Sprite",
+      "type": "Air",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-seven-sprite",
+      "name": "Seven Sprite",
+      "type": "Seven",
+      "variant": "Base",
+      "rarity": "legendary",
+      "released": true,
+      "image": "/sprites/sprite-seven-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Enemy player foot trails are visible in the world for your Squad.",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 5,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Enemy player foot trails are visible in the world for your Squad."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-seven-sprite",
+      "name": "Gold Seven Sprite",
+      "type": "Seven",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-seven-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 10,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Enemy player foot trails are visible in the world for your Squad."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-seven-sprite",
+      "name": "Gummy Seven Sprite",
+      "type": "Seven",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-seven-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 10,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Enemy player foot trails are visible in the world for your Squad."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-seven-sprite",
+      "name": "Galaxy Seven Sprite",
+      "type": "Seven",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-seven-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 10,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Enemy player foot trails are visible in the world for your Squad."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-seven-sprite",
+      "name": "Gem Seven Sprite",
+      "type": "Seven",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-seven-sprite",
+      "name": "Holofoil Seven Sprite",
+      "type": "Seven",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-holofoil-seven-sprite.webp",
+      "imageStatus": "verified",
+      "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 10,000",
+        "Location: Spotted near high and mountainous areas"
+      ],
+      "abilities": [
+        "5% chance for your squad to find rare Sprite Variants from looting chests",
+        "Enemy player foot trails are visible in the world for your Squad."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Spotted near high and mountainous areas",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-cube-seven-sprite",
+      "name": "Cube Seven Sprite",
+      "type": "Seven",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-seven-sprite",
+      "name": "Quack Seven Sprite",
+      "type": "Seven",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-john-wick-sprite",
+      "name": "John Wick Sprite",
+      "type": "John Wick",
+      "variant": "Base",
+      "rarity": "mythic",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-batman-sprite",
+      "name": "Batman Sprite",
+      "type": "Batman",
+      "variant": "Base",
+      "rarity": "mythic",
+      "released": true,
+      "image": "/sprites/sprite-batman-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Grants the ability to launch in the air and deploy the Bat Cape!",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 0",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Grants the ability to launch in the air and deploy the Bat Cape!"
+      ],
+      "effects": [],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gold-batman-sprite",
+      "name": "Gold Batman Sprite",
+      "type": "Batman",
+      "variant": "Gold",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gold-batman-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 3x bonus XP from eliminations",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 0",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 3x bonus XP from eliminations",
+        "Grants the ability to launch in the air and deploy the Bat Cape!"
+      ],
+      "effects": [],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gummy-batman-sprite",
+      "name": "Gummy Batman Sprite",
+      "type": "Batman",
+      "variant": "Gummy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-gummy-batman-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 20% more Sprite Dust upon Extraction",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 0",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 20% more Sprite Dust upon Extraction",
+        "Grants the ability to launch in the air and deploy the Bat Cape!"
+      ],
+      "effects": [],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-galaxy-batman-sprite",
+      "name": "Galaxy Batman Sprite",
+      "type": "Batman",
+      "variant": "Galaxy",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-galaxy-batman-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Gain 30% more Ammo whenever picked up in the world",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 0",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "Gain 30% more Ammo whenever picked up in the world",
+        "Grants the ability to launch in the air and deploy the Bat Cape!"
+      ],
+      "effects": [],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-gem-batman-sprite",
+      "name": "Gem Batman Sprite",
+      "type": "Batman",
+      "variant": "Gem",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-holofoil-batman-sprite",
+      "name": "Holofoil Batman Sprite",
+      "type": "Batman",
+      "variant": "Holofoil",
+      "rarity": "special",
+      "released": true,
+      "image": "/sprites/sprite-holofoil-batman-sprite.webp",
+      "imageStatus": "verified",
+      "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 0",
+        "Location: Found rarely in Sprite Chests"
+      ],
+      "abilities": [
+        "5% chance for your squad to find rare Sprite Variants from looting chests",
+        "Grants the ability to launch in the air and deploy the Bat Cape!"
+      ],
+      "effects": [],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Found rarely in Sprite Chests",
+      "releaseDate": "",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-cube-batman-sprite",
+      "name": "Cube Batman Sprite",
+      "type": "Batman",
+      "variant": "Cube",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-quack-batman-sprite",
+      "name": "Quack Batman Sprite",
+      "type": "Batman",
+      "variant": "Quack",
+      "rarity": "special",
+      "released": false,
+      "image": "/sprites/unreleased-outline.svg",
+      "imageStatus": "unreleased-outline",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": ""
+    },
+    {
+      "id": "sprite-pollo-sprite",
+      "name": "Pollo Sprite",
+      "type": "Pollo",
+      "variant": "Base",
+      "rarity": "mythic",
+      "released": true,
+      "image": "/sprites/sprite-pollo-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Upon earning an elimination, slowly replenish shield for you and nearby squad members for a duration.",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 0",
+        "Location: Acquired through the current Sprite collection pool"
+      ],
+      "abilities": [
+        "Upon earning an elimination, slowly replenish shield for you and nearby squad members for a duration."
+      ],
+      "effects": [
+        "Duration increases at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Acquired through the current Sprite collection pool",
+      "releaseDate": "2026-07-16",
+      "dataStatus": "verified"
+    },
+    {
+      "id": "sprite-vini-jr-sprite",
+      "name": "Vini Jr. Sprite",
+      "type": "Vini Jr.",
+      "variant": "Base",
+      "rarity": "mythic",
+      "released": true,
+      "image": "/sprites/sprite-vini-jr-sprite.webp",
+      "imageStatus": "verified",
+      "description": "Sprinting for a short time makes your slide destructive. Slidekicking enemies increases rate of fire and reload speed.",
+      "stats": [
+        "Drop chance: Sprite Chest 0%",
+        "Summon cost: 0",
+        "Location: Found in Relic Chests"
+      ],
+      "abilities": [
+        "Sprinting for a short time makes your slide destructive. Slidekicking enemies increases rate of fire and reload speed."
+      ],
+      "effects": [
+        "Increases in power at each Level Up: 40 dmg / 10% fire rate -> 45 dmg / 20% fire rate -> 50 dmg / 30% fire rate -> 55 dmg / 40% fire rate -> 60 dmg / 50% fire rate"
+      ],
+      "acquisition": "Sprite Chest 0%",
+      "spawnInfo": "Found in Relic Chests",
+      "releaseDate": "2026-07-16",
+      "dataStatus": "verified"
+    }
+  ]
+}

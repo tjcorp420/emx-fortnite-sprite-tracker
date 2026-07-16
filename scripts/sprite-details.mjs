@@ -118,6 +118,41 @@ const FAMILY_DETAILS = {
     baseCost: '7,500', variantCost: '15,000',
     drops: { Base: '0.000098', Gold: '0.0000012', Gummy: '0.0000006', Galaxy: '0.0000004' },
   },
+  Air: {
+    ability: 'Increases sprinting speed and jump height. Also nullifies fall damage.',
+    effect: 'Jump height increases with each Level Up!',
+    location: 'Spotted near high and mountainous areas',
+    baseCost: '2,000', variantCost: '4,000',
+    drops: { Base: '0', Gold: '0', Gummy: '0', Galaxy: '0', Holofoil: '0' },
+  },
+  Seven: {
+    ability: 'Enemy player foot trails are visible in the world for your Squad.',
+    effect: 'Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails',
+    location: 'Spotted near high and mountainous areas',
+    baseCost: '5,000', variantCost: '10,000',
+    drops: { Base: '0', Gold: '0', Gummy: '0', Galaxy: '0', Holofoil: '0' },
+  },
+  Batman: {
+    ability: 'Grants the ability to launch in the air and deploy the Bat Cape!',
+    effect: '',
+    location: 'Found rarely in Sprite Chests',
+    baseCost: '0', variantCost: '0',
+    drops: { Base: '0', Gold: '0', Gummy: '0', Galaxy: '0', Holofoil: '0' },
+  },
+  Pollo: {
+    ability: 'Upon earning an elimination, slowly replenish shield for you and nearby squad members for a duration.',
+    effect: 'Duration increases at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds',
+    location: 'Acquired through the current Sprite collection pool',
+    baseCost: '0', variantCost: '0',
+    drops: { Base: '0' },
+  },
+  'Vini Jr.': {
+    ability: 'Sprinting for a short time makes your slide destructive. Slidekicking enemies increases rate of fire and reload speed.',
+    effect: 'Increases in power at each Level Up: 40 dmg / 10% fire rate -> 45 dmg / 20% fire rate -> 50 dmg / 30% fire rate -> 55 dmg / 40% fire rate -> 60 dmg / 50% fire rate',
+    location: 'Found in Relic Chests',
+    baseCost: '0', variantCost: '0',
+    drops: { Base: '0' },
+  },
 };
 
 export function enrichRecords(records) {
