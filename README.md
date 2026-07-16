@@ -12,6 +12,10 @@ npm run dev
 
 Set the Supabase URL and publishable/anon key in `.env.local` to enable EMX accounts, cloud saves, shared trackers, achievements, and leaderboard participation. Epic Games login is never used.
 
+The app ships with a verified offline catalog and checks the EMX-owned `public/data/catalog-live.json` feed when online. A scheduled GitHub Action refreshes release status and official Sprite artwork every four hours, so catalog-only updates reach both the PWA and Windows app without requiring a new installer.
+
+Account users can sign in from phone, browser, or Windows. Password recovery returns through the configured public app URL, and collection progress remains usable locally if cloud service is unavailable.
+
 ## Windows builds
 
 ```powershell

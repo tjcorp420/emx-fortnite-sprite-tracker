@@ -2698,16 +2698,25 @@
     "type": "Air",
     "variant": "Base",
     "rarity": "rare",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
-    "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "released": true,
+    "image": "/sprites/sprite-air-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Increases sprinting speed and jump height. Also nullifies fall damage.",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 2,000",
+      "Location: Spotted near high and mountainous areas"
+    ],
+    "abilities": [
+      "Increases sprinting speed and jump height. Also nullifies fall damage."
+    ],
+    "effects": [
+      "Jump height increases with each Level Up!"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Spotted near high and mountainous areas",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-gold-air-sprite",
@@ -2715,16 +2724,26 @@
     "type": "Air",
     "variant": "Gold",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
-    "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "released": true,
+    "image": "/sprites/sprite-gold-air-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Gain 3x bonus XP from eliminations",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 4,000",
+      "Location: Spotted near high and mountainous areas"
+    ],
+    "abilities": [
+      "Gain 3x bonus XP from eliminations",
+      "Increases sprinting speed and jump height. Also nullifies fall damage."
+    ],
+    "effects": [
+      "Jump height increases with each Level Up!"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Spotted near high and mountainous areas",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-gummy-air-sprite",
@@ -2732,16 +2751,26 @@
     "type": "Air",
     "variant": "Gummy",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
-    "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "released": true,
+    "image": "/sprites/sprite-gummy-air-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Gain 20% more Sprite Dust upon Extraction",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 4,000",
+      "Location: Spotted near high and mountainous areas"
+    ],
+    "abilities": [
+      "Gain 20% more Sprite Dust upon Extraction",
+      "Increases sprinting speed and jump height. Also nullifies fall damage."
+    ],
+    "effects": [
+      "Jump height increases with each Level Up!"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Spotted near high and mountainous areas",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-galaxy-air-sprite",
@@ -2749,16 +2778,26 @@
     "type": "Air",
     "variant": "Galaxy",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
-    "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "released": true,
+    "image": "/sprites/sprite-galaxy-air-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Gain 30% more Ammo whenever picked up in the world",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 4,000",
+      "Location: Spotted near high and mountainous areas"
+    ],
+    "abilities": [
+      "Gain 30% more Ammo whenever picked up in the world",
+      "Increases sprinting speed and jump height. Also nullifies fall damage."
+    ],
+    "effects": [
+      "Jump height increases with each Level Up!"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Spotted near high and mountainous areas",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-gem-air-sprite",
@@ -2783,16 +2822,26 @@
     "type": "Air",
     "variant": "Holofoil",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
-    "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "released": true,
+    "image": "/sprites/sprite-holofoil-air-sprite.webp",
+    "imageStatus": "verified",
+    "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 4,000",
+      "Location: Spotted near high and mountainous areas"
+    ],
+    "abilities": [
+      "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "Increases sprinting speed and jump height. Also nullifies fall damage."
+    ],
+    "effects": [
+      "Jump height increases with each Level Up!"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Spotted near high and mountainous areas",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-cube-air-sprite",
@@ -2834,16 +2883,25 @@
     "type": "Seven",
     "variant": "Base",
     "rarity": "legendary",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
-    "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "released": true,
+    "image": "/sprites/sprite-seven-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Enemy player foot trails are visible in the world for your Squad.",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 5,000",
+      "Location: Spotted near high and mountainous areas"
+    ],
+    "abilities": [
+      "Enemy player foot trails are visible in the world for your Squad."
+    ],
+    "effects": [
+      "Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Spotted near high and mountainous areas",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-gold-seven-sprite",
@@ -2851,16 +2909,26 @@
     "type": "Seven",
     "variant": "Gold",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
-    "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "released": true,
+    "image": "/sprites/sprite-gold-seven-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Gain 3x bonus XP from eliminations",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 10,000",
+      "Location: Spotted near high and mountainous areas"
+    ],
+    "abilities": [
+      "Gain 3x bonus XP from eliminations",
+      "Enemy player foot trails are visible in the world for your Squad."
+    ],
+    "effects": [
+      "Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Spotted near high and mountainous areas",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-gummy-seven-sprite",
@@ -2868,16 +2936,26 @@
     "type": "Seven",
     "variant": "Gummy",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
-    "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "released": true,
+    "image": "/sprites/sprite-gummy-seven-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Gain 20% more Sprite Dust upon Extraction",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 10,000",
+      "Location: Spotted near high and mountainous areas"
+    ],
+    "abilities": [
+      "Gain 20% more Sprite Dust upon Extraction",
+      "Enemy player foot trails are visible in the world for your Squad."
+    ],
+    "effects": [
+      "Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Spotted near high and mountainous areas",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-galaxy-seven-sprite",
@@ -2885,16 +2963,26 @@
     "type": "Seven",
     "variant": "Galaxy",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
-    "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "released": true,
+    "image": "/sprites/sprite-galaxy-seven-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Gain 30% more Ammo whenever picked up in the world",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 10,000",
+      "Location: Spotted near high and mountainous areas"
+    ],
+    "abilities": [
+      "Gain 30% more Ammo whenever picked up in the world",
+      "Enemy player foot trails are visible in the world for your Squad."
+    ],
+    "effects": [
+      "Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Spotted near high and mountainous areas",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-gem-seven-sprite",
@@ -2919,16 +3007,26 @@
     "type": "Seven",
     "variant": "Holofoil",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
-    "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "released": true,
+    "image": "/sprites/sprite-holofoil-seven-sprite.webp",
+    "imageStatus": "verified",
+    "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 10,000",
+      "Location: Spotted near high and mountainous areas"
+    ],
+    "abilities": [
+      "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "Enemy player foot trails are visible in the world for your Squad."
+    ],
+    "effects": [
+      "Duration increases at each Level Up: 10 Seconds -> 15 Seconds -> 20 Seconds -> 25 Seconds -> 30 Second foot trails"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Spotted near high and mountainous areas",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-cube-seven-sprite",
@@ -2987,16 +3085,23 @@
     "type": "Batman",
     "variant": "Base",
     "rarity": "mythic",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
+    "released": true,
+    "image": "/sprites/sprite-batman-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Grants the ability to launch in the air and deploy the Bat Cape!",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 0",
+      "Location: Found rarely in Sprite Chests"
+    ],
+    "abilities": [
+      "Grants the ability to launch in the air and deploy the Bat Cape!"
+    ],
     "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Found rarely in Sprite Chests",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-gold-batman-sprite",
@@ -3004,16 +3109,24 @@
     "type": "Batman",
     "variant": "Gold",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
+    "released": true,
+    "image": "/sprites/sprite-gold-batman-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Gain 3x bonus XP from eliminations",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 0",
+      "Location: Found rarely in Sprite Chests"
+    ],
+    "abilities": [
+      "Gain 3x bonus XP from eliminations",
+      "Grants the ability to launch in the air and deploy the Bat Cape!"
+    ],
     "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Found rarely in Sprite Chests",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-gummy-batman-sprite",
@@ -3021,16 +3134,24 @@
     "type": "Batman",
     "variant": "Gummy",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
+    "released": true,
+    "image": "/sprites/sprite-gummy-batman-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Gain 20% more Sprite Dust upon Extraction",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 0",
+      "Location: Found rarely in Sprite Chests"
+    ],
+    "abilities": [
+      "Gain 20% more Sprite Dust upon Extraction",
+      "Grants the ability to launch in the air and deploy the Bat Cape!"
+    ],
     "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Found rarely in Sprite Chests",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-galaxy-batman-sprite",
@@ -3038,16 +3159,24 @@
     "type": "Batman",
     "variant": "Galaxy",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
+    "released": true,
+    "image": "/sprites/sprite-galaxy-batman-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Gain 30% more Ammo whenever picked up in the world",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 0",
+      "Location: Found rarely in Sprite Chests"
+    ],
+    "abilities": [
+      "Gain 30% more Ammo whenever picked up in the world",
+      "Grants the ability to launch in the air and deploy the Bat Cape!"
+    ],
     "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Found rarely in Sprite Chests",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-gem-batman-sprite",
@@ -3072,16 +3201,24 @@
     "type": "Batman",
     "variant": "Holofoil",
     "rarity": "special",
-    "released": false,
-    "image": "/sprites/unreleased-outline.svg",
-    "imageStatus": "unreleased-outline",
-    "description": "",
-    "stats": [],
-    "abilities": [],
+    "released": true,
+    "image": "/sprites/sprite-holofoil-batman-sprite.webp",
+    "imageStatus": "verified",
+    "description": "5% chance for your squad to find rare Sprite Variants from looting chests",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 0",
+      "Location: Found rarely in Sprite Chests"
+    ],
+    "abilities": [
+      "5% chance for your squad to find rare Sprite Variants from looting chests",
+      "Grants the ability to launch in the air and deploy the Bat Cape!"
+    ],
     "effects": [],
-    "acquisition": "",
-    "spawnInfo": "",
-    "releaseDate": ""
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Found rarely in Sprite Chests",
+    "releaseDate": "",
+    "dataStatus": "verified"
   },
   {
     "id": "sprite-cube-batman-sprite",
@@ -3116,5 +3253,57 @@
     "acquisition": "",
     "spawnInfo": "",
     "releaseDate": ""
+  },
+  {
+    "id": "sprite-pollo-sprite",
+    "name": "Pollo Sprite",
+    "type": "Pollo",
+    "variant": "Base",
+    "rarity": "mythic",
+    "released": true,
+    "image": "/sprites/sprite-pollo-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Upon earning an elimination, slowly replenish shield for you and nearby squad members for a duration.",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 0",
+      "Location: Acquired through the current Sprite collection pool"
+    ],
+    "abilities": [
+      "Upon earning an elimination, slowly replenish shield for you and nearby squad members for a duration."
+    ],
+    "effects": [
+      "Duration increases at each Level Up: 6 Seconds -> 7 Seconds -> 8 Seconds -> 9 Seconds -> 10 Seconds"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Acquired through the current Sprite collection pool",
+    "releaseDate": "2026-07-16",
+    "dataStatus": "verified"
+  },
+  {
+    "id": "sprite-vini-jr-sprite",
+    "name": "Vini Jr. Sprite",
+    "type": "Vini Jr.",
+    "variant": "Base",
+    "rarity": "mythic",
+    "released": true,
+    "image": "/sprites/sprite-vini-jr-sprite.webp",
+    "imageStatus": "verified",
+    "description": "Sprinting for a short time makes your slide destructive. Slidekicking enemies increases rate of fire and reload speed.",
+    "stats": [
+      "Drop chance: Sprite Chest 0%",
+      "Summon cost: 0",
+      "Location: Found in Relic Chests"
+    ],
+    "abilities": [
+      "Sprinting for a short time makes your slide destructive. Slidekicking enemies increases rate of fire and reload speed."
+    ],
+    "effects": [
+      "Increases in power at each Level Up: 40 dmg / 10% fire rate -> 45 dmg / 20% fire rate -> 50 dmg / 30% fire rate -> 55 dmg / 40% fire rate -> 60 dmg / 50% fire rate"
+    ],
+    "acquisition": "Sprite Chest 0%",
+    "spawnInfo": "Found in Relic Chests",
+    "releaseDate": "2026-07-16",
+    "dataStatus": "verified"
   }
 ]

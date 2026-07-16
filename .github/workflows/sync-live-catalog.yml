@@ -1,0 +1,40 @@
+name: Refresh live Sprite catalog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */4 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: emx-live-catalog
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Refresh EMX-owned catalog feed
+        run: node scripts/sync-live-catalog.mjs
+      - name: Validate catalog
+        run: node scripts/validate-data.mjs
+      - name: Publish feed changes
+        shell: bash
+        run: |
+          if git diff --quiet -- public/data/catalog-live.json public/sprites; then
+            echo "Catalog is already current."
+            exit 0
+          fi
+          git config user.name "EMX Catalog Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/data/catalog-live.json public/sprites
+          git commit -m "chore: refresh live Sprite catalog"
+          git push

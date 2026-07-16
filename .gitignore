@@ -10,3 +10,4 @@ public/updates/*
 !public/updates/latest.json
 outputs/
 work/
+tmp/

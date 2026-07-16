@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 const root = process.cwd();
 const sprites = JSON.parse(fs.readFileSync(path.join(root, 'data', 'sprites.json'), 'utf8'));
-const types = new Set(['Water','Earth','Fire','Duck','Ghost','Dream','Demon','Punk','King','Zero Point','Fishy','Striker','Aura','Boss','Grim','Air','Seven','Peanut','John Wick','Batman']);
+const types = new Set(['Water','Earth','Fire','Duck','Ghost','Dream','Demon','Punk','King','Zero Point','Fishy','Striker','Aura','Boss','Grim','Air','Seven','Peanut','John Wick','Batman','Pollo','Vini Jr.']);
 const variants = new Set(['Base','Gold','Gummy','Galaxy','Gem','Holofoil','Cube','Quack']);
 const rarities = new Set(['rare','epic','legendary','mythic','special']);
 const errors = [], warnings = [], seen = new Set();

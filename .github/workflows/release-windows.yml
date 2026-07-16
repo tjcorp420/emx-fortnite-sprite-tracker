@@ -59,7 +59,7 @@ jobs:
           $tag = "v$($package.version)"
           $manifest = [ordered]@{
             version = $package.version
-            notes = "EMX Fortnite Sprite Tracker update $($package.version)."
+            notes = "Live Sprite catalog with 148 indexed and 83 obtainable entries, official v41.20 artwork and details, EMX dropdowns, mobile sign-in and password recovery, new profile rewards, audio improvements, and responsive polish."
             pub_date = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
             platforms = [ordered]@{
               'windows-x86_64' = [ordered]@{
