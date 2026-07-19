@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "updatedAt": "2026-07-17T06:28:17.447Z",
+  "updatedAt": "2026-07-19T03:55:31.214Z",
   "indexedCount": 148,
-  "releasedCount": 82,
+  "releasedCount": 83,
   "sprites": [
     {
       "id": "sprite-air-sprite",
@@ -2831,9 +2831,9 @@
       "type": "Pollo",
       "variant": "Base",
       "rarity": "mythic",
-      "released": false,
+      "released": true,
       "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "imageStatus": "verified",
       "description": "Upon earning an elimination, slowly replenish shield for you and nearby squad members for a duration.",
       "stats": [
         "Drop chance: Sprite Chest 0%",
