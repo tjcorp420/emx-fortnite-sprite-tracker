@@ -59,7 +59,7 @@ jobs:
           $tag = "v$($package.version)"
           $manifest = [ordered]@{
             version = $package.version
-            notes = "The desktop updater dialog now always appears above the app header, so Install and restart is fully visible. Phone filters now wrap cleanly and card toggles have comfortable touch spacing. Password recovery status is clearer on Windows, browser, and phone."
+            notes = "Password reset links now reliably open the secure Choose a new password screen in the PWA and desktop app, even after a full page reload."
             pub_date = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
             platforms = [ordered]@{
               'windows-x86_64' = [ordered]@{

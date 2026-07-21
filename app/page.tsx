@@ -260,6 +260,41 @@ export default function Home() {
     return () => { mounted = false; listener.data.subscription.unsubscribe(); };
   }, []);
   useEffect(() => {
+    const client = supabase;
+    if (!isSupabaseConfigured || !client || typeof window === 'undefined') return;
+    let cancelled = false;
+    const resumePasswordRecovery = async () => {
+      const url = new URL(window.location.href);
+      const hash = new URLSearchParams(url.hash.replace(/^#/, ''));
+      const code = url.searchParams.get('code');
+      const isRecovery = url.searchParams.get('type') === 'recovery' || hash.get('type') === 'recovery';
+      if (!code && !isRecovery) return;
+      try {
+        if (code) {
+          const { error } = await client.auth.exchangeCodeForSession(code);
+          if (error) throw error;
+        } else {
+          const accessToken = hash.get('access_token');
+          const refreshToken = hash.get('refresh_token');
+          if (!accessToken || !refreshToken) throw new Error('The recovery link is missing its secure session. Request a new password reset email.');
+          const { error } = await client.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
+          if (error) throw error;
+        }
+        if (cancelled) return;
+        setPasswordRecovery(true);
+        setAuthOpen(true);
+        url.searchParams.delete('code');
+        url.searchParams.delete('type');
+        url.hash = '';
+        window.history.replaceState({}, document.title, `${url.pathname}${url.search}`);
+      } catch (error: any) {
+        if (!cancelled) { setSyncStatus('error'); setSyncError(error.message || 'This password recovery link is invalid or expired. Request a new one.'); }
+      }
+    };
+    void resumePasswordRecovery();
+    return () => { cancelled = true; };
+  }, []);
+  useEffect(() => {
     if (!authUser) return;
     let cancelled = false;
     setSyncStatus('connecting');
