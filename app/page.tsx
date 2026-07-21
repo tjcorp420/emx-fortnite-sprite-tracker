@@ -267,7 +267,8 @@ export default function Home() {
       const url = new URL(window.location.href);
       const hash = new URLSearchParams(url.hash.replace(/^#/, ''));
       const code = url.searchParams.get('code');
-      const isRecovery = url.searchParams.get('type') === 'recovery' || hash.get('type') === 'recovery';
+      const hasRecoveryMarker = url.searchParams.get('recovery') === '1';
+      const isRecovery = hasRecoveryMarker || url.searchParams.get('type') === 'recovery' || hash.get('type') === 'recovery';
       if (!code && !isRecovery) return;
       try {
         if (code) {
@@ -276,15 +277,21 @@ export default function Home() {
         } else {
           const accessToken = hash.get('access_token');
           const refreshToken = hash.get('refresh_token');
-          if (!accessToken || !refreshToken) throw new Error('The recovery link is missing its secure session. Request a new password reset email.');
-          const { error } = await client.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
-          if (error) throw error;
+          if (accessToken && refreshToken) {
+            const { error } = await client.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
+            if (error) throw error;
+          } else {
+            const { data, error } = await client.auth.getSession();
+            if (error) throw error;
+            if (!data.session) throw new Error('This recovery link did not include a secure session. Request a fresh reset email after updating the app.');
+          }
         }
         if (cancelled) return;
         setPasswordRecovery(true);
         setAuthOpen(true);
         url.searchParams.delete('code');
         url.searchParams.delete('type');
+        url.searchParams.delete('recovery');
         url.hash = '';
         window.history.replaceState({}, document.title, `${url.pathname}${url.search}`);
       } catch (error: any) {
