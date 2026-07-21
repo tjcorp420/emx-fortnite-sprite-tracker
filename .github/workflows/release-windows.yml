@@ -59,7 +59,7 @@ jobs:
           $tag = "v$($package.version)"
           $manifest = [ordered]@{
             version = $package.version
-            notes = "Catalog sync now retries transient source failures and safely preserves the last verified feed. Password reset is available from every sign-in screen and the Account panel on Windows, browser, and phone."
+            notes = "The desktop updater dialog now always appears above the app header, so Install and restart is fully visible. Phone filters now wrap cleanly and card toggles have comfortable touch spacing. Password recovery status is clearer on Windows, browser, and phone."
             pub_date = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
             platforms = [ordered]@{
               'windows-x86_64' = [ordered]@{
