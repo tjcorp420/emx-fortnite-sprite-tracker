@@ -59,7 +59,7 @@ jobs:
           $tag = "v$($package.version)"
           $manifest = [ordered]@{
             version = $package.version
-            notes = "Password reset links now reliably open the secure Choose a new password screen in the PWA and desktop app, even after a full page reload."
+            notes = "Mobile password-reset links now preserve the secure recovery session and open Choose a new password instead of the normal PWA home screen."
             pub_date = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
             platforms = [ordered]@{
               'windows-x86_64' = [ordered]@{
