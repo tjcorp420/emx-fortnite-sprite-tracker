@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -59,7 +59,7 @@ jobs:
           $tag = "v$($package.version)"
           $manifest = [ordered]@{
             version = $package.version
-            notes = "Live Sprite catalog with 148 indexed and 83 obtainable entries, official v41.20 artwork and details, EMX dropdowns, mobile sign-in and password recovery, new profile rewards, audio improvements, and responsive polish."
+            notes = "Catalog sync now retries transient source failures and safely preserves the last verified feed. Password reset is available from every sign-in screen and the Account panel on Windows, browser, and phone."
             pub_date = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
             platforms = [ordered]@{
               'windows-x86_64' = [ordered]@{
