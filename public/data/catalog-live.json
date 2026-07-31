@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "updatedAt": "2026-07-30T21:33:16.888Z",
+  "updatedAt": "2026-07-31T03:50:53.425Z",
   "indexedCount": 159,
-  "releasedCount": 108,
+  "releasedCount": 109,
   "sprites": [
     {
       "id": "sprite-air-sprite",
@@ -1349,9 +1349,9 @@
       "type": "Llama",
       "variant": "Gem",
       "rarity": "special",
-      "released": false,
+      "released": true,
       "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
