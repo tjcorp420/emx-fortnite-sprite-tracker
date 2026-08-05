@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "updatedAt": "2026-07-31T03:50:53.425Z",
+  "updatedAt": "2026-08-05T03:33:36.605Z",
   "indexedCount": 159,
-  "releasedCount": 109,
+  "releasedCount": 110,
   "sprites": [
     {
       "id": "sprite-air-sprite",
@@ -2944,9 +2944,9 @@
       "type": "Ironmouse",
       "variant": "Base",
       "rarity": "mythic",
-      "released": false,
+      "released": true,
       "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
