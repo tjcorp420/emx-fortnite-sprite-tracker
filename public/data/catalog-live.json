@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updatedAt": "2026-09-01T14:08:55.508Z",
+  "updatedAt": "2026-09-01T15:19:31.453Z",
   "activeSeason": {
     "schema": 1,
     "id": "sprite-season-current",
@@ -492,8 +492,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-cube-boss-sprite",
@@ -511,8 +510,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-cube-demon-sprite",
@@ -547,8 +545,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-cube-duck-sprite",
@@ -583,8 +580,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-cube-fire-sprite",
@@ -602,8 +598,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-cube-fishy-sprite",
@@ -621,8 +616,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-cube-ghost-sprite",
@@ -657,8 +651,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-cube-king-sprite",
@@ -693,8 +686,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-cube-seven-sprite",
@@ -763,8 +755,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-demon-sprite",
@@ -1287,8 +1278,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-galaxy-peeky-peely-sprite",
@@ -1325,8 +1315,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-galaxy-punk-sprite",
@@ -1494,8 +1483,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gem-batman-sprite",
@@ -1547,8 +1535,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gem-dream-sprite",
@@ -1583,8 +1570,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gem-earth-sprite",
@@ -1602,8 +1588,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gem-fire-sprite",
@@ -1672,8 +1657,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gem-king-sprite",
@@ -1708,8 +1692,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gem-punk-sprite",
@@ -1778,8 +1761,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gem-zero-point-sprite",
@@ -1797,8 +1779,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-ghost-sprite",
@@ -2343,8 +2324,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gold-peeky-peely-sprite",
@@ -2381,8 +2361,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gold-punk-sprite",
@@ -2984,8 +2963,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gummy-peeky-peely-sprite",
@@ -3022,8 +3000,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-gummy-punk-sprite",
@@ -3399,8 +3376,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-holofoil-king-sprite",
@@ -3464,8 +3440,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-holofoil-punk-sprite",
@@ -3581,8 +3556,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-ironmouse-sprite",
@@ -3600,8 +3574,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-jackrabbit-sprite",
@@ -3638,8 +3611,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-jonesy-sprite",
@@ -3740,8 +3712,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-peeky-peely-sprite",
@@ -3778,8 +3749,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-pollo-sprite",
@@ -3966,8 +3936,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-quack-fire-sprite",
@@ -3985,8 +3954,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-quack-fishy-sprite",
@@ -4123,8 +4091,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-quack-zero-point-sprite",
@@ -4142,8 +4109,7 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release",
-      "seasonId": "sprite-season-current"
+      "dataStatus": "live-release"
     },
     {
       "id": "sprite-seven-sprite",

@@ -14,6 +14,24 @@ if (!liveCatalog.activeSeason || liveCatalog.activeSeason.id !== activeSeason.id
 if (liveCatalog.indexedCount !== liveCatalog.sprites.length) errors.push('Live catalog indexed count does not match its records');
 if (liveCatalog.releasedCount !== liveCatalog.sprites.filter((sprite) => sprite.released).length) errors.push('Live catalog released count does not match its records');
 const liveCurrent = Array.isArray(liveCatalog.sprites) ? liveCatalog.sprites.filter((sprite) => sprite.released && sprite.seasonId === activeSeason.id) : [];
+const legacySeasonCarryoverIds = new Set([
+  'sprite-cube-batman-sprite', 'sprite-cube-boss-sprite', 'sprite-cube-dream-sprite',
+  'sprite-cube-earth-sprite', 'sprite-cube-fire-sprite', 'sprite-cube-fishy-sprite',
+  'sprite-cube-grim-sprite', 'sprite-cube-punk-sprite', 'sprite-cube-zero-point-sprite',
+  'sprite-galaxy-llama-sprite', 'sprite-galaxy-peely-sprite',
+  'sprite-gem-aura-sprite', 'sprite-gem-demon-sprite', 'sprite-gem-duck-sprite',
+  'sprite-gem-earth-sprite', 'sprite-gem-grim-sprite', 'sprite-gem-llama-sprite',
+  'sprite-gem-water-sprite', 'sprite-gem-zero-point-sprite',
+  'sprite-gold-llama-sprite', 'sprite-gold-peely-sprite',
+  'sprite-gummy-llama-sprite', 'sprite-gummy-peely-sprite',
+  'sprite-holofoil-grim-sprite', 'sprite-holofoil-peely-sprite', 'sprite-holofoil-zero-point-sprite',
+  'sprite-ironmouse-sprite', 'sprite-john-wick-sprite', 'sprite-llama-sprite',
+  'sprite-peely-sprite', 'sprite-quack-earth-sprite', 'sprite-quack-fire-sprite',
+  'sprite-quack-water-sprite', 'sprite-quack-zero-point-sprite',
+]);
+for (const sprite of liveCurrent) {
+  if (legacySeasonCarryoverIds.has(sprite.id)) errors.push(`Legacy Sprite is incorrectly marked current-season: ${sprite.id}`);
+}
 if (!liveCurrent.length) errors.push('Live catalog has no released current-season Sprites');
 for (const sprite of liveCurrent) {
   if (!sprite.id || !sprite.name || !sprite.image) errors.push(`Current-season Sprite is incomplete: ${sprite.id || sprite.name || 'unknown'}`);

@@ -8,6 +8,26 @@ const activeSeasonPath = path.join(root, 'data', 'active-season.json');
 const imageDir = path.join(root, 'public', 'sprites');
 const rawAssetRoot = 'https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites';
 const variants = ['Cheat Master', 'Holofoil', 'Galaxy', 'Gummy', 'Gold', 'Gem', 'Cube', 'Quack'];
+// These families were present in the catalog before this season. A previous
+// refresh mistakenly marked them as current because it treated every
+// `live-release` record as new. Keep this boundary explicit: only a Sprite
+// that becomes released during this season (or is newly discovered) may enter
+// the current-season roster.
+const legacySeasonCarryoverIds = new Set([
+  'sprite-cube-batman-sprite', 'sprite-cube-boss-sprite', 'sprite-cube-dream-sprite',
+  'sprite-cube-earth-sprite', 'sprite-cube-fire-sprite', 'sprite-cube-fishy-sprite',
+  'sprite-cube-grim-sprite', 'sprite-cube-punk-sprite', 'sprite-cube-zero-point-sprite',
+  'sprite-galaxy-llama-sprite', 'sprite-galaxy-peely-sprite',
+  'sprite-gem-aura-sprite', 'sprite-gem-demon-sprite', 'sprite-gem-duck-sprite',
+  'sprite-gem-earth-sprite', 'sprite-gem-grim-sprite', 'sprite-gem-llama-sprite',
+  'sprite-gem-water-sprite', 'sprite-gem-zero-point-sprite',
+  'sprite-gold-llama-sprite', 'sprite-gold-peely-sprite',
+  'sprite-gummy-llama-sprite', 'sprite-gummy-peely-sprite',
+  'sprite-holofoil-grim-sprite', 'sprite-holofoil-peely-sprite', 'sprite-holofoil-zero-point-sprite',
+  'sprite-ironmouse-sprite', 'sprite-john-wick-sprite', 'sprite-llama-sprite',
+  'sprite-peely-sprite', 'sprite-quack-earth-sprite', 'sprite-quack-fire-sprite',
+  'sprite-quack-water-sprite', 'sprite-quack-zero-point-sprite',
+]);
 const catalogUrl = process.env.EMX_CATALOG_SOURCE_URL || 'https://r.jina.ai/http://fortnite.gg/sprites';
 const sourceRetryAttempts = 4;
 const sourceTimeoutMs = 15_000;
@@ -116,7 +136,12 @@ if (scraped) {
   const merged = [];
   for (const current of currentSprites) {
     const live = liveRows.get(current.id);
-    if (!live) { merged.push(current); continue; }
+    if (!live) {
+      const { seasonId: existingSeasonId, ...spriteWithoutSeason } = current;
+      merged.push(legacySeasonCarryoverIds.has(current.id) ? spriteWithoutSeason : current);
+      continue;
+    }
+    const { seasonId: existingSeasonId, ...spriteWithoutSeason } = current;
     const target = path.join(imageDir, `${current.id}.webp`);
     const hadBundledImage = await exists(target);
     if (live.released && live.imageSource && !hadBundledImage) {
@@ -125,11 +150,11 @@ if (scraped) {
       await fs.writeFile(target, Buffer.from(await response.arrayBuffer()));
     }
     const newlyReleased = live.released && !current.released;
-    const seasonId = live.released
-      ? (current.seasonId || (newlyReleased || current.dataStatus === 'live-release' ? activeSeason.id : undefined))
-      : current.seasonId;
+    const seasonId = legacySeasonCarryoverIds.has(current.id)
+      ? undefined
+      : (live.released && newlyReleased ? activeSeason.id : existingSeasonId);
     merged.push({
-      ...current,
+      ...spriteWithoutSeason,
       released: live.released,
       rarity: live.rarity || current.rarity,
       image: live.released && live.imageSource ? (hadBundledImage ? current.image : `${rawAssetRoot}/${current.id}.webp`) : '/sprites/unreleased-outline.svg',
