@@ -3,10 +3,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import appInfo from '../package.json';
+import activeSeasonManifest from '../data/active-season.json';
 import bundledSprites from '../data/sprites.json';
 import { claimAnonymousAccount, createInvite, createTracker, deleteAccount, deleteTracker, ensureDefaultTracker, getLeaderboard, getProfile, getSession, isSupabaseConfigured, listTrackers, loadProgress, redeemInvite, refreshCloudSession, requestPasswordReset, saveAchievements, saveProgress, setLeaderboardTracker, signInAnonymously, signInWithPassword, signOut, signUpWithPassword, supabase, updateLeaderboardOptIn, updatePassword, updateProfileCosmetics, updateTracker, type CloudTracker, type LeaderboardRow } from '../lib/cloud';
 
-type Sprite = { id: string; name: string; type: string; variant: string; rarity: string; released: boolean; image: string; imageStatus: string; description: string; stats: string[]; abilities: string[]; effects: string[]; acquisition: string; spawnInfo: string; releaseDate: string; dataStatus?: string };
+type Sprite = { id: string; name: string; type: string; variant: string; rarity: string; released: boolean; image: string; imageStatus: string; description: string; stats: string[]; abilities: string[]; effects: string[]; acquisition: string; spawnInfo: string; releaseDate: string; dataStatus?: string; seasonId?: string };
 type Progress = Record<string, { owned?: boolean; mastered?: boolean; favorite?: boolean; notes?: string }>;
 type AuthUser = { id: string; email?: string; is_anonymous?: boolean };
 type Achievement = { id: string; title: string; description: string; icon: string; reward: number };
@@ -14,7 +15,9 @@ type SoundSettings = { effects: boolean; music: boolean };
 type ProfileCosmetics = { profile_badge: string; profile_title: string; avatar_frame: string };
 type CatalogAlert = { releases: string[]; verified: string[] };
 type CosmeticOption = { id: string; label: string; unlockHint?: string; unlocked: (level: number, owned: number, mastered: number, achievements: Achievement[]) => boolean };
-type LiveCatalog = { schema: number; updatedAt: string; patch?: string; indexedCount: number; releasedCount: number; sprites: Sprite[] };
+type ActiveSeason = { id: string; label: string; startedAt: string };
+type LiveCatalog = { schema: number; updatedAt: string; patch?: string; activeSeason?: ActiveSeason; indexedCount: number; releasedCount: number; sprites: Sprite[] };
+type SeasonChallenge = { id: string; title: string; description: string; current: number; target: number; complete: boolean };
 
 const APP_VERSION = appInfo.version;
 
@@ -99,10 +102,31 @@ function getAchievements(progress: Progress, catalog: Sprite[]): Achievement[] {
   return unlocked;
 }
 
+function isCurrentSeasonSprite(sprite: Sprite, activeSeason: ActiveSeason | null) {
+  return Boolean(activeSeason && sprite.released && sprite.seasonId === activeSeason.id);
+}
+
+function getSeasonChallenges(sprites: Sprite[], progress: Progress): SeasonChallenge[] {
+  const owned = sprites.filter((sprite) => progress[sprite.id]?.owned).length;
+  const mastered = sprites.filter((sprite) => progress[sprite.id]?.mastered).length;
+  const variants = new Set(sprites.filter((sprite) => progress[sprite.id]?.owned).map((sprite) => sprite.variant)).size;
+  const firstTarget = Math.min(5, sprites.length);
+  const masteryTarget = Math.min(10, sprites.length);
+  const variantTarget = Math.min(3, new Set(sprites.map((sprite) => sprite.variant)).size);
+  return [
+    { id: 'season-scout', title: 'Season Scout', description: 'Add the first wave of current Sprites to your collection.', current: owned, target: firstTarget, complete: owned >= firstTarget },
+    { id: 'season-variety', title: 'Variant Vanguard', description: 'Collect current Sprites across different variants.', current: variants, target: variantTarget, complete: variants >= variantTarget },
+    { id: 'season-mastery', title: 'Mastery Momentum', description: 'Master current-season Sprites.', current: mastered, target: masteryTarget, complete: mastered >= masteryTarget },
+    { id: 'season-completion', title: 'Current Collection', description: 'Own every released Sprite in the current season.', current: owned, target: sprites.length, complete: sprites.length > 0 && owned === sprites.length },
+  ];
+}
+
 export default function Home() {
   const [catalog, setCatalog] = useState<Sprite[]>(bundledSprites as Sprite[]);
   const [catalogStatus, setCatalogStatus] = useState<'bundled' | 'checking' | 'live' | 'offline'>('bundled');
   const [catalogUpdatedAt, setCatalogUpdatedAt] = useState('');
+  const [activeSeason, setActiveSeason] = useState<ActiveSeason | null>(activeSeasonManifest as ActiveSeason);
+  const [catalogTab, setCatalogTab] = useState<'current' | 'legacy'>('current');
   const [progress, setProgress] = useState<Progress>({});
   const [selected, setSelected] = useState<Sprite | null>(null);
   const [query, setQuery] = useState('');
@@ -141,10 +165,11 @@ export default function Home() {
   const activityTimerRef = useRef<number | null>(null);
 
   const acceptLiveCatalog = (payload: LiveCatalog) => {
-    if (payload?.schema !== 1 || !Array.isArray(payload.sprites) || payload.sprites.length < 100 || payload.releasedCount < 60) throw new Error('Live catalog validation failed.');
+    if (!payload?.schema || !Array.isArray(payload.sprites) || payload.sprites.length < 100 || payload.releasedCount < 60) throw new Error('Live catalog validation failed.');
     const clean = payload.sprites.filter((sprite) => sprite?.id && sprite?.name && Array.isArray(sprite.stats) && Array.isArray(sprite.abilities) && Array.isArray(sprite.effects));
     if (clean.length !== payload.sprites.length) throw new Error('Live catalog contains invalid entries.');
     setCatalog(clean);
+    setActiveSeason(payload.activeSeason && payload.activeSeason.id ? payload.activeSeason : null);
     setCatalogUpdatedAt(payload.updatedAt || '');
     setCatalogStatus('live');
     localStorage.setItem(LIVE_CATALOG_CACHE, JSON.stringify(payload));
@@ -231,6 +256,7 @@ export default function Home() {
     if (!localReady) return;
     const next = Object.fromEntries(catalog.map((sprite) => [sprite.id, {
       released: sprite.released,
+      seasonId: sprite.seasonId,
       verified: sprite.dataStatus === 'verified' || sprite.imageStatus === 'verified',
       details: `${sprite.description}|${sprite.stats.join('|')}|${sprite.abilities.join('|')}|${sprite.effects.join('|')}`,
     }]));
@@ -343,13 +369,17 @@ export default function Home() {
   useEffect(() => { const on = () => { if (!navigator.onLine) setSyncStatus('offline'); else if (syncStatus !== 'error') setSyncStatus(authUser ? 'synced' : 'local'); }; window.addEventListener('online', on); window.addEventListener('offline', on); return () => { window.removeEventListener('online', on); window.removeEventListener('offline', on); }; }, [authUser, syncStatus]);
 
   const values = (key: keyof Sprite) => Array.from(new Set(catalog.map((s) => String(s[key])))).sort();
+  const currentSeasonSprites = useMemo(() => catalog.filter((sprite) => isCurrentSeasonSprite(sprite, activeSeason)), [catalog, activeSeason]);
+  const legacySprites = useMemo(() => catalog.filter((sprite) => !isCurrentSeasonSprite(sprite, activeSeason)), [catalog, activeSeason]);
   const filtered = useMemo(() => catalog.filter((s) => {
     const p = progress[s.id] || {};
-    return (!query || `${s.name} ${s.id}`.toLowerCase().includes(query.toLowerCase())) && (type === 'all' || s.type === type) && (variant === 'all' || s.variant === variant) && (rarity === 'all' || s.rarity === rarity) && (release === 'all' || (release === 'released' ? s.released : !s.released)) && (status === 'all' || (status === 'owned' ? p.owned : status === 'mastered' ? p.mastered : status === 'needs-mastering' ? p.owned && !p.mastered : status === 'favorites' ? p.favorite : !p.owned));
-  }).sort((a, b) => sort === 'rarity' ? (rarityOrder[b.rarity] || 0) - (rarityOrder[a.rarity] || 0) : sort === 'type' ? a.type.localeCompare(b.type) : a.name.localeCompare(b.name)), [catalog, query, type, variant, rarity, release, status, sort, progress]);
+    const inSelectedTab = catalogTab === 'current' ? isCurrentSeasonSprite(s, activeSeason) : !isCurrentSeasonSprite(s, activeSeason);
+    return inSelectedTab && (!query || `${s.name} ${s.id}`.toLowerCase().includes(query.toLowerCase())) && (type === 'all' || s.type === type) && (variant === 'all' || s.variant === variant) && (rarity === 'all' || s.rarity === rarity) && (release === 'all' || (release === 'released' ? s.released : !s.released)) && (status === 'all' || (status === 'owned' ? p.owned : status === 'mastered' ? p.mastered : status === 'needs-mastering' ? p.owned && !p.mastered : status === 'favorites' ? p.favorite : !p.owned));
+  }).sort((a, b) => sort === 'rarity' ? (rarityOrder[b.rarity] || 0) - (rarityOrder[a.rarity] || 0) : sort === 'type' ? a.type.localeCompare(b.type) : a.name.localeCompare(b.name)), [catalog, query, type, variant, rarity, release, status, sort, progress, catalogTab, activeSeason]);
   const collectible = catalog.filter((sprite) => sprite.released);
   const owned = collectible.filter((s) => progress[s.id]?.owned).length;
   const mastered = collectible.filter((s) => progress[s.id]?.mastered).length;
+  const seasonChallenges = getSeasonChallenges(currentSeasonSprites, progress);
   const unlockedAchievements = getAchievements(progress, catalog);
   const xp = owned * 25 + mastered * 100 + unlockedAchievements.reduce((sum, item) => sum + item.reward, 0);
   const level = Math.floor(xp / 500) + 1;
@@ -391,13 +421,15 @@ export default function Home() {
     <header className="topbar"><div className="brand"><img src="/branding/logo.png" alt="EMX Tweaks" /><div><span className="eyebrow">EMX TWEAKS</span><h1>FORTNITE SPRITES</h1></div></div><div className="header-actions"><span className="version-tag" title={`EMX build ${APP_VERSION}`}>v{APP_VERSION}</span><button className={`catalog-sync ${catalogStatus}`} onClick={refreshCatalog} disabled={catalogStatus === 'checking'} title={catalogUpdatedAt ? `Catalog updated ${new Date(catalogUpdatedAt).toLocaleString()}` : 'Refresh the EMX Sprite catalog'}><i />{catalogStatus === 'checking' ? 'Checking catalog' : catalogStatus === 'live' ? `${collectible.length} live` : catalogStatus === 'offline' ? 'Catalog offline' : 'Catalog'}</button><span className={`sync-pill ${syncStatus}`}><i />{syncStatus === 'synced' ? 'Cloud synced' : syncStatus === 'connecting' ? 'Connecting' : syncStatus === 'syncing' ? 'Syncing' : syncStatus === 'offline' ? 'Offline' : syncStatus === 'error' ? 'Sync issue' : isSupabaseConfigured ? 'Cloud ready' : 'Local mode'}</span><UpdateButton />{isSupabaseConfigured && <button className="leaderboard-button" onClick={openLeaderboard}>Leaderboard</button>}{authUser && <button className="ghost" onClick={() => setTrackerOpen(true)}>My Trackers</button>}<button className="account-button" onClick={() => setAuthOpen(true)}>{authUser ? (authUser.is_anonymous ? 'Anonymous' : 'Account') : 'Sign in'}</button><button className="ghost" onClick={() => setSelected(null)}>About</button></div></header>
     {!isSupabaseConfigured && <div className="cloud-notice">Cloud sync is optional. Add Supabase URL and anon key to enable accounts and sharing; local tracking still works normally.</div>}
     {syncStatus === 'error' && syncError && <div className="cloud-notice error sync-recovery"><div><strong>Cloud save needs attention</strong><span>{friendlySyncMessage(syncError)}</span></div><button onClick={retryCloudSync}>Refresh cloud</button><button className="dismiss-intel" onClick={() => { setSyncError(''); setSyncStatus('offline'); }}>Use offline</button></div>}
-    {catalogAlert && <div className="catalog-alert"><div><strong>EMX Sprite Intel</strong><span>{catalogAlert.releases.length ? `${catalogAlert.releases.length} newly released` : ''}{catalogAlert.releases.length && catalogAlert.verified.length ? ' and ' : ''}{catalogAlert.verified.length ? `${catalogAlert.verified.length} verified or updated` : ''} Sprite {catalogAlert.releases.length + catalogAlert.verified.length === 1 ? 'entry' : 'entries'} added to your catalog.</span></div><button onClick={() => { setRelease('released'); setStatus('all'); document.querySelector('.toolbar')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>View intel</button><button className="dismiss-intel" aria-label="Dismiss Sprite Intel" onClick={() => setCatalogAlert(null)}>X</button></div>}
+    {catalogAlert && <div className="catalog-alert"><div><strong>EMX Sprite Intel</strong><span>{catalogAlert.releases.length ? `${catalogAlert.releases.length} newly released` : ''}{catalogAlert.releases.length && catalogAlert.verified.length ? ' and ' : ''}{catalogAlert.verified.length ? `${catalogAlert.verified.length} verified or updated` : ''} Sprite {catalogAlert.releases.length + catalogAlert.verified.length === 1 ? 'entry' : 'entries'} added to your catalog.</span></div><button onClick={() => { setCatalogTab('current'); setRelease('released'); setStatus('all'); document.querySelector('.catalog-tabs')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>View intel</button><button className="dismiss-intel" aria-label="Dismiss Sprite Intel" onClick={() => setCatalogAlert(null)}>X</button></div>}
     <section className="hero"><div><p className="eyebrow accent">COLLECTION COMMAND CENTER</p><h2>Track every Sprite.<br /><span>Master the set.</span></h2><p className="muted">A personal, offline-first checklist with live EMX catalog intelligence.</p><div className="catalog-meta"><b>{collectible.length}</b> obtainable <span /> <b>{catalog.length}</b> indexed {catalogUpdatedAt && <><span /> Updated {new Date(catalogUpdatedAt).toLocaleDateString()}</>}</div></div><div className="stats"><Stat label="Owned" value={`${owned}/${collectible.length}`} percent={collectible.length ? owned / collectible.length : 0} /><Stat label="Mastered" value={`${mastered}/${collectible.length}`} percent={collectible.length ? mastered / collectible.length : 0} /></div></section>
     <section className="progress-hub"><div className="xp-card"><div className="xp-orb">{level}</div><div className="xp-copy"><span className="eyebrow accent">EMX TRAINER RANK</span><h3>Level {level} <span>&bull;</span> {xp.toLocaleString()} XP</h3><div className="xp-bar"><i style={{ width: `${Math.round(levelProgress * 100)}%` }} /></div><small>{500 - (xp % 500)} XP to next level</small></div></div><div className="achievement-summary"><span className="eyebrow">ACHIEVEMENTS</span><strong>{unlockedAchievements.length}</strong><small>unlocked</small><button onClick={() => document.getElementById('achievements')?.scrollIntoView({ behavior: 'smooth' })}>View rewards</button></div></section>
     {activeTracker && <div className="active-tracker"><span>TRACKER</span><strong>{activeTracker.name}</strong><em>{activeTracker.role || 'owner'}</em></div>}
+    <section className="season-command" aria-labelledby="season-title"><div><p className="eyebrow accent">LIVE COLLECTION</p><h3 id="season-title">{activeSeason?.label || 'Loading current Sprite Season'}</h3><p>{currentSeasonSprites.length ? `${currentSeasonSprites.length} released Sprites are in this season and new verified releases join automatically.` : 'Connect to the live catalog to load the current season.'}</p></div><div className="season-challenges" aria-label="Current season challenges">{seasonChallenges.map((challenge) => <article className={challenge.complete ? 'complete' : ''} key={challenge.id}><span>{challenge.complete ? '✓' : `${Math.min(challenge.current, challenge.target)}/${challenge.target}`}</span><div><strong>{challenge.title}</strong><small>{challenge.description}</small></div></article>)}</div></section>
+    <div className="catalog-tabs" role="tablist" aria-label="Sprite collection"><button role="tab" aria-selected={catalogTab === 'current'} className={catalogTab === 'current' ? 'active' : ''} onClick={() => setCatalogTab('current')}>Current Season <b>{currentSeasonSprites.length}</b></button><button role="tab" aria-selected={catalogTab === 'legacy'} className={catalogTab === 'legacy' ? 'active' : ''} onClick={() => setCatalogTab('legacy')}>Legacy Collection <b>{legacySprites.length}</b></button></div>
     <section className="toolbar"><input aria-label="Search Sprites" placeholder="Search name or ID..." value={query} onChange={(e) => setQuery(e.target.value)} /><Select label="Type" value={type} setValue={setType} options={values('type')} /><Select label="Variant" value={variant} setValue={setVariant} options={values('variant')} /><Select label="Rarity" value={rarity} setValue={setRarity} options={values('rarity')} /><Select label="Status" value={status} setValue={setStatus} options={['owned', 'missing', 'needs-mastering', 'mastered', 'favorites']} /><Select label="Release" value={release} setValue={setRelease} options={['released', 'unreleased']} /><Select label="Sort" value={sort} setValue={setSort} options={['name', 'type', 'rarity']} /></section>
     <div className="quick-filters"><span>Quick view</span><button className={status === 'missing' ? 'active' : ''} onClick={() => setStatus(status === 'missing' ? 'all' : 'missing')}>Need to collect</button><button className={status === 'owned' ? 'active' : ''} onClick={() => setStatus(status === 'owned' ? 'all' : 'owned')}>Owned</button><button className={status === 'needs-mastering' ? 'active' : ''} onClick={() => setStatus(status === 'needs-mastering' ? 'all' : 'needs-mastering')}>Need to master</button><button className={status === 'mastered' ? 'active' : ''} onClick={() => setStatus(status === 'mastered' ? 'all' : 'mastered')}>Mastered</button><button className={status === 'favorites' ? 'active' : ''} onClick={() => setStatus(status === 'favorites' ? 'all' : 'favorites')}>Favorites</button><button onClick={() => { setStatus('all'); setRelease('released'); }}>Released only</button><button onClick={() => { setStatus('all'); setRelease('all'); setQuery(''); setType('all'); setVariant('all'); setRarity('all'); }}>Clear filters</button></div>
-    <section className="actions"><span className="result-count">Showing <b>{filtered.length}</b> Sprites</span><div><button onClick={exportProgress}>Export</button><label className="button">Import<input type="file" accept="application/json" hidden onChange={(e) => importProgress(e.target.files?.[0])} /></label><button className="danger" onClick={() => confirm('Reset all EMX progress?') && setProgress({})}>Reset</button></div></section>
+    <section className="actions"><span className="result-count">Showing <b>{filtered.length}</b> {catalogTab === 'current' ? 'current-season' : 'legacy'} Sprites</span><div><button onClick={exportProgress}>Export</button><label className="button">Import<input type="file" accept="application/json" hidden onChange={(e) => importProgress(e.target.files?.[0])} /></label><button className="danger" onClick={() => confirm('Reset all EMX progress?') && setProgress({})}>Reset</button></div></section>
     <section className="achievements" id="achievements"><div className="section-heading"><div><p className="eyebrow accent">REWARD TRACK</p><h3>Achievements</h3></div><span>{unlockedAchievements.length} unlocked</span></div><div className="achievement-grid">{[...baseAchievements, ...Array.from(new Set(collectible.map((s) => s.type))).flatMap((item) => [{ id: `type-owned-${item}`, title: `${item} Collector`, description: `Own every released ${item} Sprite.`, icon: '+', reward: 250 }, { id: `type-mastered-${item}`, title: `${item} Master`, description: `Master every released ${item} Sprite.`, icon: 'X', reward: 500 }])].map((achievement) => <AchievementCard key={achievement.id} achievement={achievement} unlocked={unlockedAchievements.some((item) => item.id === achievement.id)} />)}</div></section>
     <section className="grid">{filtered.map((sprite) => <SpriteCard key={sprite.id} sprite={sprite} progress={progress[sprite.id] || {}} update={update} onOpen={() => { playSound('interact'); setSelected(sprite); }} />)}</section>
     {!filtered.length && <div className="empty"><span>*</span><h3>No Sprites found</h3><p>Try changing your filters or search.</p></div>}

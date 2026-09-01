@@ -2,10 +2,23 @@ import fs from 'node:fs';
 import path from 'node:path';
 const root = process.cwd();
 const sprites = JSON.parse(fs.readFileSync(path.join(root, 'data', 'sprites.json'), 'utf8'));
+const activeSeason = JSON.parse(fs.readFileSync(path.join(root, 'data', 'active-season.json'), 'utf8'));
+const liveCatalog = JSON.parse(fs.readFileSync(path.join(root, 'public', 'data', 'catalog-live.json'), 'utf8'));
 const types = new Set(['Water','Earth','Fire','Duck','Ghost','Dream','Demon','Punk','King','Zero Point','Fishy','Striker','Aura','Boss','Grim','Air','Seven','Peanut','John Wick','Batman','Pollo','Vini Jr.']);
-const variants = new Set(['Base','Gold','Gummy','Galaxy','Gem','Holofoil','Cube','Quack']);
+const variants = new Set(['Base','Gold','Gummy','Galaxy','Gem','Holofoil','Cube','Quack','Cheat Master']);
 const rarities = new Set(['rare','epic','legendary','mythic','special']);
 const errors = [], warnings = [], seen = new Set();
+if (!activeSeason.id || !activeSeason.label || Number.isNaN(Date.parse(activeSeason.startedAt))) errors.push('Active season manifest is invalid');
+if (liveCatalog.schema !== 2 || !Array.isArray(liveCatalog.sprites)) errors.push('Live catalog schema is invalid');
+if (!liveCatalog.activeSeason || liveCatalog.activeSeason.id !== activeSeason.id) errors.push('Live catalog is not stamped with the active season');
+if (liveCatalog.indexedCount !== liveCatalog.sprites.length) errors.push('Live catalog indexed count does not match its records');
+if (liveCatalog.releasedCount !== liveCatalog.sprites.filter((sprite) => sprite.released).length) errors.push('Live catalog released count does not match its records');
+const liveCurrent = Array.isArray(liveCatalog.sprites) ? liveCatalog.sprites.filter((sprite) => sprite.released && sprite.seasonId === activeSeason.id) : [];
+if (!liveCurrent.length) errors.push('Live catalog has no released current-season Sprites');
+for (const sprite of liveCurrent) {
+  if (!sprite.id || !sprite.name || !sprite.image) errors.push(`Current-season Sprite is incomplete: ${sprite.id || sprite.name || 'unknown'}`);
+  if (!/^https?:\/\//.test(sprite.image) && !fs.existsSync(path.join(root, 'public', sprite.image.replace(/^\//, '')))) errors.push(`Current-season Sprite is missing artwork: ${sprite.id}`);
+}
 for (const s of sprites) {
   if (seen.has(s.id)) errors.push(`Duplicate ID: ${s.id}`); seen.add(s.id);
   if (!s.name) errors.push(`${s.id}: missing name`);
@@ -19,6 +32,6 @@ for (const s of sprites) {
   if (!Array.isArray(s.stats) || !Array.isArray(s.abilities) || !Array.isArray(s.effects)) errors.push(`${s.id}: stats, abilities, and effects must be arrays`);
   if (s.released && (!s.description || !s.abilities.length || !s.stats.length)) errors.push(`${s.id}: released Sprite is missing verified details`);
 }
-console.log(`Sprite validation report\n========================\nTotal records: ${sprites.length}\nVerified released: ${sprites.filter(s => s.released && s.imageStatus === 'verified').length}\nUnreleased outlines: ${sprites.filter(s => !s.released && s.imageStatus === 'unreleased-outline').length}\nReleased requiring verification: ${warnings.filter(w => w.includes('released')).length}\nMissing/invalid records: ${errors.length}`);
+console.log(`Sprite validation report\n========================\nOffline records: ${sprites.length}\nLive catalog records: ${liveCatalog.indexedCount}\nCurrent-season released: ${liveCurrent.length}\nVerified released: ${sprites.filter(s => s.released && s.imageStatus === 'verified').length}\nUnreleased outlines: ${sprites.filter(s => !s.released && s.imageStatus === 'unreleased-outline').length}\nReleased requiring verification: ${warnings.filter(w => w.includes('released')).length}\nMissing/invalid records: ${errors.length}`);
 if (warnings.length) console.log(`\nWarnings:\n- ${warnings.join('\n- ')}`);
 if (errors.length) { console.error(`\nErrors:\n- ${errors.join('\n- ')}`); process.exitCode = 1; }

@@ -4,9 +4,10 @@ import path from 'node:path';
 const root = process.cwd();
 const livePath = path.join(root, 'public', 'data', 'catalog-live.json');
 const bundledPath = path.join(root, 'data', 'sprites.json');
+const activeSeasonPath = path.join(root, 'data', 'active-season.json');
 const imageDir = path.join(root, 'public', 'sprites');
 const rawAssetRoot = 'https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites';
-const variants = ['Holofoil', 'Galaxy', 'Gummy', 'Gold', 'Gem', 'Cube', 'Quack'];
+const variants = ['Cheat Master', 'Holofoil', 'Galaxy', 'Gummy', 'Gold', 'Gem', 'Cube', 'Quack'];
 const catalogUrl = process.env.EMX_CATALOG_SOURCE_URL || 'https://r.jina.ai/http://fortnite.gg/sprites';
 const sourceRetryAttempts = 4;
 const sourceTimeoutMs = 15_000;
@@ -28,10 +29,11 @@ async function exists(file) { try { await fs.access(file); return true; } catch 
 function wait(milliseconds) { return new Promise((resolve) => setTimeout(resolve, milliseconds)); }
 
 function parseCatalog(markdown) {
-  if (!markdown.includes('All Fortnite Sprites')) throw new CatalogSourceError('Catalog reader returned an unexpected page.');
-  const pattern = /\[!\[Image \d+: [^\]]+\]\((https?:\/\/fortnite\.gg\/img\/x\/sprites\/icons\/[^)]+)\)\]\((https?:\/\/fortnite\.gg\/sprites\/\d+-[^)]+)\)\s+\[([^\]]+)\]\(\2\)\s+(rare|epic|legendary|mythic|special)\s+[^\r\n]+\s+(Not owned|Unreleased)/gim;
+  if (!markdown.includes('Fortnite Sprites')) throw new CatalogSourceError('Catalog reader returned an unexpected page.');
+  const legacyPattern = /\[!\[Image \d+: [^\]]+\]\((https?:\/\/fortnite\.gg\/img\/x\/sprites\/icons\/[^)]+)\)\]\((https?:\/\/fortnite\.gg\/sprites\/\d+-[^)]+)\)\s+\[([^\]]+)\]\(\2\)\s+(rare|epic|legendary|mythic|special)\s+[^\r\n]+\s+(Not owned|Unreleased)/gim;
+  const currentSeasonPattern = /\[!\[Image \d+: [^\]]+\]\((https?:\/\/fortnite\.gg\/img\/x\/sprites\/icons\/[^)]+)\)\]\((https?:\/\/fortnite\.gg\/sprites\/\d+-[^)]+)\)\s*\r?\n+\s*\[([^\]]+)\]\(\2\)/gim;
   const rows = [];
-  for (const match of markdown.matchAll(pattern)) {
+  for (const match of markdown.matchAll(legacyPattern)) {
     rows.push({
       linkName: match[3].trim(),
       href: match[2].replace('http://', 'https://'),
@@ -40,9 +42,20 @@ function parseCatalog(markdown) {
       imageSource: match[1].replace('http://', 'https://'),
     });
   }
+  if (!rows.length) {
+    for (const match of markdown.matchAll(currentSeasonPattern)) {
+      rows.push({
+        linkName: match[3].trim(),
+        href: match[2].replace('http://', 'https://'),
+        released: true,
+        rarity: 'special',
+        imageSource: match[1].replace('http://', 'https://'),
+      });
+    }
+  }
   const uniqueRows = Array.from(new Map(rows.map((row) => [row.href, row])).values());
   const releasedCount = uniqueRows.filter((row) => row.released).length;
-  if (uniqueRows.length < 100 || releasedCount < 60) {
+  if (uniqueRows.length < 25 || !releasedCount) {
     throw new CatalogSourceError(`Catalog reader returned incomplete data (${uniqueRows.length} indexed / ${releasedCount} released).`);
   }
   return uniqueRows;
@@ -75,6 +88,10 @@ async function scrapeCatalog() {
 }
 
 const existingPayload = await readJson(await exists(livePath) ? livePath : bundledPath);
+const activeSeason = await readJson(activeSeasonPath);
+if (!activeSeason?.id || !activeSeason?.label || !activeSeason?.startedAt) {
+  throw new Error('The active Sprite season manifest is invalid.');
+}
 const currentSprites = Array.isArray(existingPayload) ? existingPayload : existingPayload.sprites;
 if (!Array.isArray(currentSprites)) {
   throw new Error('The existing catalog has an invalid sprite list.');
@@ -95,7 +112,6 @@ try {
 
 if (scraped) {
   const liveRows = new Map(scraped.map((row) => [identity(row.linkName).id, { ...identity(row.linkName), ...row }]));
-  const releasedCount = [...liveRows.values()].filter((row) => row.released).length;
 
   const merged = [];
   for (const current of currentSprites) {
@@ -108,6 +124,10 @@ if (scraped) {
       if (!response.ok) throw new Error(`Image ${current.id} returned HTTP ${response.status}`);
       await fs.writeFile(target, Buffer.from(await response.arrayBuffer()));
     }
+    const newlyReleased = live.released && !current.released;
+    const seasonId = live.released
+      ? (current.seasonId || (newlyReleased || current.dataStatus === 'live-release' ? activeSeason.id : undefined))
+      : current.seasonId;
     merged.push({
       ...current,
       released: live.released,
@@ -115,6 +135,7 @@ if (scraped) {
       image: live.released && live.imageSource ? (hadBundledImage ? current.image : `${rawAssetRoot}/${current.id}.webp`) : '/sprites/unreleased-outline.svg',
       imageStatus: live.released && live.imageSource ? 'verified' : 'unreleased-outline',
       dataStatus: live.released ? (current.dataStatus || 'live-release') : current.dataStatus,
+      ...(seasonId ? { seasonId } : {}),
     });
     liveRows.delete(current.id);
   }
@@ -127,21 +148,23 @@ if (scraped) {
       await fs.writeFile(target, Buffer.from(await response.arrayBuffer()));
     }
     merged.push({
-      id: live.id, name: live.name, type: live.type, variant: live.variant, rarity: live.rarity, released: live.released,
+      id: live.id, name: live.name, type: live.type, variant: live.variant, rarity: live.rarity || 'special', released: live.released,
       image: live.released && live.imageSource ? `${rawAssetRoot}/${live.id}.webp` : '/sprites/unreleased-outline.svg',
       imageStatus: live.released && live.imageSource ? 'verified' : 'unreleased-outline',
       description: '', stats: [], abilities: [], effects: [], acquisition: '', spawnInfo: '', releaseDate: '', dataStatus: 'live-release',
+      ...(live.released ? { seasonId: activeSeason.id } : {}),
     });
   }
 
   merged.sort((a, b) => a.name.localeCompare(b.name));
-  const oldFingerprint = JSON.stringify(currentSprites.map(({ released, image, rarity, id }) => ({ id, released, image, rarity })).sort((a, b) => a.id.localeCompare(b.id)));
-  const newFingerprint = JSON.stringify(merged.map(({ released, image, rarity, id }) => ({ id, released, image, rarity })).sort((a, b) => a.id.localeCompare(b.id)));
+  const mergedReleasedCount = merged.filter((sprite) => sprite.released).length;
+  const oldFingerprint = JSON.stringify({ seasonId: existingPayload.activeSeason?.id, sprites: currentSprites.map(({ released, image, rarity, id, seasonId }) => ({ id, released, image, rarity, seasonId })).sort((a, b) => a.id.localeCompare(b.id)) });
+  const newFingerprint = JSON.stringify({ seasonId: activeSeason.id, sprites: merged.map(({ released, image, rarity, id, seasonId }) => ({ id, released, image, rarity, seasonId })).sort((a, b) => a.id.localeCompare(b.id)) });
   if (oldFingerprint === newFingerprint) {
-    console.log(`Catalog unchanged: ${releasedCount} released / ${merged.length} indexed.`);
+    console.log(`Catalog unchanged: ${mergedReleasedCount} released / ${merged.length} indexed.`);
   } else {
     await fs.mkdir(path.dirname(livePath), { recursive: true });
-    await fs.writeFile(livePath, `${JSON.stringify({ schema: 1, updatedAt: new Date().toISOString(), indexedCount: merged.length, releasedCount, sprites: merged }, null, 2)}\n`);
-    console.log(`Catalog refreshed: ${releasedCount} released / ${merged.length} indexed.`);
+    await fs.writeFile(livePath, `${JSON.stringify({ schema: 2, updatedAt: new Date().toISOString(), activeSeason, indexedCount: merged.length, releasedCount: mergedReleasedCount, sprites: merged }, null, 2)}\n`);
+    console.log(`Catalog refreshed: ${mergedReleasedCount} released / ${merged.length} indexed.`);
   }
 }

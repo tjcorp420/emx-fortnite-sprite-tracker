@@ -59,7 +59,7 @@ jobs:
           $tag = "v$($package.version)"
           $manifest = [ordered]@{
             version = $package.version
-            notes = "Password reset now opens in a browser-safe recovery screen on phone, so iOS PWA handoff cannot discard the secure reset token."
+            notes = "Current Season and Legacy collection views, seasonal collection challenges, resilient live Sprite updates, and the new EMX Sprite icon."
             pub_date = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
             platforms = [ordered]@{
               'windows-x86_64' = [ordered]@{
