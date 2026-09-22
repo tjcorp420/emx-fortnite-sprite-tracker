@@ -7,7 +7,8 @@ const bundledPath = path.join(root, 'data', 'sprites.json');
 const activeSeasonPath = path.join(root, 'data', 'active-season.json');
 const imageDir = path.join(root, 'public', 'sprites');
 const rawAssetRoot = 'https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites';
-const variants = ['Cheat Master', 'Holofoil', 'Galaxy', 'Gummy', 'Gold', 'Gem', 'Cube', 'Quack'];
+// Ordered so multi-word / more specific variant prefixes match before shorter ones.
+const variants = ['Bounty Hunter', 'Cheat Master', 'Loot Hacker', 'Holofoil', 'Galaxy', 'Gummy', 'Gold', 'Gem', 'Cube', 'Quack'];
 // These families were present in the catalog before this season. A previous
 // refresh mistakenly marked them as current because it treated every
 // `live-release` record as new. Keep this boundary explicit: only a Sprite
@@ -28,9 +29,26 @@ const legacySeasonCarryoverIds = new Set([
   'sprite-peely-sprite', 'sprite-quack-earth-sprite', 'sprite-quack-fire-sprite',
   'sprite-quack-water-sprite', 'sprite-quack-zero-point-sprite',
 ]);
+
+// Fortnite.GG protects its pages behind a Cloudflare browser challenge, so the
+// unattended sync reads the same public pages through the r.jina.ai reader (as
+// markdown). The site redesign reduced the grid to bare image links, so rarity
+// and released status now come from each Sprite's own detail page. Artwork is
+// pulled through the images.weserv.nl proxy because the icon CDN is challenged
+// for non-browser clients too.
 const catalogUrl = process.env.EMX_CATALOG_SOURCE_URL || 'https://r.jina.ai/http://fortnite.gg/sprites';
-const sourceRetryAttempts = 4;
-const sourceTimeoutMs = 15_000;
+const detailBase = process.env.EMX_CATALOG_DETAIL_BASE || 'https://r.jina.ai/http://fortnite.gg/sprites/';
+const imageProxy = 'https://images.weserv.nl/?url=';
+const requestHeaders = { 'User-Agent': 'EMX-Sprite-Tracker/catalog-sync' };
+const rarities = new Set(['rare', 'epic', 'legendary', 'mythic', 'special']);
+const detailConcurrency = 2;
+const sourceRetryAttempts = 6;
+const sourceTimeoutMs = 25_000;
+// The reader allows ~20 requests per rolling minute. Pace request starts a bit
+// under that so refreshes stay reliable instead of exhausting retry budgets.
+const readerMinIntervalMs = Number(process.env.EMX_READER_INTERVAL_MS || 3_300);
+const imageTimeoutMs = 20_000;
+const gridRowPattern = /\[!\[Image \d+: ([^\]]+)\]\((https?:\/\/fortnite\.gg\/img\/x\/sprites\/icons\/[^)]+)\)\]\((https?:\/\/fortnite\.gg\/sprites\/(\d+-[^)]+))\)/g;
 
 class CatalogSourceError extends Error {}
 
@@ -43,68 +61,151 @@ function identity(linkName) {
   const type = baseName === 'Burnt Peanut' ? 'Peanut' : familyName;
   return { id: `sprite-${slug(name)}`, name, type, variant };
 }
+// The grid's image alt text already carries the " Sprite" suffix that identity()
+// re-adds, so strip it to keep ids stable (`sprite-<slug(name)>`).
+function linkNameFromAlt(alt) {
+  const trimmed = alt.trim();
+  return trimmed === 'Burnt Peanut' ? trimmed : trimmed.replace(/ Sprite$/i, '');
+}
 
 async function readJson(file) { return JSON.parse(await fs.readFile(file, 'utf8')); }
 async function exists(file) { try { await fs.access(file); return true; } catch { return false; } }
 function wait(milliseconds) { return new Promise((resolve) => setTimeout(resolve, milliseconds)); }
 
-function parseCatalog(markdown) {
-  if (!markdown.includes('Fortnite Sprites')) throw new CatalogSourceError('Catalog reader returned an unexpected page.');
-  const legacyPattern = /\[!\[Image \d+: [^\]]+\]\((https?:\/\/fortnite\.gg\/img\/x\/sprites\/icons\/[^)]+)\)\]\((https?:\/\/fortnite\.gg\/sprites\/\d+-[^)]+)\)\s+\[([^\]]+)\]\(\2\)\s+(rare|epic|legendary|mythic|special)\s+[^\r\n]+\s+(Not owned|Unreleased)/gim;
-  const currentSeasonPattern = /\[!\[Image \d+: [^\]]+\]\((https?:\/\/fortnite\.gg\/img\/x\/sprites\/icons\/[^)]+)\)\]\((https?:\/\/fortnite\.gg\/sprites\/\d+-[^)]+)\)\s*\r?\n+\s*\[([^\]]+)\]\(\2\)/gim;
-  const rows = [];
-  for (const match of markdown.matchAll(legacyPattern)) {
-    rows.push({
-      linkName: match[3].trim(),
-      href: match[2].replace('http://', 'https://'),
-      released: match[5].toLowerCase() !== 'unreleased',
-      rarity: match[4].toLowerCase(),
-      imageSource: match[1].replace('http://', 'https://'),
-    });
-  }
-  if (!rows.length) {
-    for (const match of markdown.matchAll(currentSeasonPattern)) {
-      rows.push({
-        linkName: match[3].trim(),
-        href: match[2].replace('http://', 'https://'),
-        released: true,
-        rarity: 'special',
-        imageSource: match[1].replace('http://', 'https://'),
-      });
-    }
-  }
-  const uniqueRows = Array.from(new Map(rows.map((row) => [row.href, row])).values());
-  const releasedCount = uniqueRows.filter((row) => row.released).length;
-  if (uniqueRows.length < 25 || !releasedCount) {
-    throw new CatalogSourceError(`Catalog reader returned incomplete data (${uniqueRows.length} indexed / ${releasedCount} released).`);
-  }
-  return uniqueRows;
+let readerNextSlot = 0;
+async function reserveReaderSlot() {
+  const now = Date.now();
+  const start = Math.max(now, readerNextSlot);
+  readerNextSlot = start + readerMinIntervalMs;
+  if (start > now) await wait(start - now);
 }
 
-async function scrapeCatalog() {
-  // Fortnite.GG protects the HTML page with a browser challenge. The reader endpoint
-  // transports that same public page as markdown so the EMX feed can refresh unattended.
+async function fetchText(url, tries = sourceRetryAttempts) {
   const failures = [];
-  for (let attempt = 1; attempt <= sourceRetryAttempts; attempt += 1) {
+  for (let attempt = 1; attempt <= tries; attempt += 1) {
     try {
-      const response = await fetch(catalogUrl, {
-        headers: { 'User-Agent': 'EMX-Sprite-Tracker/catalog-sync' },
-        signal: AbortSignal.timeout(sourceTimeoutMs),
-      });
-      if (!response.ok) throw new CatalogSourceError(`Catalog reader returned HTTP ${response.status}.`);
-      return parseCatalog(await response.text());
+      await reserveReaderSlot();
+      const response = await fetch(url, { headers: requestHeaders, signal: AbortSignal.timeout(sourceTimeoutMs) });
+      // The reader is rate limited; on 429 it recovers after a longer pause.
+      if (response.status === 429) throw Object.assign(new Error('HTTP 429'), { rateLimited: true });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.text();
     } catch (error) {
-      if (!(error instanceof CatalogSourceError) && !(error instanceof Error)) throw error;
-      const message = error instanceof Error ? error.message : String(error);
-      failures.push(message);
-      if (attempt < sourceRetryAttempts) {
-        const delay = attempt * 1_500;
-        console.warn(`Catalog source attempt ${attempt}/${sourceRetryAttempts} failed: ${message} Retrying in ${delay / 1000}s.`);
-        await wait(delay);
-      }
+      failures.push(error instanceof Error ? error.message : String(error));
+      if (attempt < tries) await wait((error && error.rateLimited ? 4_000 : 1_500) * attempt);
     }
   }
-  throw new CatalogSourceError(`Catalog reader was unavailable after ${sourceRetryAttempts} attempts: ${failures.at(-1) || 'unknown source error'}`);
+  throw new CatalogSourceError(`Reader unavailable for ${url} after ${tries} attempts: ${failures.at(-1) || 'unknown error'}`);
+}
+
+// The grid lists every Sprite as a single image link. It no longer carries
+// rarity or released status, so it is used only to enumerate the catalog.
+function parseGrid(markdown) {
+  if (!markdown.includes('Fortnite Sprites')) throw new CatalogSourceError('Catalog reader returned an unexpected page.');
+  const rows = [];
+  const seen = new Set();
+  for (const match of markdown.matchAll(gridRowPattern)) {
+    const linkName = linkNameFromAlt(match[1]);
+    const { id } = identity(linkName);
+    if (seen.has(id)) continue;
+    seen.add(id);
+    rows.push({ id, linkName, imageSource: match[2].replace('http://', 'https://'), href: match[4] });
+  }
+  if (rows.length < 100) throw new CatalogSourceError(`Grid reader returned incomplete data (${rows.length} indexed).`);
+  return rows;
+}
+
+// A Sprite detail page still carries rarity and the "Unreleased" marker that the
+// grid redesign removed.
+function parseDetail(markdown) {
+  const lines = markdown.split('\n');
+  const headingIndex = lines.findIndex((line) => /^# \S/.test(line));
+  if (headingIndex < 0) return null;
+  let statusIndex = headingIndex + 1;
+  while (statusIndex < lines.length && !lines[statusIndex].trim()) statusIndex += 1;
+  const statusLine = lines[statusIndex] || '';
+  const rarityMatch = statusLine.match(/\b(rare|epic|legendary|mythic|special)\b/i);
+  if (!rarityMatch) return null;
+  return { rarity: rarityMatch[1].toLowerCase(), released: !/unreleased/i.test(statusLine) };
+}
+
+async function fetchDetail(href) {
+  try {
+    return parseDetail(await fetchText(`${detailBase}${href}`));
+  } catch {
+    return null;
+  }
+}
+
+async function runPool(items, size, worker) {
+  const results = new Array(items.length);
+  let cursor = 0;
+  async function next() {
+    while (cursor < items.length) {
+      const index = cursor;
+      cursor += 1;
+      results[index] = await worker(items[index], index);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(size, items.length || 1) }, next));
+  return results;
+}
+
+// Self-host released artwork. The icon CDN 403s non-browser clients, so fetch
+// through the image proxy. Returns true when a file is present on disk.
+async function ensureImage(id, imageSource) {
+  const target = path.join(imageDir, `${id}.webp`);
+  if (await exists(target)) return true;
+  const proxied = `${imageProxy}${encodeURIComponent(imageSource.replace(/^https?:\/\//, ''))}&output=webp`;
+  const response = await fetch(proxied, { signal: AbortSignal.timeout(imageTimeoutMs) });
+  if (!response.ok) throw new Error(`Image ${id} returned HTTP ${response.status}`);
+  const buffer = Buffer.from(await response.arrayBuffer());
+  if (buffer.length < 200) throw new Error(`Image ${id} was empty`);
+  await fs.mkdir(imageDir, { recursive: true });
+  await fs.writeFile(target, buffer);
+  return true;
+}
+
+// Build the scraped-row list the merge step expects. Released Sprites never
+// regress, so only new and still-unreleased Sprites need a detail lookup; this
+// keeps steady-state refreshes small and self-healing.
+async function scrapeCatalog(currentMap) {
+  const grid = parseGrid(await fetchText(catalogUrl));
+  const needDetail = grid.filter((row) => {
+    const existing = currentMap.get(row.id);
+    return !existing || !existing.released;
+  });
+  console.log(`Grid indexed ${grid.length} Sprites; resolving status for ${needDetail.length} (new or unreleased).`);
+  const detailResults = await runPool(needDetail, detailConcurrency, (row) => fetchDetail(row.href));
+  const detailMap = new Map(needDetail.map((row, index) => [row.id, detailResults[index]]));
+  console.log(`Detail fetch: ${detailResults.filter(Boolean).length}/${needDetail.length} resolved.`);
+
+  const rows = [];
+  let skipped = 0;
+  for (const row of grid) {
+    const existing = currentMap.get(row.id);
+    if (existing && existing.released) {
+      rows.push({ linkName: row.linkName, href: row.href, released: true, rarity: existing.rarity, imageSource: row.imageSource });
+      continue;
+    }
+    const detail = detailMap.get(row.id);
+    if (!detail) {
+      // Keep an existing unreleased Sprite untouched; skip a brand-new one whose
+      // status could not be confirmed rather than guessing.
+      if (existing) rows.push({ linkName: row.linkName, href: row.href, released: false, rarity: existing.rarity, imageSource: row.imageSource });
+      else skipped += 1;
+      continue;
+    }
+    const rarity = rarities.has(detail.rarity) ? detail.rarity : (existing?.rarity || 'special');
+    rows.push({ linkName: row.linkName, href: row.href, released: detail.released, rarity, imageSource: row.imageSource });
+  }
+  if (skipped) console.log(`Skipped ${skipped} new Sprite(s) with unresolved status; they will be retried next run.`);
+
+  const releasedCount = rows.filter((row) => row.released).length;
+  if (rows.length < 100 || releasedCount < 60) {
+    throw new CatalogSourceError(`Resolved catalog is incomplete (${rows.length} indexed / ${releasedCount} released).`);
+  }
+  return rows;
 }
 
 const existingPayload = await readJson(await exists(livePath) ? livePath : bundledPath);
@@ -120,10 +221,11 @@ const cachedReleasedCount = currentSprites.filter((sprite) => sprite.released).l
 if (currentSprites.length < 100 || cachedReleasedCount < 60) {
   throw new Error('The existing catalog is not complete enough to safely use as a fallback.');
 }
+const currentMap = new Map(currentSprites.map((sprite) => [sprite.id, sprite]));
 
 let scraped;
 try {
-  scraped = await scrapeCatalog();
+  scraped = await scrapeCatalog(currentMap);
 } catch (error) {
   if (!(error instanceof CatalogSourceError)) throw error;
   console.warn(`::warning title=Catalog refresh skipped::${error.message} Keeping the last verified catalog.`);
@@ -145,9 +247,7 @@ if (scraped) {
     const target = path.join(imageDir, `${current.id}.webp`);
     const hadBundledImage = await exists(target);
     if (live.released && live.imageSource && !hadBundledImage) {
-      const response = await fetch(live.imageSource);
-      if (!response.ok) throw new Error(`Image ${current.id} returned HTTP ${response.status}`);
-      await fs.writeFile(target, Buffer.from(await response.arrayBuffer()));
+      await ensureImage(current.id, live.imageSource);
     }
     const newlyReleased = live.released && !current.released;
     const seasonId = legacySeasonCarryoverIds.has(current.id)
@@ -166,11 +266,8 @@ if (scraped) {
   }
 
   for (const live of liveRows.values()) {
-    const target = path.join(imageDir, `${live.id}.webp`);
     if (live.released && live.imageSource) {
-      const response = await fetch(live.imageSource);
-      if (!response.ok) throw new Error(`Image ${live.id} returned HTTP ${response.status}`);
-      await fs.writeFile(target, Buffer.from(await response.arrayBuffer()));
+      await ensureImage(live.id, live.imageSource);
     }
     merged.push({
       id: live.id, name: live.name, type: live.type, variant: live.variant, rarity: live.rarity || 'special', released: live.released,
