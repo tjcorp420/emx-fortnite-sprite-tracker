@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updatedAt": "2026-09-22T03:00:09.843Z",
+  "updatedAt": "2026-09-24T13:35:28.570Z",
   "activeSeason": {
     "schema": 1,
     "id": "sprite-season-current",
@@ -8,7 +8,7 @@
     "startedAt": "2026-07-16T00:00:00.000Z"
   },
   "indexedCount": 265,
-  "releasedCount": 196,
+  "releasedCount": 218,
   "sprites": [
     {
       "id": "sprite-8-bit-sprite",
@@ -193,9 +193,9 @@
       "type": "8-Bit",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-8-bit-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -203,7 +203,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-adventure-sprite",
@@ -211,9 +212,9 @@
       "type": "Adventure",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-adventure-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -221,7 +222,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-birthday-sprite",
@@ -247,9 +249,9 @@
       "type": "Blinky",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-blinky-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -257,7 +259,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-body-slam-sprite",
@@ -265,9 +268,9 @@
       "type": "Body Slam",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-body-slam-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -275,7 +278,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-bush-sprite",
@@ -283,9 +287,9 @@
       "type": "Bush",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-bush-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -293,7 +297,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-crown-sprite",
@@ -320,9 +325,9 @@
       "type": "Jackrabbit",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-jackrabbit-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -330,7 +335,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-jonesy-sprite",
@@ -338,9 +344,9 @@
       "type": "Jonesy",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-jonesy-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -348,7 +354,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-killswitch-sprite",
@@ -356,9 +363,9 @@
       "type": "Killswitch",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-killswitch-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -366,7 +373,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-klombo-sprite",
@@ -374,9 +382,9 @@
       "type": "Klombo",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-klombo-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -384,7 +392,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-morgana-sprite",
@@ -392,9 +401,9 @@
       "type": "Morgana",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-morgana-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -402,7 +411,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-onigiri-sprite",
@@ -410,9 +420,9 @@
       "type": "Onigiri",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-onigiri-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -420,7 +430,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-overshield-sprite",
@@ -428,9 +439,9 @@
       "type": "Overshield",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-overshield-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -438,7 +449,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-pond-sprite",
@@ -446,9 +458,9 @@
       "type": "Pond",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-pond-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -456,7 +468,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-shadow-sprite",
@@ -464,9 +477,9 @@
       "type": "Shadow",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-shadow-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -474,7 +487,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-sonic-sprite",
@@ -482,9 +496,9 @@
       "type": "Sonic",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-sonic-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -492,7 +506,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-storm-scout-sprite",
@@ -500,9 +515,9 @@
       "type": "Storm Scout",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-storm-scout-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -510,7 +525,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-tails-sprite",
@@ -518,9 +534,9 @@
       "type": "Tails",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-tails-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -528,7 +544,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-x-ray-sprite",
@@ -536,9 +553,9 @@
       "type": "X-Ray",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-x-ray-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -546,7 +563,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-burnt-peanut",
@@ -807,9 +825,9 @@
       "type": "Morgana",
       "variant": "Cheat Master",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-cheat-master-morgana-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -817,7 +835,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-cheat-master-overshield-sprite",
@@ -2955,9 +2974,9 @@
       "type": "Morgana",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-morgana-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -2965,7 +2984,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-onigiri-sprite",
@@ -4645,9 +4665,9 @@
       "type": "Morgana",
       "variant": "Loot Hacker",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-loot-hacker-morgana-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -4655,7 +4675,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-loot-hacker-onigiri-sprite",
@@ -4834,9 +4855,9 @@
       "type": "Morgana",
       "variant": "Base",
       "rarity": "epic",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-morgana-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -4844,7 +4865,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-onigiri-sprite",
