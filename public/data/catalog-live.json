@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updatedAt": "2026-09-24T13:35:28.570Z",
+  "updatedAt": "2026-09-26T19:13:40.271Z",
   "activeSeason": {
     "schema": 1,
     "id": "sprite-season-current",
@@ -8,7 +8,7 @@
     "startedAt": "2026-07-16T00:00:00.000Z"
   },
   "indexedCount": 265,
-  "releasedCount": 218,
+  "releasedCount": 223,
   "sprites": [
     {
       "id": "sprite-8-bit-sprite",
@@ -130,9 +130,9 @@
       "type": "Birthday",
       "variant": "Base",
       "rarity": "rare",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-birthday-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -140,7 +140,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-blinky-sprite",
@@ -231,9 +232,9 @@
       "type": "Birthday",
       "variant": "Bounty Hunter",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-birthday-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -241,7 +242,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-bounty-hunter-blinky-sprite",
@@ -655,9 +657,9 @@
       "type": "Birthday",
       "variant": "Cheat Master",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-cheat-master-birthday-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -665,7 +667,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-cheat-master-blinky-sprite",
@@ -2516,9 +2519,9 @@
       "type": "Birthday",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-birthday-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -2526,7 +2529,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-blinky-sprite",
@@ -4495,9 +4499,9 @@
       "type": "Birthday",
       "variant": "Loot Hacker",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-loot-hacker-birthday-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -4505,7 +4509,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-loot-hacker-blinky-sprite",
