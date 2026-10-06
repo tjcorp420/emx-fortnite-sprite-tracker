@@ -1,14 +1,14 @@
 {
   "schema": 2,
-  "updatedAt": "2026-10-03T13:25:03.039Z",
+  "updatedAt": "2026-10-06T01:18:33.061Z",
   "activeSeason": {
     "schema": 1,
     "id": "sprite-season-current",
     "label": "Current Sprite Season",
     "startedAt": "2026-07-16T00:00:00.000Z"
   },
-  "indexedCount": 309,
-  "releasedCount": 244,
+  "indexedCount": 310,
+  "releasedCount": 245,
   "sprites": [
     {
       "id": "sprite-8-bit-sprite",
@@ -291,6 +291,25 @@
       "rarity": "special",
       "released": true,
       "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-bush-sprite.webp",
+      "imageStatus": "verified",
+      "description": "",
+      "stats": [],
+      "abilities": [],
+      "effects": [],
+      "acquisition": "",
+      "spawnInfo": "",
+      "releaseDate": "",
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
+    },
+    {
+      "id": "sprite-bounty-hunter-crash-bandicoot-sprite",
+      "name": "Bounty Hunter Crash Bandicoot Sprite",
+      "type": "Crash Bandicoot",
+      "variant": "Bounty Hunter",
+      "rarity": "special",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-bounty-hunter-crash-bandicoot-sprite.webp",
       "imageStatus": "verified",
       "description": "",
       "stats": [],
