@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updatedAt": "2026-11-12T16:50:35.144Z",
+  "updatedAt": "2026-11-20T16:59:46.151Z",
   "activeSeason": {
     "schema": 1,
     "id": "sprite-season-current",
@@ -8,7 +8,7 @@
     "startedAt": "2026-07-16T00:00:00.000Z"
   },
   "indexedCount": 388,
-  "releasedCount": 322,
+  "releasedCount": 323,
   "sprites": [
     {
       "id": "sprite-8-bit-sprite",
@@ -7827,9 +7827,9 @@
       "type": "Zee",
       "variant": "Base",
       "rarity": "mythic",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-zee-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -7837,7 +7837,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-zero-point-sprite",
