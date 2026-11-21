@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updatedAt": "2026-11-20T16:59:46.151Z",
+  "updatedAt": "2026-11-21T01:33:20.006Z",
   "activeSeason": {
     "schema": 1,
     "id": "sprite-season-current",
@@ -8,7 +8,7 @@
     "startedAt": "2026-07-16T00:00:00.000Z"
   },
   "indexedCount": 388,
-  "releasedCount": 323,
+  "releasedCount": 329,
   "sprites": [
     {
       "id": "sprite-8-bit-sprite",
@@ -1789,9 +1789,9 @@
       "type": "Cursed Mini Miku",
       "variant": "Base",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-cursed-mini-miku-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -1799,7 +1799,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-cursed-plundarrgh-sprite",
@@ -1863,9 +1864,9 @@
       "type": "Cursed Squiplash",
       "variant": "Base",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-cursed-squiplash-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -1873,7 +1874,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-cursed-wayfinder-sprite",
@@ -2246,9 +2248,9 @@
       "type": "Fortune Mini Miku",
       "variant": "Base",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-fortune-mini-miku-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -2256,7 +2258,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-fortune-plundarrgh-sprite",
@@ -2320,9 +2323,9 @@
       "type": "Fortune Squiplash",
       "variant": "Base",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-fortune-squiplash-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -2330,7 +2333,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-fortune-wayfinder-sprite",
@@ -6322,9 +6326,9 @@
       "type": "Mini Miku",
       "variant": "Base",
       "rarity": "mythic",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-mini-miku-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -6332,7 +6336,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-morgana-sprite",
@@ -7066,9 +7071,9 @@
       "type": "Squiplash",
       "variant": "Base",
       "rarity": "epic",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-squiplash-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -7076,7 +7081,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-storm-scout-sprite",
