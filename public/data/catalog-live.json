@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "updatedAt": "2026-11-21T01:33:20.006Z",
+  "updatedAt": "2026-11-22T16:17:56.630Z",
   "activeSeason": {
     "schema": 1,
     "id": "sprite-season-current",
@@ -8,7 +8,7 @@
     "startedAt": "2026-07-16T00:00:00.000Z"
   },
   "indexedCount": 388,
-  "releasedCount": 329,
+  "releasedCount": 346,
   "sprites": [
     {
       "id": "sprite-8-bit-sprite",
@@ -1846,9 +1846,9 @@
       "type": "Cursed Sir Oscar the Second",
       "variant": "Base",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-cursed-sir-oscar-the-second-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -1856,7 +1856,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-cursed-squiplash-sprite",
@@ -2305,9 +2306,9 @@
       "type": "Fortune Sir Oscar the Second",
       "variant": "Base",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-fortune-sir-oscar-the-second-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -2315,7 +2316,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-fortune-squiplash-sprite",
@@ -3347,9 +3349,9 @@
       "type": "Barry O'Fish",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-barry-o-fish-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -3357,7 +3359,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-batman-sprite",
@@ -3474,9 +3477,9 @@
       "type": "Chester",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-chester-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -3484,7 +3487,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-crash-bandicoot-sprite",
@@ -3657,9 +3661,9 @@
       "type": "Exmarks",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-exmarks-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -3667,7 +3671,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-fire-sprite",
@@ -3783,9 +3788,9 @@
       "type": "Halfpeel'd",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-halfpeel-d-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -3793,7 +3798,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-honey-sprite",
@@ -3858,9 +3864,9 @@
       "type": "Kelper",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-kelper-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -3868,7 +3874,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-killswitch-sprite",
@@ -3941,9 +3948,9 @@
       "type": "Lil' Flacko",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-lil-flacko-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -3951,7 +3958,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-lil-squibbly-sprite",
@@ -3959,9 +3967,9 @@
       "type": "Lil' Squibbly",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-lil-squibbly-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -3969,7 +3977,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-lil-uzi-vert-jr-sprite",
@@ -3977,9 +3986,9 @@
       "type": "Lil' Uzi Vert Jr.",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-lil-uzi-vert-jr-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -3987,7 +3996,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-llama-sprite",
@@ -4013,9 +4023,9 @@
       "type": "Mini Miku",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-mini-miku-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -4023,7 +4033,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-morgana-sprite",
@@ -4144,9 +4155,9 @@
       "type": "Plundarrgh",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-plundarrgh-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -4154,7 +4165,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-pond-sprite",
@@ -4206,9 +4218,9 @@
       "type": "Re-Pete",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-re-pete-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -4216,7 +4228,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-seven-sprite",
@@ -4270,9 +4283,9 @@
       "type": "Sir Oscar the Second",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-sir-oscar-the-second-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -4280,7 +4293,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-sonic-sprite",
@@ -4326,9 +4340,9 @@
       "type": "Squiplash",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-squiplash-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -4336,7 +4350,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-storm-scout-sprite",
@@ -4474,9 +4489,9 @@
       "type": "Wayfinder",
       "variant": "Gold",
       "rarity": "special",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-gold-wayfinder-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -4484,7 +4499,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-gold-x-ray-sprite",
@@ -7015,9 +7031,9 @@
       "type": "Sir Oscar the Second",
       "variant": "Base",
       "rarity": "legendary",
-      "released": false,
-      "image": "/sprites/unreleased-outline.svg",
-      "imageStatus": "unreleased-outline",
+      "released": true,
+      "image": "https://raw.githubusercontent.com/tjcorp420/emx-fortnite-sprite-tracker/main/public/sprites/sprite-sir-oscar-the-second-sprite.webp",
+      "imageStatus": "verified",
       "description": "",
       "stats": [],
       "abilities": [],
@@ -7025,7 +7041,8 @@
       "acquisition": "",
       "spawnInfo": "",
       "releaseDate": "",
-      "dataStatus": "live-release"
+      "dataStatus": "live-release",
+      "seasonId": "sprite-season-current"
     },
     {
       "id": "sprite-sonic-sprite",
